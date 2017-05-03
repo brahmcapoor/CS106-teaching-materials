@@ -1,4 +1,4 @@
-#Weird Big-Os and how to figure them out
+# Weird Big-Os and how to figure them out
 
 In section, we've done a bunch of Big-O problems so far. Most of the algorithms that we've written (with the exception of recursive solutions, which we'll talk about in a bit) have had polynomial or radical runtimes: that is, their big-O is O(N^a) where a is some integer or fraction. In this handout, we'll explore two of the less conventional types of Big-O and how to figure them out.
 
