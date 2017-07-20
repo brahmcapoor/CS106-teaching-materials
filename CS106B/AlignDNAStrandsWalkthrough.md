@@ -12,7 +12,7 @@ I strongly recommend you try and work through the problem yourself before going 
 
 As we've seen in lecture, Memoization is the practice of caching the results of our recursive calls to avoid repeated calculation. Take, for example, the recursive fibonacci calculation:
 
-```
+```C++
 fib(4) = fib(2) + fib(3)
 fib(3) = fib(1) + fib(2)
 => fib(4) = fib(2) + fib(1) + fib(2)
@@ -30,7 +30,7 @@ The approach I'm going to take to go through this problem is to first make a non
 
 ## Non-memoized solution
 
-```
+```C++
 int alignStrands(string &one, string &two) {
  if (one.empty()) return -2 * two.length();
  if (two.empty()) return -2 * one.length();
@@ -55,26 +55,26 @@ Try and figure out why this solution works!
 
 The first thing we want to do is create a cache. Given that our recursive function takes in strings as input and returns an integer, it probably makes sense to make our map from strings to integer:
 
-```
+```C++
 Map<string, int> cache;
 ```
 
 Next, we want to figure out how to convert our problem parameters (the two strings) into a string representation. For the purposes of this, the representation will be the two strings, separated by a colon. For example, if the alignment score of the strings `"banter"` and `"ante"` is 0, the entry in the map would look like this:
 
-```
+```C++
 cache["banter:ante"] == 0;
 ```
 
 Cool! Now that we know what our cache will look like, let's figure out how to use it. Firstly, we should check at every call of the function whether the function has already been calculated for those specific parameters, and if so, just return that answer:
 
-```
+```C++
 string key = one + ":" + two;
 if (cache.containsKey[key]) return cache[key];
 ```
 
 Next, we need to actually put calculated values into the map whenever we find a new one, and we're pretty much done!
 
-```
+```C++
 if (one[0] == two[0]) {
   // int score = calculate alignment for one.substr(1), two.substr(1)
   cache[key] = score;
@@ -82,7 +82,7 @@ if (one[0] == two[0]) {
 }
 ```
 
-```
+```C++
 //Calculate first, second and third options
 int best = max(first, max(second, third))
 cache[key] = best;
@@ -91,7 +91,7 @@ return best;
 
 And we're done! Here's the full code:
 
-```
+```C++
 int alignStrands(string &one, string &two, Map<string, int> &cache) {
  if (one.empty()) return -2 * two.length();
  if (two.empty()) return -2 * one.length();
@@ -101,7 +101,7 @@ int alignStrands(string &one, string &two, Map<string, int> &cache) {
 
  if (one[0] == two[0]) { // two leading bases match
    int score = alignStrands(one.substr(1), two.substr(1), cache) + 1;
-   cache[key] = score; 
+   cache[key] = score;
    return score; // the best solution is one where these bases are aligned
  }
 
