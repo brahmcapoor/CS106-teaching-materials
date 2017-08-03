@@ -12,10 +12,10 @@ struct TreeNode {
   TreeNode *right;
 };
 
-bool isBSTHelper(TreeNode *root, int min, int max) {
-  if(root == null) return true;
-  if(root->data < min || root->data > max) return false;
-  return isBSTHelper(root->left, min, node->data - 1) && isBSTHelper(root->right, node->data + 1, max);
+bool isBSTHelper(TreeNode *node, int min, int max) {
+  if(node == null) return true;
+  if(node->data < min || node->data > max) return false;
+  return isBSTHelper(node->left, min, node->data - 1) && isBSTHelper(node->right, node->data + 1, max);
 }
 
 bool isBST(TreeNode *root) {
