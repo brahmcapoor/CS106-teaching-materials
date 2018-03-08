@@ -1,4 +1,4 @@
-#FlightPlanner!
+# FlightPlanner!
 
 ## Summary
 
@@ -16,8 +16,8 @@ _Note: While this section of this document is intended for section leaders, any 
 
 The one slight issue with this is that in order for the browser to communicate effectively with the server, it needs to allow Cross-Origin Resource Sharing. I did just enough googling to understand that this needed to happen, but not enough to even remotely comprensibly explain it to anyone at 1:30 in the morning, but the crux of the matter is that I installed a browser extension to let it happen. If you'd like to use the demo, install one of the following:
 
-Firefox: [CORS everywhere](https://addons.mozilla.org/en-US/firefox/addon/cors-everywhere/)
-Chrome: [Allow-Control-Allow-Origin](https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en)
+* Firefox: [CORS everywhere](https://addons.mozilla.org/en-US/firefox/addon/cors-everywhere/)
+* Chrome: [Allow-Control-Allow-Origin](https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en)
 
 For what it's worth, I've only tested the Firefox extension, but nothing in my (very limited) understanding of this suggests that the chrome one won't work. 
 
