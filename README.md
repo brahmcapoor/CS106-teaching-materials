@@ -1,1 +1,1 @@
-# CS106B-teaching-materials
+# CS106-teaching-materials
