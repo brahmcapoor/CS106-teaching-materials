@@ -1,5 +1,7 @@
 # FlightPlanner!
 
+Download the project [here](https://github.com/brahmcapoor/CS106-teaching-materials/raw/master/CS106A/FlightPlanner/download.zip)
+
 ## Summary
 
 This is a program based on the section 8 handout of CS 106A Winter Quarter 2018 at Stanford University. The genuinely important things are as follows:
@@ -18,5 +20,5 @@ _Note redux: A previous version of this readme instructed you to install a CORS 
 
 1) Download the Eclipse project from this repo and import it as you normally would.
 2) Run `FlightPlannerServer.java` or `FlightPlannerServerSoln.java` from Eclipse, making sure that `private static final int PORT = 8080;`
-3) `cd` to the `webpage` project in the directory and run `python -m SimpleHttpServer`. If you're on Windows or for some reason don't have python installed, opening `index.html` will probably be okay. Testing this is for people with more sleep than I am currently running on, so take that with a grain of salt. 
+3) Open `webpage/index.html` in your browser.
 4) The demo should just work now. If anything weird comes up, shoot me an email at brahm@stanford.edu. 
