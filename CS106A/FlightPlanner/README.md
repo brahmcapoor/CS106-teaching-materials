@@ -13,10 +13,8 @@ This is a program based on the section 8 handout of CS 106A Winter Quarter 2018 
 The `webpage` directory has resources for a web client to show students for fun. At this point, I can't think of anything else that might be important but this document will be uploaded as necessary. 
 
 ## How to use the web demo
-_Note: While this section of this document is intended for section leaders, any enterprising 106 students and/or viewers of this repo are welcome to try to do this as well._
 
-
-_Note redux: A previous version of this readme instructed you to install a CORS extension for Chrome and/or firefox. You no longer need to do this, since CORS is now enabled in `SimpleServer.jar`._
+_Note: A previous version of this readme instructed you to install a CORS extension for Chrome and/or firefox. You no longer need to do this, since CORS is now enabled in `SimpleServer.jar`._
 
 1) Download the Eclipse project from this repo (see the link at the top of this document) and import it as you normally would.
 2) Run `FlightPlannerServer.java` or `FlightPlannerServerSoln.java` from Eclipse, making sure that `private static final int PORT = 8080;`
