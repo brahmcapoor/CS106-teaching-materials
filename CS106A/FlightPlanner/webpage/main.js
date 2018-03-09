@@ -143,7 +143,7 @@ $(document).ready(function() {
               Download the eclipse project <a href="https://github.com/brahmcapoor/CS106-teaching-materials/raw/master/CS106A/FlightPlanner/download.zip"> here </a>. 
               This project includes starter code (<code>FlightPlannerServer.java</code>), a solution (<code>FlightPlannerServerSolution.java</code>) and a 
               fully-functioning client (<code>FlightPlannerClient.java</code>). It also includes a <code> webpage </code> directory, which is the source of this website.
-              You shouldn't need to worry about that directory, though, although you should feel free to peruse the code. 
+              You shouldn't need to worry about that directory, although you should feel free to peruse the code. 
             </li>
             <br>
             <li>
