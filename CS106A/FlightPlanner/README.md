@@ -1,6 +1,6 @@
 # FlightPlanner!
 
-Download the project [here](https://github.com/brahmcapoor/CS106-teaching-materials/raw/master/CS106A/FlightPlanner/download.zip)
+Download the eclipse project (including the web demo) [here](https://github.com/brahmcapoor/CS106-teaching-materials/raw/master/CS106A/FlightPlanner/download.zip)
 
 ## Summary
 
