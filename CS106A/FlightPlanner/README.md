@@ -18,7 +18,7 @@ _Note: While this section of this document is intended for section leaders, any 
 
 _Note redux: A previous version of this readme instructed you to install a CORS extension for Chrome and/or firefox. You no longer need to do this, since CORS is now enabled in `SimpleServer.jar`._
 
-1) Download the Eclipse project from this repo and import it as you normally would.
+1) Download the Eclipse project from this repo (see the link at the top of this document) and import it as you normally would.
 2) Run `FlightPlannerServer.java` or `FlightPlannerServerSoln.java` from Eclipse, making sure that `private static final int PORT = 8080;`
 3) Open `webpage/index.html` in your browser.
 4) The demo should just work now. If anything weird comes up, shoot me an email at brahm@stanford.edu. 
