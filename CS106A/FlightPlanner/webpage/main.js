@@ -4,6 +4,8 @@ let currentCity = "";
 var map;
 var flightPath = [];
 var line;
+var userip;
+var host;
 
 const COORDINATES = {
   "Singapore": {lat: 1.35, lng: 103.8},
@@ -117,6 +119,10 @@ $(document).on("click", ".countryOption", function(e) {
 });
 
 $(document).ready(function() {
+  $.get('https://jsonip.com/', function(r){ 
+    userip = r.ip;
+    host =  userip.toString() + ":8080";
+  });
   swal({
     type: "info",
     text: "This website requires your location to display a Google Map. Most modern browsers should ask you to confirm this.",
@@ -150,7 +156,7 @@ $(document).ready(function() {
             </li>
             <br>
             <li>
-              Next, run your server. This would be either the <code>FlightPlannerServer.java</code> that you just wrote, or the 
+              Next, run your server. This would be either <code>FlightPlannerServer.java</code>, which you just wrote, or 
               <code>FlightPlannerServerSolution.java</code> if you just want to try it out. 
             </li>
             <br>
