@@ -15,7 +15,6 @@ const COORDINATES = {
 }
 
 function initMap() {
-  console.log("Initializing");
   navigator.geolocation.getCurrentPosition(function(position){
     map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: position.coords.latitude, lng: position.coords.longitude},
@@ -29,10 +28,20 @@ function makeInitialChoices() {
     mimeType: 'text/plain; charset=x-user-defined',
     url: "http://localhost:8080/getAllCities",
     success: updateDropDown,
+    error: noServer,
     dataType: "text"
   });
 }
 
+function noServer() {
+  swal({
+    type:"error",
+    title: "Uh oh! It doesn't look like you have a server running",
+    html: "<p>Make sure you've started a server and that <code>private static final int PORT = 8080;</code></p>"
+  }).then((result) => {
+    makeInitialChoices();
+  });
+}
 
 function updateDropDown(data) {
   const cities = parseArrayList(data);
@@ -108,6 +117,56 @@ $(document).on("click", ".countryOption", function(e) {
 });
 
 $(document).ready(function() {
-  makeInitialChoices();
-})
+  swal({
+    type: "info",
+    text: "This website requires your location to display a Google Map. Most modern browsers should ask you to confirm this.",
+    confirmButtonText: "I've given the page my location",
+  }).then((result) => {
+    swal({
+    type: "info",
+    title: "Welcome to FlightPlanner!",
+    html: `
+          <p> 
+            This is a website that allows you to use the server 
+            you built to practice your skills of programming 
+            servers from CS106A. Before we get started, there are 
+            a couple of things you need to do.  
+          </p>
+          <ol>
+            <li> 
+              Download the eclipse project <a href="https://github.com/brahmcapoor/CS106-teaching-materials/raw/master/CS106A/FlightPlanner/download.zip"> here </a>. 
+              This project includes starter code (<code>FlightPlannerServer.java</code>), a solution (<code>FlightPlannerServerSolution.java</code>) and a 
+              fully-functioning client (<code>FlightPlannerClient.java</code>). It also includes a <code> webpage </code> directory, which is the source of this website.
+              You shouldn't need to worry about that directory, though, although you should feel free to peruse the code. 
+            </li>
+            <br>
+            <li>
+              Import the project into your eclipse workspace just as you would for your assignment starter code.
+            </li>
+            <br>
+            <li>
+              If you want the practice (and I think it's a great idea), try and implement the server according to the 
+              <a href="http://web.stanford.edu/class/cs106a/section/8/Section8.pdf"> handout </a> in <code>FlightPlannerServer.java</code>.
+            </li>
+            <br>
+            <li>
+              Next, run your server. This would be either the <code>FlightPlannerServer.java</code> that you just wrote, or the 
+              <code>FlightPlannerServerSolution.java</code> if you just want to try it out. 
+            </li>
+            <br>
+            <li>
+              Now, you should be ready to start playing around on this webpage. Try making different itineraries and seeing how your server
+              responds to them. Make sure to check your server logs if anything goes wrong. 
+            </li>
+          </ol>
+          `,
+    confirmButtonText: "I've started my server. Let's go!",
+    grow: "fullscreen"
+  }).then((result) => {
+      if(result.value) {
+        makeInitialChoices();
+      }
+  });
+  });
+});
 
