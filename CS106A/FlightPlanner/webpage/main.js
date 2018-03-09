@@ -39,7 +39,8 @@ function noServer() {
   swal({
     type:"error",
     title: "Uh oh! It doesn't look like you have a server running",
-    html: "<p>Make sure you've started a server and that <code>private static final int PORT = 8080;</code></p>"
+    html: "<p>Make sure you've started a server and that <code>private static final int PORT = 8080;</code></p>",
+    allowOutsideClick: false
   }).then((result) => {
     makeInitialChoices();
   });
@@ -60,7 +61,7 @@ function parseArrayList(str) {
   return trimmed.split(", ");
 }
 
-function updatePanes(over=false) {
+function updatePanes() {
   $("#currentCity").text("You are currently in: " + currentCity);
   $("#itinerary").append('<li class="list-group-item">' + currentCity + '</li>');
   $.ajax({
@@ -127,16 +128,17 @@ $(document).ready(function() {
     type: "info",
     text: "This website requires your location to display a Google Map. Most modern browsers should ask you to confirm this.",
     confirmButtonText: "I've given the page my location",
+    allowOutsideClick: false
   }).then((result) => {
     swal({
     type: "info",
     title: "Welcome to FlightPlanner!",
     html: `
           <p> 
-            This is a website that allows you to use the server 
-            you built to practice your skills of programming 
-            servers from CS106A. Before we get started, there are 
-            a couple of things you need to do.  
+            This is a sample webpage that allows you to see how a server that 
+            you made for a CS106A section might be used in a real website like 
+            Google Flights or Kayak. Before you get started, there are 
+            a couple of things you need to do: 
           </p>
           <ol>
             <li> 
@@ -167,7 +169,8 @@ $(document).ready(function() {
           </ol>
           `,
     confirmButtonText: "I've started my server. Let's go!",
-    grow: "fullscreen"
+    grow: "fullscreen",
+    allowOutsideClick: false
   }).then((result) => {
       if(result.value) {
         makeInitialChoices();
