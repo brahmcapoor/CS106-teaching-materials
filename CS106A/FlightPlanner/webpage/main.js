@@ -30,19 +30,19 @@ function makeInitialChoices() {
     mimeType: 'text/plain; charset=x-user-defined',
     url: "http://localhost:8080/getAllCities",
     success: updateDropDown,
-    error: noServer,
+    error: e => noServer(makeInitialChoices),
     dataType: "text"
   });
 }
 
-function noServer() {
+function noServer(fn) {
   swal({
     type:"error",
     title: "Uh oh! It doesn't look like you have a server running",
     html: "<p>Make sure you've started a server and that <code>private static final int PORT = 8080;</code></p>",
     allowOutsideClick: false
   }).then((result) => {
-    makeInitialChoices();
+    fn();
   });
 }
 
@@ -61,13 +61,19 @@ function parseArrayList(str) {
   return trimmed.split(", ");
 }
 
-function updatePanes() {
+function successfulGetDestinations() {
+  console.log("banter");
   $("#currentCity").text("You are currently in: " + currentCity);
   $("#itinerary").append('<li class="list-group-item">' + currentCity + '</li>');
+  updateDropDown();
+}
+
+function updatePanes() {
   $.ajax({
     mimeType: 'text/plain; charset=x-user-defined',
     url: "http://localhost:8080/getDestinations?city=" + currentCity,
-    success: updateDropDown,
+    success: successfulGetDestinations,
+    error: e => noServer(updatePanes),
     dataType: "text"
   });
 }
