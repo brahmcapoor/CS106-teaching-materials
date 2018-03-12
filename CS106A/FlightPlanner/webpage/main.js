@@ -61,11 +61,10 @@ function parseArrayList(str) {
   return trimmed.split(", ");
 }
 
-function successfulGetDestinations() {
-  console.log("banter");
+function successfulGetDestinations(data) {
   $("#currentCity").text("You are currently in: " + currentCity);
   $("#itinerary").append('<li class="list-group-item">' + currentCity + '</li>');
-  updateDropDown();
+  updateDropDown(data);
 }
 
 function updatePanes() {
