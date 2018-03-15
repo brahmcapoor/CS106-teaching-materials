@@ -3,6 +3,7 @@
 	<classpathentry kind="src" path=""/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="spl.jar"/>
-	<classpathentry kind="lib" path="SimpleNetworking.jar"/>
+	<classpathentry kind="lib" path="simpleClient.jar"/>
+	<classpathentry kind="lib" path="simpleServer.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>

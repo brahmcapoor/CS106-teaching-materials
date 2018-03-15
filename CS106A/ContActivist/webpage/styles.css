@@ -1,0 +1,31 @@
+body {
+    padding: 20px;
+}
+
+.row {
+    min-height: 700px;
+}
+
+.footer {
+    text-align: center;
+}
+
+.contactsTable {
+    margin-top: 20px;
+}
+
+#logo {
+    color: #007bff;
+}
+
+#ContActivistBody {
+    padding: 20px;
+    background-color: blanchedalmond;
+}
+
+#map {
+    height: 400px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
