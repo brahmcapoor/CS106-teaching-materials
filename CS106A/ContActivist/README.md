@@ -1,4 +1,4 @@
-# FlightPlanner!
+# ContActivist!
 
 Download the eclipse project (including the web demo) [here](https://github.com/brahmcapoor/CS106-teaching-materials/raw/master/CS106A/ContActivist/download.zip)
 
