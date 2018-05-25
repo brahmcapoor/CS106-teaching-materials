@@ -10,7 +10,7 @@ Open up `Airplane.java` and `Airport.java`. Try to implement the Airplane Class 
 System.out.println("<Your message here>");
 ```
 
-Now, whenever one of those methods is called, you'll see the message show up in the Eclipse console. You can think of these messages as 'responses' from the plane to whichever 'airport' issued commands through it.
+Now, whenever one of those methods is called, you'll see the message show up in the Eclipse console. You can think of these messages as 'responses' from the plane to whichever 'airport' issued commands through it. You can't use the normal `println` method here, because the Airplane class isn't a console program so it doesn't have the `println` method. `System.out.println` method is Java's significantly uglier counterpart to `println`.
 
 Once you've finished implementing the Airplane Class, try your hand at using it in the Airport program found in `Airport.java`. Most of the architecture for this is set up already, but feel free to shoot me any questions at [brahm@stanford.edu](mailto:brahm@stanford.edu).
 
