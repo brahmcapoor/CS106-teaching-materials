@@ -26,31 +26,54 @@ public class Airport extends ConsoleProgram {
 			println(" ");
 		}
 	}
-
+	
+	/**
+	 * Decomission a plane
+	 */
 	private void deletePlane() {
 		String flightCode = readLine("Flight Code? ");
 	}
 
+	/**
+	 * Update a plane's flight code or destination city
+	 */
 	private void changePlaneInfo() {
 		String flightCode = readLine("Flight Code? ");
 	}
-
+	
+	/**
+	 * Get the information of a particular plane by asking the user
+	 * for the plane's flight code
+	 */
 	private void getPlaneInfo() {
 		String flightCode = readLine("Flight Code? ");
 	}
 
+	/**
+	 * Make a plane land if it's currently airborne.
+	 */
 	private void landFlight() {
 		String flightCode = readLine("Flight Code? ");
 	}
 
+	/**
+	 * Make a plane take off if it's currently grounded
+	 */
 	private void makeFlight() {
 		String flightCode = readLine("Flight Code? ");
 	}
 
+	/**
+	 * List all the planes currently on the ground or in the air
+	 */
 	private void listAllFlights() {
 		
 	}
 
+	/**
+	 * STARTER CODE: Gets a command from the user
+	 * @return the user's command as a characters
+	 */
 	private char getCommand() {
 		while (true) {
 			String command = readLine("Quit, List, Make, Touchdown, Get Info, Change Info, Delete? ").toLowerCase();
