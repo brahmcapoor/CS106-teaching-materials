@@ -12,7 +12,7 @@ This is a program based on the section 9 handout of CS 106A Winter Quarter 2018 
 * `ContActivistServerSoln.java`: solution code for the server (to be posted after I teach section)
 * `CongressMemberSolution.java` solution code for the Congress Member class (to be posted after I teach section)
 
-The `webpage` directory has resources for a web client to show students for fun. At this point, I can't think of anything else that might be important but this document will be uploaded as necessary. 
+The `webpage` directory has resources for a web client to show students for fun. At this point, I can't think of anything else that might be important but this document will be updated as necessary. 
 
 ## How to use the web demo
 
