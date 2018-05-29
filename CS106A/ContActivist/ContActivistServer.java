@@ -22,11 +22,9 @@ public class ContActivistServer extends ConsoleProgram
 	
 	/* INSTANCE VARIABLES */
 	private SimpleServer server;
-	private HashMap<String, ArrayList<CongressMember>> congress;  
 
 	public void run() {
-		congress = new HashMap<String, ArrayList<CongressMember>>();
-		readCongressFile(DATA_FILENAME);
+		// TODO: Do we need to do any setup?
 		
 		println("Starting server on port " + PORT);
 		server = new SimpleServer(this, PORT);
@@ -39,7 +37,8 @@ public class ContActivistServer extends ConsoleProgram
 			Scanner scanner = new Scanner(new File(filename));			
 			
 			while (scanner.hasNextLine()) {
-				
+				// TODO: How should we store the congress members' information?
+				// If only we had a variable type... 
 			}	
 			scanner.close();
 		} catch (IOException e) {

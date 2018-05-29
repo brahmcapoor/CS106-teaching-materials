@@ -5,6 +5,8 @@
  */
 public class CongressMember {
 	
+	// TODO: What instance variables do we need?
+
 	public CongressMember(/* TODO: What parameters do we use? */) {
 
 	}
