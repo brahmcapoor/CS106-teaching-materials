@@ -112,6 +112,10 @@ async function getRepresentatives() {
 function clickHandler(event, data) {
   stateCode = data.name;
   if (stateCode === "DC") {
+    swal({
+      type: "error",
+      title: "The District of Columbia doesn't have any voting representatives!"
+    });
     return;
   }
   $("#clicked-state").text(CODES_TO_STATES[stateCode]);
