@@ -18,7 +18,7 @@ The `webpage` directory has resources for a web client to show students for fun.
 
 1) Download the Eclipse project from this repo (see the link at the top of this document) and import it as you normally would.
 2) Run `ContActivistServer.java` or `ContActivistServerSoln.java` from Eclipse, making sure that `private static final int PORT = 8000;`
-3) Open `webpage/index.html` in your browser or -- if you're comfortable doing so -- run `python -m SimpleHTTPServer 8080` and naivgate to `localhost:8080` in your browser. As far as I've tested, there isn't much of a difference between the two but the latter makes you seem like more of a hacker.
+3) Open `webpage/index.html` in your browser or -- if you're comfortable doing so -- run `python -m SimpleHTTPServer 8080` (after `cd`ing to the webpage directory) and navigate to `localhost:8080` in your browser. As far as I've tested, there isn't much of a difference between the two but the latter makes you seem like more of a hacker.
 4) The demo should just work now. If anything weird comes up, shoot me an email at brahm@stanford.edu. 
 
 ## To students:
