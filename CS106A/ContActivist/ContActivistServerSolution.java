@@ -27,7 +27,8 @@ public class ContActivistServerSolution extends ConsoleProgram
 	public void run() {
 		congress = new HashMap<String, ArrayList<CongressMemberSolution>>();
 		readCongressFile(DATA_FILENAME);
-		
+		System.out.println(congress.keySet()
+				);
 		println("Starting server on port " + PORT);
 		server = new SimpleServer(this, PORT);
 		server.start();

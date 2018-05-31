@@ -111,6 +111,9 @@ async function getRepresentatives() {
 
 function clickHandler(event, data) {
   stateCode = data.name;
+  if (stateCode === "DC") {
+    return;
+  }
   $("#clicked-state").text(CODES_TO_STATES[stateCode]);
   getRepresentatives();
 }
