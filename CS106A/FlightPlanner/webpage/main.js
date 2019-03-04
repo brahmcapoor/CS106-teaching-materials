@@ -13,7 +13,9 @@ const COORDINATES = {
   "San Francisco": {lat: 37.77, lng: -122.4},
   "Los Angeles": {lat: 34.05, lng: -118.24},
   "London": {lat: 51.5, lng: -0.128},
-  "New Delhi": {lat: 28.61, lng: 77.21}
+  "New Delhi": {lat: 28.61, lng: 77.21},
+  "Nairobi": {lat: -1.334, lng: 36.93},
+  "Lima": {lat: -12.05, lng: -77.04}
 }
 
 function initMap() {

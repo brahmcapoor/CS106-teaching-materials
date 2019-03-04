@@ -9,7 +9,8 @@
  * "getAllCities" -> we send back a list of all cities
  * "getDestinations" -> (needs parameter "city") we send back a
  *                      list of all cities reachable from the
- *                      provided city.
+ *                      provided city with the travel time between
+ *                      the two.
  */
 
 import acm.program.*;
@@ -29,10 +30,11 @@ public class FlightPlannerServerSolution extends ConsoleProgram
     /* The server object that we use to listen for requests */
     private SimpleServer server;
     
-    private HashMap<String, ArrayList<String>> destinations;
+    /* A map of all cities to a list of flights starting from that city */
+    private HashMap<String, ArrayList<FlightSolution>> flightMap;
 
     public void run() {
-        destinations = new HashMap<String, ArrayList<String>>();
+        flightMap = new HashMap<String, ArrayList<FlightSolution>>();
         	readFlightData(FLIGHT_DATA_FILE);
         server = new SimpleServer(this, PORT);
         server.start();
@@ -71,14 +73,16 @@ public class FlightPlannerServerSolution extends ConsoleProgram
     }
 
     private void processLine(String line) {
-        int arrow = line.indexOf("->"); // find where the arrow is  
-        if (arrow == -1) {
+        String[] flightComponents = line.split(",");
+        if (flightComponents.length != 3) {
             throw new ErrorException("Illegal entry in flights file: " + line);
         }
 
-        String fromCity = line.substring(0, arrow).trim();  // get the first city and get rid of spaces
-        String toCity = line.substring(arrow + 2).trim();   // get the second city and get rid of spaces
-        addToDestinations(fromCity, toCity);
+        String fromCity = flightComponents[0].trim();  // get the first city and get rid of spaces
+        String toCity = flightComponents[1].trim();   // get the second city and get rid of spaces
+        double flightTime = Double.parseDouble(flightComponents[2].trim()); //get the flight time in hours as a double
+        
+        addFlight(fromCity, toCity, flightTime);
     }
 
 
@@ -86,11 +90,12 @@ public class FlightPlannerServerSolution extends ConsoleProgram
      * Add the fromCity -> toCity route to our map, making sure to put 
      * the key in the map if it isn't already there.
      */
-    private void addToDestinations(String fromCity, String toCity) {
-        if (!destinations.containsKey(fromCity)) {
-            destinations.put(fromCity, new ArrayList<String>());
+    private void addFlight(String fromCity, String toCity, double duration) {
+    	FlightSolution flight = new FlightSolution(fromCity, toCity, duration);
+        if (!flightMap.containsKey(fromCity)) {
+            flightMap.put(fromCity, new ArrayList<FlightSolution>());
         }
-        destinations.get(fromCity).add(toCity);
+        flightMap.get(fromCity).add(flight);
     }
 
     /**
@@ -99,7 +104,7 @@ public class FlightPlannerServerSolution extends ConsoleProgram
     private String getAllCities() {
         println("Received request to get all cities");
         ArrayList<String> cities = new ArrayList<String>();
-        for (String city : destinations.keySet()) {
+        for (String city : flightMap.keySet()) {
             // iterate over the keys in the map and add it to an arraylist
             cities.add(city);
         }
@@ -114,14 +119,14 @@ public class FlightPlannerServerSolution extends ConsoleProgram
     private String getDestinations(Request request) {
         String city = request.getParam("city");
         println("Received request to getDestinations for " + city);
-
-        ArrayList<String> possibleDestinations = destinations.get(city);
-        if (possibleDestinations == null) {
-            // deal with the case where there are no destinations from here
+        
+        if (!flightMap.containsKey(city)) {
+        	// deal with the case where there are no destinations from here
             // and so we shouldn't call toString on a string that doesn't exist!
-            return null;
+        	return null;
         }
-        String result = possibleDestinations.toString();
+        ArrayList<FlightSolution> flights = flightMap.get(city);
+        String result = flights.toString();
         println("       => " + result);
         return result;
     }
