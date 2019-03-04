@@ -1,20 +1,31 @@
-San Francisco -> Singapore
-San Francisco -> London
+San Francisco,Singapore,20.9
+San Francisco,London,10.4
 
-New York -> London
-New York -> San Francisco
-New York -> Singapore
-New York -> New Delhi
+New York,London,6.50
+New York,San Francisco,6.16
+New York,Singapore,22.3
+New York,New Delhi,13.9
 
-London -> New York
-London -> San Francisco
+London,New York,8.16
+London,San Francisco,11.3
+London,Nairobi,15.6
 
-New Delhi -> New York
-New Delhi -> Singapore
+New Delhi,New York,15.5
+New Delhi,Singapore,6.00
 
-Los Angeles -> San Francisco
-Los Angeles -> Singapore
+Nairobi,Singapore,14.3
+Nairobi,London,15.5
+Nairobi,Lima,27.2
 
-Singapore -> New York
-Singapore -> New Delhi
-Singapore -> Los Angeles
+Los Angeles,San Francisco,1.61
+Los Angeles,Singapore,21.1
+Los Angeles,Lima,12.7
+
+Singapore,New York,25.4
+Singapore,New Delhi,6.23
+Singapore,Los Angeles,17.2
+Singapore,Nairobi,13.9
+
+Lima,Nairobi,24.5
+Lima,Los Angeles,11.4
+Lima,New York,13.0

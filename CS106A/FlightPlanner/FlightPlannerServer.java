@@ -9,7 +9,8 @@
  * "getAllCities" -> we send back a list of all cities
  * "getDestinations" -> (needs parameter "city") we send back a
  *                      list of all cities reachable from the
- *                      provided city.
+ *                      provided city and the travel time to get 
+ *                      there.
  */
 
 import acm.program.*;
@@ -66,15 +67,15 @@ public class FlightPlannerServer extends ConsoleProgram
     }
 
     private void processLine(String line) {
-        int arrow = line.indexOf("->"); // find where the arrow is 
-        if (arrow == -1) {
+        String[] flightComponents = line.split(",");
+        if (flightComponents.length != 3) {
             throw new ErrorException("Illegal entry in flights file: " + line);
         }
 
-        String fromCity = line.substring(0, arrow).trim();  // get the first city and get rid of spaces
-        String toCity = line.substring(arrow + 2).trim();   // get the second city and get rid of spaces
+        String fromCity = flightComponents[0].trim();  // get the first city and get rid of spaces
+        String toCity = flightComponents[1].trim();   // get the second city and get rid of spaces
+        double flightTime = Double.parseDouble(flightComponents[2].trim()); //get the flight time in hours as a double
 
         // TODO: What should we do here?
     }
 }
-
