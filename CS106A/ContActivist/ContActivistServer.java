@@ -23,8 +23,11 @@ public class ContActivistServer extends ConsoleProgram
 	/* INSTANCE VARIABLES */
 	private SimpleServer server;
 
+	private HashMap<String, ArrayList<CongressMember>> congress 
+		= new HashMap<String, ArrayList<CongressMember>>();
+	
 	public void run() {
-		// TODO: Do we need to do any setup?
+		readCongressFile(DATA_FILENAME);
 		
 		println("Starting server on port " + PORT);
 		server = new SimpleServer(this, PORT);
@@ -37,8 +40,20 @@ public class ContActivistServer extends ConsoleProgram
 			Scanner scanner = new Scanner(new File(filename));			
 			
 			while (scanner.hasNextLine()) {
-				// TODO: How should we store the congress members' information?
-				// If only we had a variable type... 
+				String name = scanner.nextLine();
+				String stateCode = scanner.nextLine();
+				String phoneNumber = scanner.nextLine();
+				String emailLink = scanner.nextLine();
+				if (emailLink.equals("")) {
+					emailLink = null;
+				}
+				
+				CongressMember member = new CongressMember(name, phoneNumber, emailLink, stateCode);
+				if (!congress.containsKey(stateCode)) {
+					congress.put(stateCode, new ArrayList<CongressMember>());
+				} 
+				congress.get(stateCode).add(member);
+				scanner.nextLine();
 			}	
 			scanner.close();
 		} catch (IOException e) {
@@ -53,11 +68,33 @@ public class ContActivistServer extends ConsoleProgram
 		String response = "";
 		
 		if (cmd.equals("getCongressPhonesForState")) {
-			
+			response = congressPhones(request);
 		} else if (cmd.equals("getCongressEmailsForState")) {
-			
+			response = congressEmails(request);
 		} else {
 			response = "Error: Unknown command " + cmd + ".";
+		}
+		return response;
+	}
+	
+	private String congressPhones(Request req) {
+		String response = "";
+		String stateCode = req.getParam("stateCode");
+		ArrayList<CongressMember> mems = congress.get(stateCode);
+		for (CongressMember mem: mems) {
+			String desc = mem.getDescription("phone");
+			response += desc + "\n";
+		}
+		return response;
+	}
+	
+	private String congressEmails(Request req) {
+		String response = "";
+		String stateCode = req.getParam("stateCode");
+		ArrayList<CongressMember> mems = congress.get(stateCode);
+		for (CongressMember mem: mems) {
+			String desc = mem.getDescription("email");
+			response += desc + "\n";
 		}
 		return response;
 	}
