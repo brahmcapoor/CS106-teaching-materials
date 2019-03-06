@@ -4,7 +4,7 @@ Download the eclipse project (including the web demo) [here](https://github.com/
 
 ## Summary
 
-This is a program based on the section 8 handout of CS 106A Winter Quarter 2018 at Stanford University. The genuinely important things are as follows:
+This is a program based on the section 8 handout of CS 106A at Stanford University. The genuinely important things are as follows:
 
 * `FlightPlannerClient.java`: a fully featured client
 * `FlightPlannerServer.java`: a server that students need to implement
