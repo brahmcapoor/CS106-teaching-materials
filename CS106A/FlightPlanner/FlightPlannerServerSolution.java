@@ -14,6 +14,7 @@
  */
 
 import acm.program.*;
+import com.sun.net.httpserver.*;
 import acm.util.*;
 import java.io.*;
 import java.util.*;
@@ -36,8 +37,12 @@ public class FlightPlannerServerSolution extends ConsoleProgram
     public void run() {
         flightMap = new HashMap<String, ArrayList<FlightSolution>>();
         	readFlightData(FLIGHT_DATA_FILE);
+            try {
         server = new SimpleServer(this, PORT);
         server.start();
+        } catch (Exception ex) {
+        	System.out.println("ohp");
+        }
         println("Starting server...");
     }
 
@@ -45,6 +50,7 @@ public class FlightPlannerServerSolution extends ConsoleProgram
      * Deal with a request
      */
     public String requestMade(Request request) {
+    	println("Crashed in request made.");
         String cmd = request.getCommand();
         	print("");
         if (cmd.equals("getAllCities")) {
