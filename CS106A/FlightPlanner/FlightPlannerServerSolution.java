@@ -14,7 +14,6 @@
  */
 
 import acm.program.*;
-import com.sun.net.httpserver.*;
 import acm.util.*;
 import java.io.*;
 import java.util.*;
@@ -41,7 +40,7 @@ implements SimpleServerListener {
 			server = new SimpleServer(this, PORT);
 			server.start();
 		} catch (Exception ex) {
-			System.out.println("ohp");
+			throw ex;
 		}
 		println("Starting server...");
 	}

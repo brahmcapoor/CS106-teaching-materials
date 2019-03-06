@@ -225,7 +225,7 @@ $(document).ready(function() {
   swal({
     type: "info",
     text:
-      "This website requires your location to display a Google Map. Most modern browsers should ask you to confirm this.",
+      "This website requires your location to display a map. Most modern browsers should ask you to confirm this.",
     confirmButtonText: "I've given the page my location",
     allowOutsideClick: false
   }).then(result => {
