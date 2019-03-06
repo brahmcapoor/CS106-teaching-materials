@@ -2,10 +2,10 @@ let firstCity = "";
 let currentCity = "";
 
 var map;
-var flightPath = [];
 var line;
 var userip;
 var host;
+var totalDuration = 0.0;
 
 const COORDINATES = {
   Singapore: { lat: 1.35, lng: 103.8 },
@@ -20,10 +20,23 @@ const COORDINATES = {
 
 function initMap() {
   navigator.geolocation.getCurrentPosition(function(position) {
-    map = new google.maps.Map(document.getElementById("map"), {
-      center: { lat: position.coords.latitude, lng: position.coords.longitude },
-      zoom: 3
-    });
+    map = L.map("map").setView(
+      [position.coords.latitude, position.coords.longitude],
+      5,
+      { setView: true }
+    );
+
+    L.tileLayer(
+      "https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiYnJhaG0iLCJhIjoiY2pzdXYybnJzMDBmejQ0bzU5a3ZpNTVkZSJ9.XZbgIEsaq9sJ12CuCzcA_w",
+      {
+        maxZoom: 18,
+        attribution:
+          'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+          '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+          'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        id: "mapbox.streets"
+      }
+    ).addTo(map);
   });
 }
 
@@ -60,7 +73,11 @@ function updateDropDown(data, initial = false) {
     } else {
       city = cities[i].dest;
     }
-    html += '<a class="dropdown-item countryOption" href="#">' + city + "</a>";
+    html += '<a class="dropdown-item countryOption" href="#">' + city;
+    if (!initial) {
+      html += ` (${cities[i].duration} hrs)`;
+    }
+    html += "</a>";
   }
   $("#cityChoices").html(html);
 }
@@ -120,7 +137,9 @@ function endTrip() {
   swal({
     type: "success",
     title: "You're done!",
-    text: "Enjoy your trip!",
+    text: `You'll be flying for around ${Math.round(
+      totalDuration
+    )} hours. Enjoy your trip!`,
     imageUrl:
       "http://bestanimations.com/Transport/Aircraft/plane-travel-animated-gif-4.gif",
     imageWidth: 300,
@@ -132,19 +151,59 @@ function endTrip() {
 }
 
 $(document).on("click", ".countryOption", function(e) {
-  const selectedCity = e.currentTarget.innerHTML;
+  const prevCity = currentCity;
+  let selectedStr = e.currentTarget.innerHTML;
+  let selectedCity = "";
+  if (selectedStr.includes("(")) {
+    selectedCity = selectedStr.substring(0, selectedStr.indexOf("(") - 1);
+
+    const duration = parseFloat(
+      selectedStr.substring(
+        selectedStr.indexOf("(") + 1,
+        selectedStr.indexOf(")") - 4
+      )
+    );
+    console.log(duration);
+    totalDuration += duration;
+  } else {
+    selectedCity = selectedStr;
+  }
   currentCity = selectedCity;
-  flightPath.push(COORDINATES[currentCity]);
-  map.panTo(COORDINATES[currentCity]);
-  line = new google.maps.Polyline({
-    path: flightPath,
-    geodesic: true,
-    strokeColor: "#FF0000",
-    strokeOpacity: 1.0,
-    strokeWeight: 2
+
+  const srcPosition = COORDINATES[prevCity];
+  const destPosition = COORDINATES[currentCity];
+  console.log(srcPosition);
+  if (srcPosition !== undefined) {
+    console.log("drawing");
+    const src = new L.LatLng(srcPosition.lat, srcPosition.lng);
+    const dest = new L.LatLng(destPosition.lat, destPosition.lng);
+
+    var Geodesic = L.geodesic(
+      [
+        [
+          [srcPosition.lat, srcPosition.lng],
+          [destPosition.lat, destPosition.lng]
+        ]
+      ],
+      {
+        opacity: 1,
+        color: "red",
+        steps: 50
+      }
+    ).addTo(map);
+  }
+  const coords = [destPosition.lat, destPosition.lng];
+  map.panTo(coords, {
+    animate: true,
+    duration: 2
   });
 
-  line.setMap(map);
+  var marker = L.marker(coords, {
+    autoPan: false
+  }).addTo(map);
+  var popup = L.popup({ autoPan: false }).setContent(`<b>${currentCity}</b>`);
+  marker.bindPopup(popup).openPopup();
+
   if (firstCity === currentCity) {
     endTrip(true);
   }
@@ -158,6 +217,7 @@ $(document).on("click", ".countryOption", function(e) {
 });
 
 $(document).ready(function() {
+  initMap();
   $.get("https://jsonip.com/", function(r) {
     userip = r.ip;
     host = userip.toString() + ":8080";
