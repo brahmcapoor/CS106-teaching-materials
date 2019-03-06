@@ -41,18 +41,19 @@ public class FlightPlannerClient extends ConsoleProgram {
     private ArrayList<String> readInFlightRoute() {
         println("Let's plan a round-trip route!");
         String startCity = readLine("Enter the starting city: ");
+        startCity = "x->" + startCity + ":0.00";
         ArrayList<String> route = new ArrayList<String>();
         route.add(startCity);
         String currentCity = startCity;
         
         while (true) {
-            String nextCity = getNextCity(currentCity);
+            String nextCity = getNextCity(getDestination(currentCity));
             if (nextCity == null) {
                 // An error occurred
                 return null;
             }
             route.add(nextCity);
-            if (nextCity.equals(startCity)) {
+            if (getDestination(nextCity).equals(getDestination(startCity))) {
                 break;
             }
             currentCity = nextCity;
@@ -93,14 +94,14 @@ public class FlightPlannerClient extends ConsoleProgram {
         String nextCity = null;
         while (true) {
             println("From " + city + " you can fly directly to:");
-            printCityList(destinations);
+            printCityListWithTimes(destinations);
             String prompt = "Where do you want to go from " 
                 + city + "? ";
             nextCity = readLine(prompt);
-            if (destinations.contains(nextCity)) break;
+            if (hasDestination(destinations, nextCity)) break;
             println("You can't get to that city by a direct flight.");
         }
-        return nextCity;
+        return findDestination(destinations, nextCity);
     }
     
     /**
@@ -132,6 +133,15 @@ public class FlightPlannerClient extends ConsoleProgram {
             println(" " + city);
         }
     }
+    
+    private void printCityListWithTimes(ArrayList<String> cityList) {
+        for(int i = 0; i < cityList.size(); i++) {
+            String city = cityList.get(i);
+            String destination = getDestination(city);
+            String time = getDateString(getTime(city));
+            println(" " + destination + " (" + time + ")");
+        }
+    }
 
     /**
      * Given a list of city names, prints out the flight
@@ -139,10 +149,13 @@ public class FlightPlannerClient extends ConsoleProgram {
      */
     private void printRoute(ArrayList<String> route) {
         println("The route you've chosen is: ");
+        double totalTime = 0;
         for (int i = 0; i < route.size(); i++) {
             if (i > 0) print(" -> ");
-            print(route.get(i));
+            print(getDestination(route.get(i)));
+            totalTime += getTime(route.get(i));
         }
+        print(" (Total Travel Time: " + getDateString(totalTime) + ")");
         println();
     }
     
@@ -165,5 +178,53 @@ public class FlightPlannerClient extends ConsoleProgram {
             }
         }
         return list;
+    }
+
+    /**
+     * The following three methods take a String formatted as 
+     *      source->destination:time
+     * and parse out each of these three components.
+     */
+    private String getSource(String flightStr) {
+        return flightStr.split("->")[0];
+    }
+
+    private String getDestination(String flightStr) {
+        String arrivalPart = flightStr.split("->")[1];
+        return arrivalPart.split(":")[0];
+    }
+
+    private double getTime(String flightStr) {
+        String arrivalPart = flightStr.split("->")[1];
+        return Double.parseDouble(arrivalPart.split(":")[1]);
+    }
+
+    /*
+     * Converts a time in hours to a formatted String of 
+     * x + "h" + y + "m" where x and y represent the hours
+     * and minutes respectively. 
+     */
+    private String getDateString(double time) {
+        int hours = (int)time;
+        int minutes = (int)(60 * (time - Math.floor(time)));
+        String minuteString = "" + minutes;
+        //Pad the minutes to be exactly two digits
+        while (minuteString.length() < 2) {
+            minuteString = "0" + minuteString;
+        }
+        return hours + "h" + minuteString + "m";
+    }
+
+    private boolean hasDestination(ArrayList<String> destinations, String target) {
+        return findDestination(destinations, target) != null;
+    }
+
+    private String findDestination(ArrayList<String> destinations, String target) {
+        for (String dest : destinations) {
+            if (getDestination(dest).equals(target)) {
+                return dest;
+            }
+        }
+        return null;
     }
 }
