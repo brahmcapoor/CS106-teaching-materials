@@ -1,0 +1,16 @@
+body {
+  font-family: "Source Sans Pro", sans-serif;
+  padding-top: 20px;
+}
+
+.subtleHeading {
+  font-size: 12px;
+  font-weight: 700;
+  color: #959595;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-default {
+  border-color: #ccc;
+}

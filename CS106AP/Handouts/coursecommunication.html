@@ -1,0 +1,195 @@
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="handoutstyles.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script>
+      lairLocation = function() {
+        Swal.fire({
+          title: "LaIR Location",
+          type: "info",
+          confirmButtonText: "Cool",
+          width: "600px",
+          html: `<p style="font-size:16px">
+    	      	The LaIR is located in the Tresidder Union first floor food court and is staffed Sunday through Thursday 6pm-11pm. The <a href="https://cs198.stanford.edu/lair/shifts">CS198</a> website will host a LaIR calendar with holiday changes. <b>The LaIR does not open until Sunday April 7th</b>
+    	      </p>
+    	      <p>
+    	      	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3168.5415733070363!2d-122.17303088454764!3d37.424309040017974!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fbad4451d1567%3A0x8820f24eeb7fde1e!2sTresidder+Memorial+Union%2C+459+Lagunita+Dr%2C+Stanford%2C+CA+94305!5e0!3m2!1sen!2sus!4v1546920977626" width="570" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+    	      </p>`
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="pageHeader">
+            <a href="http://cs106ap.stanford.edu">
+              <p class="subtleHeading text-center">
+                Back to CS 106AP Homepage
+              </p>
+            </a>
+            <h1>Course Communication</h1>
+            <p class="subtleHeading"></p>
+            <p class="subtleHeading">
+              <i class="far fa-calendar-alt"></i> Jan 8th, 2019
+            </p>
+          </div>
+
+          <hr />
+        </div>
+      </div>
+      <p>
+        We provide a variety of support resources in CS106A to help you as much
+        as possible with assignment, material, or other questions throughout the
+        quarter. These include: your assigned Section Leader, the LaIR, the
+        CLaIR,
+        <a href="http://piazza.com/stanford/spring2019/cs106ap" target="_blank"
+          >Piazza</a
+        >, and weekly office hours held by Nick and Brahm. To help you make the
+        most of these resources, we've compiled a list of common issues or
+        questions that may come up throughout the quarter, and the best way to
+        get help for each.
+      </p>
+      <h4>Resource FAQ:</h4>
+      <p>
+        <button type="button" class="btn btn-default" onclick="lairLocation()">
+          <i class="fas fa-map-pin"></i>
+          Where / when is the LaIR?
+        </button>
+      </p>
+      <hr />
+
+      <h3>
+        <i class="fas fa-question"></i> I have a
+        <b style="color:blue">conceptual question</b> about the course material:
+      </h3>
+
+      <p>
+        We love conceptual questions. Conceptual questions are the height of all
+        course queries. It often takes more work to figure out what concept you
+        are confused about, but if you do that extra work, you will learn much
+        more in return. You can ask conceptual questions to any course staff.
+      </p>
+      <p>
+        <b>
+          Go to the LaIR, stop by any office hours, email your Section Leader or
+          post on Piazza!
+        </b>
+      </p>
+      <p>
+        At the LaIR there is a special sign up for conceptual help called the
+        CLaIR, or "Conceptual LaIR." This is a higher priority queue and you
+        will get a faster response. When getting CLaIR help, section leaders
+        won't look at your code but instead teach you the concepts you need for
+        your homework. Understand concepts before you code! It will make life
+        much more pleasant.
+      </p>
+
+      <hr />
+
+      <h3>
+        <i class="fas fa-question"></i> I have
+        <b style="color:blue">a bug</b> in my code, or another question about my
+        code:
+      </h3>
+      <p>
+        We all get stuck when programming. There are times when the best thing
+        to do is to work through the bug yourself -- learning by doing is
+        powerful. However, there are also times when an experienced programmer
+        can help get you on the right track. Course staff will help you learn
+        how to narrow down what may be going wrong in your code and how to
+        approach fixing it.
+      </p>
+      <p>
+        <b>
+          Go to the LaIR or stop by Brahm's office hours
+        </b>
+      </p>
+      <p>
+        It turns out that code is terribly difficult to debug over email or over
+        Piazza so please come in person, if possible.
+      </p>
+
+      <hr />
+
+      <h3>
+        <i class="fas fa-question"></i> I have an
+        <b style="color:blue">administrative</b> question:
+      </h3>
+      <p>
+        Post on Piazza if it's not specific to you, or email the head TA for
+        private matters.
+      </p>
+
+      <p>
+        <b>
+          Post on Piazza or email Brahm
+        </b>
+      </p>
+      <p>
+        Importantly, only the Head TA is able to grant extensions beyond the 2
+        penalty-free late days for each assignment.
+      </p>
+
+      <hr />
+      <h3>
+        <i class="fas fa-question"></i> I want to
+        <b style="color:blue">chat about life</b> and programming / I need to
+        restrategize:
+      </h3>
+
+      <p>
+        Anyone on the course staff would appreciate a good conversation about
+        where this crazy world is headed. If you are interested in more specific
+        career advice, ideas on how to restrategize your learning, or just want
+        to talk about life at Stanford, please feel free to come to Nick or
+        Brahm's office hours.
+      </p>
+      <p>
+        <b>
+          Talk to Nick or Brahm!
+        </b>
+      </p>
+
+      <p>
+        We have no expectations for students who come to office hours - it's
+        totally fine to just come with a general sense of confusion or the
+        desire to work and ask us questions whenever you need to.
+      </p>
+
+      <script
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"
+      ></script>
+      <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"
+      ></script>
+      <script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"
+      ></script>
+    </div>
+  </body>
+</html>
