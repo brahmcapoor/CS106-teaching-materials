@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700");
+
+/* General layout and text formatting*/
+body {
+  font-family: "Source Sans Pro", sans-serif;
+  padding-top: 20px;
+}
+
+.subtleHeading {
+  font-size: 12px;
+  font-weight: 700;
+  color: #959595;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-default {
+  border-color: #ccc;
+}
+
+code {
+  font-style: normal;
+}
+
+/* Problem layouts and text formatting */
+.problem {
+  padding-top: 15px;
+}
+
+.problem .hint {
+  font-style: italic;
+}
+
+@media screen {
+  .problem img {
+    padding: 20px;
+    width: 40%;
+  }
+}
+
+/* Utilities for printing */
+@media print {
+  .no-print,
+  .no-print * {
+    display: none !important;
+  }
+
+  .problem img {
+    max-width: 25%;
+    height: auto;
+    padding: 20px;
+  }
+}
+
+@media screen {
+  .only-print,
+  .only-print * {
+    display: none !important;
+  }
+}

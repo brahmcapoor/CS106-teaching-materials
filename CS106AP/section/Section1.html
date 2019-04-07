@@ -1,0 +1,335 @@
+<html>
+  <head>
+    <title> Section 1 </title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="sectionstyles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="pageHeader">
+            <a href="http://cs106ap.stanford.edu" class="no-print">
+              <p class="subtleHeading text-center">
+                Back to CS 106A Homepage
+              </p>
+            </a>
+            <h1> Section 1 </h1>
+            <p class="subtleHeading">
+              Written by Nick Parlante with modifications by Brahm Capoor
+            </p>
+            <p class="subtleHeading">
+              <i class="far fa-calendar-alt"></i> April 7th, 2019
+            </p>
+            <hr />
+          </div>
+        </div>
+      </div>
+      <p>
+        Welcome to section for CS 106A! Each week, your section will meet to
+        review the material from the course and to work through some problems.
+        This week we'll work on image-loop problems, using material from the
+        first few lectures. Problems like this will appear on this week's
+        assignment.
+      </p>
+      <p>
+        Solution code will be available for all section problems later on, so
+        they will also serve as review problems. Each week's section page will
+        list several problems, and your section leader will pick which problems
+        to do and in what form.
+      </p>
+      <hr />
+      <!-- Double For Loop Problems-->
+      <div class="problem">
+        <h2> Image Range-Loop Problems </h2>
+        <p class="hint">
+          You might find nested <code>y</code>,<code>x</code> range loops
+          helpful in solving these. Problems like this are well suited to making
+          a drawing first to think through the algorithm before coding, and
+          especially to get the arithmetic for each coordinate exactly right.
+          These algorithms are a magnet for off-by-one errors.
+        </p>
+        <p class="hint">
+          A good first step, as in lecture, is to sketch out the pixel grid
+          <code>x</code>,<code>y</code> coordinates as in lecture to plan how
+          your algorithm will access the pixels.
+        </p>
+        <img
+          src="section1_img/python-image-grid.png"
+          alt="An image grid"
+          class="img-fluid mx-auto d-block"
+        />
+        <p>
+          Implement the following functions, each of which takes an image's
+          <code>filename</code> and returns a <code>SimpleImage</code>.
+          <span class="no-print">
+            You might find the
+            <a
+              href="http://web.stanford.edu/class/cs106ap/handouts/reference-image.html"
+              target="_blank"
+              ><code>SimpleImage</code> documentation</a
+            >
+            useful to consult.
+          </span>
+        </p>
+        <ol>
+          <li>
+            <p>
+              <code>double_left(filename)</code>: Takes the left half of the
+              image, and copies it on top of the right half.
+            </p>
+            <img
+              src="section1_img/double_left.png"
+              alt="double_left_output"
+              width="25%"
+              class="img-fluid mx-auto d-block"
+            />
+          </li>
+          <li>
+            <p>
+              <code>double_left_up(filename)</code>: Takes the left half of the
+              image, and copies it on the right half as before, except it is
+              flipped upside-down as it is copied.
+            </p>
+            <img
+              src="section1_img/double_left_up.png"
+              alt="double_left_output"
+              width="25%"
+              class="img-fluid mx-auto d-block"
+            />
+          </li>
+          <li>
+            <p>
+              <code>copies_2(filename)</code>: Create a new image twice as wide
+              as the original, and place two copies of the original image, in
+              it, side by side.
+            </p>
+            <img
+              src="section1_img/copies_2.png"
+              alt="double_left_output"
+              width="30%"
+              class="img-fluid mx-auto d-block"
+            />
+          </li>
+          <li>
+            <p>
+              <code>squeeze_width(filename, n)</code>: A funhouse mirror effect
+              governed by the <code>int</code> parameter <code>n</code>. Create
+              a new image with the same height as the original, but with a width
+              that is <code>n</code> times smaller than the original's. Copy the
+              original image such that it is squeezed horizontally.
+            </p>
+            <img
+              src="section1_img/squeeze-width.png"
+              alt="double_left_output"
+              width="30%"
+              class="img-fluid mx-auto d-block"
+            />
+            <p>
+              For example, if <code>n = 4</code>, the pixels in the output image
+              with an <code>x</code> coordinate of <code>0</code> would be
+              copies of the input pixels with an <code>x</code> coordinate of
+              <code>0 * 4 = 0</code>, while pixels in the output image with an
+              <code>x</code> coordinate of <code>1</code> would be copies of the
+              input pixels with an <code>x</code> coordinate of
+              <code>1 * 4 = 4</code>, and so on.
+            </p>
+          </li>
+        </ol>
+        <p class="no-print">
+          Test your solutions
+          <a href="https://parlante.org/make/image/range-section/">here</a>.
+        </p>
+      </div>
+      <hr />
+
+      <!-- Image Puzzle Problems-->
+      <div class="problem">
+        <h2> Image Puzzles </h2>
+        <h5>
+          This is a lab-style problem. You may want to work on this in groups on
+          your laptop and test your programs as you write them.
+        </h5>
+        <p>
+          Photo Editor programs are often used for color correcting digital
+          images, that is, modifying the color components in images to alter the
+          relative 'redness', 'greenness' or 'blueness' of the image. In this
+          problem, we'll give you three exaggerated examples of images that need
+          color correction-as well as what exactly is wrong with each of
+          them-and you'll figure out how to alter each pixel in order to correct
+          the image. For these problems, you should be able to use the plain
+          'foreach' to solve each of them without needing to work with
+          <code>x</code> and <code>y</code> coordinates.
+        </p>
+        <p>
+          Specifically, implement the following functions, each of which takes
+          in an image <code>filename</code> and returns a
+          <code>SimpleImage</code>.
+
+          <span class="no-print">
+            You might find the
+            <a
+              href="http://web.stanford.edu/class/cs106ap/handouts/reference-image.html"
+              target="_blank"
+              ><code>SimpleImage</code> documentation</a
+            >
+            useful to consult.
+          </span>
+        </p>
+        <p class="hint only-print">
+          Reproductions of images themselves are not reproduced on printed
+          copies of this handout. You can find the images on the digital version
+          of this handout, linked on the course website.
+        </p>
+
+        <p>
+          For the benefit of students who are color-blind or otherwise unable to
+          identify issues with the colors of these images, we list the issues
+          with each of the images below, so you'll be able to implement them
+          anyway.
+          <span class="only-print">
+            This table is available on the digital version of this handout,
+            linked on the course page.
+          </span>
+        </p>
+        <div class="no-print text-center">
+          <button
+            class="btn btn-info"
+            type="button"
+            data-toggle="collapse"
+            data-target="#imageIssues"
+            aria-expanded="false"
+            aria-controls="imageIssues"
+            id="revealButton"
+          >
+            Reveal image issues
+          </button>
+          <div class="collapse" id="imageIssues">
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Function</th>
+                  <th scope="col">Issue with image</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>fix_1</code></td>
+                  <td>
+                    <p>
+                      In each of the original image's pixels, the red component
+                      is divided by 8, the green component by 2 and the blue
+                      component by 4.
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>fix_2</code></td>
+                  <td>
+                    <p>
+                      In each of the original image's pixels, the red component
+                      is swapped with the green component.
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>fix_3</code></td>
+                  <td>
+                    <p>
+                      In each of the original image's pixels, the red component
+                      is swapped with the blue component and the green component
+                      is divided by 4.
+                    </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <ol>
+          <li>
+            <p>
+              <code>fix1(filename)</code>: This function takes in the
+              <code>filename</code> of an image wherein across all its pixels,
+              one of the red/green/blue components has been divided by 2, one by
+              4, and one by 8. Write code to reverse this to fix the image and
+              then return it.
+            </p>
+            <img
+              src="section1_img/fix1.png"
+              alt="double_left_output"
+              width="30%"
+              class="img-fluid mx-auto d-block no-print"
+            />
+            <p>
+              The divide/multiply cycle introduces some small glitches in the
+              image which can be ignored.
+            </p>
+          </li>
+          <li>
+            <p>
+              <code>fix2(filename)</code>: This function takes in the
+              <code>filename</code> of an image wherein across all its pixels,
+              two of the colors have been swapped. Figure out which two colors
+              and write code to fix it.
+            </p>
+            <img
+              src="section1_img/fix2.png"
+              alt="double_left_output"
+              width="30%"
+              class="img-fluid mx-auto d-block no-print"
+            />
+            <p>
+              This does not suffer from divide/multiply glitches. Swapping is
+              perfectly reversible!
+            </p>
+          </li>
+          <li>
+            <p>
+              <code>fix3(filename)</code>: This function takes in the
+              <code>filename</code> of an image wherein across all its pixels,
+              two of the colors have been swapped. In addition, the third color
+              has been divided by 4. Write code to fix all this.
+            </p>
+            <img
+              src="section1_img/fix3.png"
+              alt="double_left_output"
+              width="30%"
+              class="img-fluid mx-auto d-block no-print"
+            />
+          </li>
+        </ol>
+        <p class="no-print">
+          Test your solutions
+          <a href="https://parlante.org/make/image/puzzle-section/">here</a>.
+        </p>
+      </div>
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      document.getElementById("revealButton").addEventListener("click", e => {
+        document.getElementById("revealButton").remove();
+      });
+    </script>
+  </body>
+</html>
