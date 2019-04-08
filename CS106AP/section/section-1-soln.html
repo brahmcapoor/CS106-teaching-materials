@@ -1,0 +1,132 @@
+<body>
+<h1> Section 1 Solutions </h1>
+<!-- HTML generated using hilite.me --><div
+  style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"
+  ><pre
+    style="margin: 0; line-height: 125%"
+  ><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">double_left</span>(filename):
+    <span style="color: #DD4422">&quot;&quot;&quot;</span>
+<span style="color: #DD4422">    Take the left half of the image.</span>
+<span style="color: #DD4422">    Copy it on top of the right half.</span>
+<span style="color: #DD4422">    Assume the image width is even.</span>
+<span style="color: #DD4422">    A classic make-a-drawing situation.</span>
+<span style="color: #DD4422">    &quot;&quot;&quot;</span>
+    image <span style="color: #333333">=</span> SimpleImage(filename)
+    <span style="color: #888888"># style idea: the math is hard enough to follow,</span>
+    <span style="color: #888888"># it&#39;s helpful to introduce a variable like this to name</span>
+    <span style="color: #888888"># a common value we need (identify mid_x on drawing too).</span>
+    mid_x <span style="color: #333333">=</span> image<span style="color: #333333">.</span>width <span style="color: #333333">//</span> <span style="color: #0000DD; font-weight: bold">2</span>
+    <span style="color: #008800; font-weight: bold">for</span> y <span style="color: #000000; font-weight: bold">in</span> <span style="color: #007020">range</span>(image<span style="color: #333333">.</span>height):
+        <span style="color: #008800; font-weight: bold">for</span> x <span style="color: #000000; font-weight: bold">in</span> <span style="color: #007020">range</span>(mid_x):
+            pixel <span style="color: #333333">=</span> image<span style="color: #333333">.</span>get_pixel(x, y)
+            pixel_right <span style="color: #333333">=</span> image<span style="color: #333333">.</span>get_pixel(mid_x <span style="color: #333333">+</span> x, y)
+            pixel_right<span style="color: #333333">.</span>red <span style="color: #333333">=</span> pixel<span style="color: #333333">.</span>red
+            pixel_right<span style="color: #333333">.</span>green <span style="color: #333333">=</span> pixel<span style="color: #333333">.</span>green
+            pixel_right<span style="color: #333333">.</span>blue <span style="color: #333333">=</span> pixel<span style="color: #333333">.</span>blue
+    <span style="color: #008800; font-weight: bold">return</span> image
+
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">double_left_up</span>(filename):
+    <span style="color: #DD4422">&quot;&quot;&quot;</span>
+<span style="color: #DD4422">    Copy the left half on top of the</span>
+<span style="color: #DD4422">    right half as before, except the</span>
+<span style="color: #DD4422">    right half should be upside down.</span>
+<span style="color: #DD4422">    &quot;&quot;&quot;</span>
+    image <span style="color: #333333">=</span> SimpleImage(filename)
+    mid_x <span style="color: #333333">=</span> image<span style="color: #333333">.</span>width <span style="color: #333333">//</span> <span style="color: #0000DD; font-weight: bold">2</span>
+    <span style="color: #008800; font-weight: bold">for</span> y <span style="color: #000000; font-weight: bold">in</span> <span style="color: #007020">range</span>(image<span style="color: #333333">.</span>height):
+        <span style="color: #008800; font-weight: bold">for</span> x <span style="color: #000000; font-weight: bold">in</span> <span style="color: #007020">range</span>(mid_x):
+            pixel <span style="color: #333333">=</span> image<span style="color: #333333">.</span>get_pixel(x, y)
+            <span style="color: #888888"># the key line:</span>
+            pixel_right <span style="color: #333333">=</span> image<span style="color: #333333">.</span>get_pixel(mid_x <span style="color: #333333">+</span> x, image<span style="color: #333333">.</span>height <span style="color: #333333">-</span> y <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">1</span>)
+            pixel_right<span style="color: #333333">.</span>red <span style="color: #333333">=</span> pixel<span style="color: #333333">.</span>red
+            pixel_right<span style="color: #333333">.</span>green <span style="color: #333333">=</span> pixel<span style="color: #333333">.</span>green
+            pixel_right<span style="color: #333333">.</span>blue <span style="color: #333333">=</span> pixel<span style="color: #333333">.</span>blue
+    <span style="color: #008800; font-weight: bold">return</span> image
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">copies_2</span>(filename):
+    <span style="color: #DD4422">&quot;&quot;&quot;</span>
+<span style="color: #DD4422">    Create a new &#39;out&#39; image twice as wide as the original.</span>
+<span style="color: #DD4422">    Place 2 copies of the original in out side by side,</span>
+<span style="color: #DD4422">    and return it.</span>
+<span style="color: #DD4422">    &quot;&quot;&quot;</span>
+    image <span style="color: #333333">=</span> SimpleImage(filename)
+    <span style="color: #888888"># Creates a new white image with nothing in it</span>
+    out <span style="color: #333333">=</span> SimpleImage(<span style="background-color: #fff0f0">&#39;&#39;</span>, width<span style="color: #333333">=</span>image<span style="color: #333333">.</span>width <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">2</span>, height<span style="color: #333333">=</span>image<span style="color: #333333">.</span>height)
+    mid_x <span style="color: #333333">=</span> image<span style="color: #333333">.</span>width
+    <span style="color: #008800; font-weight: bold">for</span> y <span style="color: #000000; font-weight: bold">in</span> <span style="color: #007020">range</span>(image<span style="color: #333333">.</span>height):
+        <span style="color: #008800; font-weight: bold">for</span> x <span style="color: #000000; font-weight: bold">in</span> <span style="color: #007020">range</span>(image<span style="color: #333333">.</span>width):
+            pixel <span style="color: #333333">=</span> image<span style="color: #333333">.</span>get_pixel(x, y)
+            <span style="color: #888888"># left copy</span>
+            pixel_left <span style="color: #333333">=</span> out<span style="color: #333333">.</span>get_pixel(x, y)
+            pixel_left<span style="color: #333333">.</span>red <span style="color: #333333">=</span> pixel<span style="color: #333333">.</span>red
+            pixel_left<span style="color: #333333">.</span>green <span style="color: #333333">=</span> pixel<span style="color: #333333">.</span>green
+            pixel_left<span style="color: #333333">.</span>blue <span style="color: #333333">=</span> pixel<span style="color: #333333">.</span>blue
+            <span style="color: #888888"># right copy</span>
+            pixel_right <span style="color: #333333">=</span> out<span style="color: #333333">.</span>get_pixel(mid_x <span style="color: #333333">+</span> x, y)
+            pixel_right<span style="color: #333333">.</span>red <span style="color: #333333">=</span> pixel<span style="color: #333333">.</span>red
+            pixel_right<span style="color: #333333">.</span>green <span style="color: #333333">=</span> pixel<span style="color: #333333">.</span>green
+            pixel_right<span style="color: #333333">.</span>blue <span style="color: #333333">=</span> pixel<span style="color: #333333">.</span>blue
+    <span style="color: #008800; font-weight: bold">return</span> out
+
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">squeeze_width</span>(filename, n):
+    <span style="color: #DD4422">&quot;&quot;&quot;</span>
+<span style="color: #DD4422">    A sort of funhouse-mirror effect.</span>
+<span style="color: #DD4422">    Create a new &#39;out&#39; image the same height as the original,</span>
+<span style="color: #DD4422">    but with width divided by int n.</span>
+<span style="color: #DD4422">    Copy the original image to out, squeezing it horizontally</span>
+<span style="color: #DD4422">    by a factor of n, e.g. for n of 4, copy from the original</span>
+<span style="color: #DD4422">    at x 0, 4, 8, ... and so on.</span>
+<span style="color: #DD4422">    n=1 should copy the image without squeezing.</span>
+<span style="color: #DD4422">    &quot;&quot;&quot;</span>
+    image <span style="color: #333333">=</span> SimpleImage(filename)
+    out <span style="color: #333333">=</span> SimpleImage(<span style="background-color: #fff0f0">&#39;&#39;</span>, width<span style="color: #333333">=</span>image<span style="color: #333333">.</span>width <span style="color: #333333">//</span> n, height<span style="color: #333333">=</span>image<span style="color: #333333">.</span>height)
+    <span style="color: #888888"># strategy: iterate x,y over the out pixels, compute</span>
+    <span style="color: #888888"># scaled * n pixel in original image.</span>
+    <span style="color: #008800; font-weight: bold">for</span> y <span style="color: #000000; font-weight: bold">in</span> <span style="color: #007020">range</span>(out<span style="color: #333333">.</span>height):
+        <span style="color: #008800; font-weight: bold">for</span> x <span style="color: #000000; font-weight: bold">in</span> <span style="color: #007020">range</span>(out<span style="color: #333333">.</span>width):
+            pixel_out <span style="color: #333333">=</span> out<span style="color: #333333">.</span>get_pixel(x, y)
+            pixel <span style="color: #333333">=</span> image<span style="color: #333333">.</span>get_pixel(x <span style="color: #333333">*</span> n, y)
+
+            pixel_out<span style="color: #333333">.</span>red <span style="color: #333333">=</span> pixel<span style="color: #333333">.</span>red
+            pixel_out<span style="color: #333333">.</span>green <span style="color: #333333">=</span> pixel<span style="color: #333333">.</span>green
+            pixel_out<span style="color: #333333">.</span>blue <span style="color: #333333">=</span> pixel<span style="color: #333333">.</span>blue
+    <span style="color: #008800; font-weight: bold">return </span> out
+
+
+
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">fix1</span>(filename):
+    <span style="color: #DD4422">&quot;&quot;&quot;Fix the fix1 puzzle image.&quot;&quot;&quot;</span>
+    image <span style="color: #333333">=</span> SimpleImage(filename)
+    <span style="color: #008800; font-weight: bold">for</span> pixel <span style="color: #000000; font-weight: bold">in</span> image:
+        pixel<span style="color: #333333">.</span>red <span style="color: #333333">=</span> pixel<span style="color: #333333">.</span>red <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">8</span>
+        pixel<span style="color: #333333">.</span>green <span style="color: #333333">=</span> pixel<span style="color: #333333">.</span>green <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">2</span>
+        pixel<span style="color: #333333">.</span>blue <span style="color: #333333">=</span> pixel<span style="color: #333333">.</span>blue  <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">4</span>
+    <span style="color: #008800; font-weight: bold">return </span> image
+
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">fix2</span>(filename):
+    <span style="color: #DD4422">&quot;&quot;&quot;Fix the fix2 puzzle image.&quot;&quot;&quot;</span>
+    image <span style="color: #333333">=</span> SimpleImage(filename)
+    <span style="color: #008800; font-weight: bold">for</span> pixel <span style="color: #000000; font-weight: bold">in</span> image:
+        temp <span style="color: #333333">=</span> pixel<span style="color: #333333">.</span>red
+        pixel<span style="color: #333333">.</span>red <span style="color: #333333">=</span> pixel<span style="color: #333333">.</span>green
+        pixel<span style="color: #333333">.</span>green <span style="color: #333333">=</span> temp
+    <span style="color: #008800; font-weight: bold">return </span>image
+
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">fix3</span>(filename):
+    <span style="color: #DD4422">&quot;&quot;&quot;Fix the fix3 puzzle image.&quot;&quot;&quot;</span>
+    image <span style="color: #333333">=</span> SimpleImage(filename)
+    <span style="color: #008800; font-weight: bold">for</span> pixel <span style="color: #000000; font-weight: bold">in</span> image:
+        temp <span style="color: #333333">=</span> pixel<span style="color: #333333">.</span>red
+        pixel<span style="color: #333333">.</span>red <span style="color: #333333">=</span> pixel<span style="color: #333333">.</span>blue
+        pixel<span style="color: #333333">.</span>blue <span style="color: #333333">=</span> temp
+        pixel<span style="color: #333333">.</span>green <span style="color: #333333">=</span> pixel<span style="color: #333333">.</span>green <span style="color: #333333">*</span> <span style="color: #0000DD; font-weight: bold">4</span>
+    <span style="color: #008800; font-weight: bold">return </span> image
+    </pre></div</div
+>
+</div>
+</body>
