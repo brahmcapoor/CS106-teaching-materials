@@ -1,0 +1,321 @@
+<html>
+  <head>
+    <title> Installing PyCharm </title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="handoutstyles.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="pageHeader">
+            <a href="http://cs106ap.stanford.edu">
+              <p class="subtleHeading text-center">
+                Back to CS 106AP Homepage
+              </p>
+            </a>
+            <h1>Installing PyCharm</h1>
+            <p class="subtleHeading"></p>
+            <p class="subtleHeading">
+              <i class="far fa-calendar-alt"></i> April 12th, 2019
+            </p>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="subsection">
+        <p>
+          So far in CS 106A, you've been programming in Python on your browser.
+          Moving forwards, however, you will be writing your code on your
+          computer using an application called
+          <a href="https://www.jetbrains.com/pycharm/"> PyCharm</a>. PyCharm is
+          what is known as an IDE, or <i>Integrated Development Environment</i>,
+          which means that it allows us to edit our code, browse our files, run
+          our programs and debug them, all in the same place. It's one of the
+          most popular Python IDEs in the world, and used extremely commonly in
+          industry. This handout is intended to take you through installing
+          PyCharm on your own computer.
+        </p>
+      </div>
+      <hr />
+      <div class="subsection">
+        <h2>Setting up</h2>
+        <h4>The Terminal</h4>
+        <p>
+          The Terminal, also sometimes called the <i>Command Line</i> or the
+          <i>Command Prompt</i> on Windows, is a text-based interface for
+          operating your computer. We'll be using it a bit throughout the
+          quarter in order to run our programs, so make sure you know how to
+          open the Terminal on your computer.
+          <a
+            href="https://tutorial.djangogirls.org/en/intro_to_command_line/"
+            target="_blank"
+          >
+            This website
+          </a>
+          explains how to find the Terminal application on your computer, as
+          well as some further details on what you can do with it. You don't
+          need to worry too much about those details just yet, although you're
+          free to peruse them if you'd like. As we go through the quarter, we'll
+          explore the capabilities of the terminal in much greater depth.
+        </p>
+
+        <h4>Installing Python</h4>
+        <p>
+          In order to be able to run Python programs on your computer, you need
+          to install a <i>Python Interpreter.</i> An interpreter is a program
+          that is capable of reading a <code>.py</code> file that you have
+          written, and translating the Python code in that file to instructions
+          that your computer can easily execute. Begin by downloading Python:
+        </p>
+        <ul>
+          <li>
+            <a
+              href="https://www.python.org/ftp/python/3.7.3/python-3.7.3-macosx10.9.pkg"
+            >
+              Mac Installer
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.python.org/ftp/python/3.7.3/python-3.7.3-amd64.exe"
+            >
+              Windows 64-bit installer
+            </a>
+            (If you're using a relatively new Windows computer, download this
+            file)
+          </li>
+          <li>
+            <a href="https://www.python.org/ftp/python/3.7.3/python-3.7.3.exe">
+              Windows 32-bit installer
+            </a>
+            (If you're using an older Windows computer, download this file)
+          </li>
+        </ul>
+        <b>Installing on a Mac</b>
+        <p class="note">
+          <b>Note: </b> Macs come with a version of Python installed, but this
+          is an older version of Python (specifically, Python 2). CS 106A
+          requires the use of Python 3, so make sure to follow these
+          instructions even if you think you already have Python installed. If
+          you require the use of Python 2 for other work, you can still install
+          Python 3, which exists alongside Python 2 rather than replacing it.
+        </p>
+        <ol>
+          <li>
+            Open the downloaded Python installer file and follow the default
+            instructions.
+          </li>
+          <li>
+            Open up your terminal application.
+          </li>
+          <li>
+            Type <code>python3</code> and press enter. You should see something
+            that looks like this:
+          </li>
+          <div class="codeblock">
+            <pre class="console">
+              <code>
+Python 3.7.3 (default, Mar 27 2019, 09:23:15)
+[Clang 10.0.1 (clang-1001.0.46.3)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+              </code>
+            </pre>
+          </div>
+        </ol>
+        <b>Installing on Windows</b>
+        <ol>
+          <li>
+            Open the downloaded file. Before installing, there should be an
+            option that says "Add Python 3.7 in PATH".
+            <b>Make sure to check this box.</b> Then, continue installing
+            normally.
+          </li>
+          <li>
+            Open up the command prompt.
+          </li>
+          <li>
+            Type <code>py</code> and press enter. You should see something that
+            looks like this:
+          </li>
+          <div class="codeblock">
+            <pre class="console">
+              <code>
+Python 3.7.3 (v3.7.3:9a3ffc0492, Mar 27 2019, 09:23:15)
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+              </code>
+            </pre>
+          </div>
+        </ol>
+      </div>
+      <hr />
+      <div class="subsection">
+        <h3> Installing and Testing PyCharm </h3>
+        <h4> Installation </h4>
+        <p>
+          To get started, download and install the community version of PyCharm:
+        </p>
+        <ul>
+          <li>
+            <a href="https://www.jetbrains.com/pycharm/download/#section=mac">
+              Mac Download
+            </a>
+            (Open the downloaded <code>.dmg</code> file and drag PyCharm into
+            your Applications folder)
+          </li>
+          <li>
+            <a
+              href="https://www.jetbrains.com/pycharm/download/#section=windows"
+            >
+              Windows Download
+            </a>
+            (Open the downloaded <code>.exe</code> file and install PyCharm,
+            using all the default options. )
+          </li>
+        </ul>
+        <h4> Testing PyCharm </h4>
+        <p>
+          Now that you have PyCharm downloaded and installed, open it up and
+          follow the setup wizard, which allows you to choose some default
+          settings. Feel free to install any additional plugins it suggests,
+          although none will be necessary for this class.
+        </p>
+        <p>
+          PyCharm models a program as a 'project', which consists of one or more
+          Python files, as well as any additional resources like images or text
+          files. To get you familiar with working with projects in PyCharm,
+          we've provided a sample project, which you can download
+          <a
+            href="http://web.stanford.edu/class/cs106ap/handouts/pycharm_intro.zip"
+          >
+            here</a
+          >. To test out this project, and to gain familiarity with the PyCharm
+          environment, download the sample project and open it in PyCharm (using
+          the 'open' option on the first screen). Now, follow the steps below to
+          run the project in PyCharm:
+        </p>
+        <ol>
+          <li>
+            First, you need to <i>configure the interpreter</i> for the project,
+            which essentially means that you want to specify the version of
+            Python you'll be using to run your code. To do so, click 'configure
+            Python Interpreter' at the top of your window:
+          </li>
+          <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+              <img
+                src="pycharm_images/mainwindow.png"
+                class="img-fluid mx-auto d-block"
+              />
+            </div>
+          </div>
+          <li>
+            Then, select the dropdown at the top of the window and click 'show
+            all'.
+          </li>
+          <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+              <img
+                src="pycharm_images/dropdown.png"
+                class="img-fluid mx-auto d-block"
+              />
+            </div>
+          </div>
+          <li>
+            Then click the + button at the bottom left corner.
+          </li>
+          <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+              <img
+                src="pycharm_images/add_interpreter.png"
+                class="img-fluid mx-auto d-block"
+              />
+            </div>
+          </div>
+          <li>
+            Now, Python 3.7 should automatically be selected on the next window.
+            Click 'OK', and save your progress. PyCharm might take a while to
+            recognize your interpreter, but you should eventually be good to go.
+          </li>
+          <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+              <img
+                src="pycharm_images/interpreterchoice.png"
+                class="img-fluid mx-auto d-block"
+              />
+            </div>
+          </div>
+          <li>
+            Once PyCharm has finished recognizing your interpreter (indicated by
+            the progress bar in the bottom right corner), you should be ready to
+            run your program! Click the green arrow in the top right of the
+            window to run, and you should see your program's output in the
+            bottom pane.
+          </li>
+          <ul>
+            <li>
+              If you get an error saying "cannot run program", click "intro" in
+              the top right>edit configuration>python interpreter> Python 3.7.
+            </li>
+          </ul>
+          <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+              <img
+                src="pycharm_images/first_run.png"
+                class="img-fluid mx-auto d-block"
+              />
+            </div>
+          </div>
+          <li>
+            Now, click 'terminal' in the bottom of your Window to open up
+            PyCharm's integrated terminal. Type
+            <code>python3 intro.py &lt;YOUR NAME HERE&gt;</code> (or on Windows,
+            <code>py intro.py &lt;YOUR NAME HERE&gt;</code>) and press enter to
+            see the program's output. Congratulations! You've successfully set
+            up PyCharm!
+          </li>
+          <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+              <img
+                src="pycharm_images/second_run.png"
+                class="img-fluid mx-auto d-block"
+              />
+            </div>
+          </div>
+        </ol>
+      </div>
+    </div>
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atom-one-dark.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atelier-forest-light.min.css"
+      disabled
+    />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>

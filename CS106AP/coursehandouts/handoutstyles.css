@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700");
 
+/* General layout and text formatting*/
 body {
   font-family: "Source Sans Pro", sans-serif;
   padding-top: 20px;
@@ -15,4 +16,23 @@ body {
 
 .btn-default {
   border-color: #ccc;
+}
+
+code {
+  font-style: normal;
+}
+
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  text-align: justify;
+}
+
+.codeblock {
+  width: 60%;
+  margin: auto;
+}
+
+.note {
+  font-style: italic;
 }
