@@ -1,0 +1,320 @@
+<html>
+  <head>
+    <title> Section 2 </title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../sectionstyles.css" />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="pageHeader">
+            <a href="http://cs106ap.stanford.edu" class="no-print">
+              <p class="subtleHeading text-center">
+                Back to CS 106A Homepage
+              </p>
+            </a>
+            <h1> Section 2 </h1>
+            <p class="subtleHeading">
+              Written by Nick Parlante, Brahm Capoor and Andrew Tierno
+            </p>
+            <p class="subtleHeading">
+              <i class="far fa-calendar-alt"></i> April 11th, 2019
+            </p>
+            <hr />
+          </div>
+        </div>
+      </div>
+      <p>
+        Section overview
+      </p>
+      <hr />
+      <div class="problem no-print">
+        <h2>Image Algorithms Review</h2>
+        <div class="subproblem">
+          <h3>Rotate Left</h3>
+          <p> Write the following function: </p>
+          <div class="text-center">
+            <code>def rotate_image_left(image)</code>
+          </div>
+          <p>
+            that takes a <code>SimpleImage</code> parameter called
+            <code>image</code> and returns a version of that image, rotated 90
+            degrees to the left.
+          </p>
+          <img
+            src="section2_img/rotate_left.png"
+            alt="An image grid"
+            class="img-fluid mx-auto d-block"
+          />
+          <p>
+            Note that the source image's width may be different from its height,
+            and that the dimensions of the result image reflect the rotation you
+            have performed; the result image is as wide as the source was tall,
+            and as tall as the source was wide.
+          </p>
+        </div>
+        <div class="subproblem">
+          <h3>Flip Vertical</h3>
+          <p>Write the following function:</p>
+          <div class="text-center">
+            <code>def flip_vertical(image)</code>
+          </div>
+          <p>
+            that flips a <code>SimpleImage</code> parameter called
+            <code>image</code> in the vertical direction.
+          </p>
+          <img
+            src="section2_img/flip_vertical.png"
+            alt="An image grid"
+            class="img-fluid mx-auto d-block"
+          />
+        </div>
+      </div>
+      <hr class="no-print" />
+      <div class="problem">
+        <h2>String Slicing</h2>
+        <p>
+          Suppose we have the following string:
+        </p>
+        <div class="codeblock text-center">
+          <!--TODO Codeblock class-->
+          <code>s = 'PythonTime'</code>
+        </div>
+        <p>
+          How would you slice into this string to obtain the following results?
+        </p>
+        <ul>
+          <li><code>'ython'</code></li>
+          <li><code>'Py'</code></li>
+          <li><code>'Tim'</code></li>
+          <li><code>'Time'</code></li>
+          <li><code>'T'</code></li>
+          <li><code>'PythonTime'</code></li>
+        </ul>
+        <p class="hint">
+          Remember, strings in Python are 0-indexed. In addition, the slice
+          <code>s[1:8]</code> is inclusive of the first index, and exculsive of
+          the second (that is, it will get the string beginning at index 1 and
+          up to, but not including, index 8, i.e. <code>'ythonTi'</code>).
+        </p>
+      </div>
+      <div class="no-print">
+        <hr />
+      </div>
+      <div class="problem">
+        <h2> String Function Warmup</h2>
+        <p>
+          Implement the following functions:
+        </p>
+        <ol>
+          <li>
+            <p>
+              <code>defront(s)</code>: If the string parameter has more than 1
+              character, return it without its first two characters. Otherwise,
+              return the original string. What would we expect this function to
+              return if the string is exactly 2 characters long?
+            </p>
+          </li>
+          <li>
+            <p>
+              <code>x_end(s)</code>: If the string parameter contains the
+              <code>'x'</code> character, return the string,
+              <i>from the first <code>'x'</code></i> to the end of the string.
+              Otherwise, return an empty string. For example, calling
+              <code>x_end('excited')</code> would return the string
+              <code>'xcited'</code>.
+            </p>
+          </li>
+          <li>
+            <p>
+              <code>pre_colon(s)</code>: If the string parameter contains a
+              colon (<code>':'</code>), return the substring leading to but not
+              including the first ocurrence of this character. For example,
+              calling <code>pre_colon('hello:world')</code> would return the
+              string <code>'hello'</code>.
+            </p>
+            <p>
+              As an extension, write a version of this function
+              <code>pre_colon_ext(s, before)</code> that takes in a boolean
+              parameter <code>before</code>. If this parameter is
+              <code>True</code>, return the substring <i>up to</i> the first
+              colon. If this parameter is <code>False</code>, return the
+              substring <i>after</i> the first colon.
+            </p>
+            <ul>
+              <li>
+                <code>pre_colon_ext('hello:world', True)</code> would return
+                'hello'.
+              </li>
+              <li>
+                <code>pre_colon_ext('hello:world', False)</code> would return
+                'world'.
+              </li>
+            </ul>
+          </li>
+          <br />
+          <li>
+            <p>
+              <code>at_word(s)</code>: If the string parameter contains 2 or
+              more <code>'@'</code> characters, return the substring between the
+              first two such characters. Otherwise, return the empty string. For
+              example, calling <code>at_word('xx@hello@xx')</code> returns the
+              string <code>'hello'</code>.
+            </p>
+            <p class="hint">
+              You might find the 2-parameter version of the
+              <code>s.find(target, start)</code> function useful. This function
+              returns the index in <code>s</code> of the first instance of the
+              string <code>target</code>, searching the range
+              <code>s[start: len(s)]</code>
+            </p>
+          </li>
+        </ol>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2>Advanced String Problems</h2>
+        <br />
+        <div class="subproblem">
+          <h4>Adding Comma to Numeric Strings</h4>
+          <p>
+            In many parts of the world, when large numbers are written out, it
+            is traditional to use separator characters to split the digits into
+            groups. In the United States, commas are typically used to separate
+            the digits into groups of three. For example, the number one million
+            is usually written in the following form:
+          </p>
+          <p class="text-center">1,000,000</p>
+          <p>
+            As you can imagine, this is probably a task that is frequently done;
+            to allow programmers to easily display numbers in this fashion,
+            implement the method
+          </p>
+          <div class="text-center">
+            <code>def add_commas_to_numeric_string(digits)</code>
+          </div>
+          <br />
+          <p>
+            which takes a string of decimal digits representing a number and
+            returns the string formed by inserting commas after every third
+            position, from right-to-left.
+          </p>
+          <p>
+            Here are some sample inputs and outputs of the
+            <code>add_commas_to_numeric_string</code> function:
+          </p>
+          <div class="codeblock">
+            <pre>
+                <code class='python'>
+>>> add_commas_to_numeric_string('17')
+'17'
+>>> add_commas_to_numeric_string('1001')
+'1,001'
+>>> add_commas_to_numeric_string('12345678')
+'12,345,678'
+>>> add_commas_to_numeric_string('999999999')
+'999,999,999'
+                </code>
+            </pre>
+          </div>
+        </div>
+        <div class="subproblem">
+          <h3>Remove All Occurrences</h3>
+          <p>
+            Write the following function:
+          </p>
+          <div class="text-center">
+            <code>
+              def remove_all_occurrences(s, to_remove)
+            </code>
+          </div>
+          <p>
+            which removes all occurences of the length-one string
+            <code>to_remove</code> from the string <code>s</code>. Here are some
+            sample inputs and outputs for this function:
+          </p>
+          <div class="codeblock">
+            <pre>
+              <code class='python'>
+>>> remove_all_occurrences('This is a test', 't')
+'this is a es'
+>>> remove_all_occurrences('Summer is here!', 'e')
+'Summr is hr!'
+>>> remove_all_occurrence('----O----', '-')
+'O'
+              </code>
+            </pre>
+          </div>
+        </div>
+        <div class="subproblem">
+          <h3>Palindrome Checker</h3>
+          <p>
+            Write the following function:
+          </p>
+          <div class="text-center">
+            <code> def is_palindrome(s) </code>
+          </div>
+          <p>
+            which returns <code>True</code> if <code>s</code> is a palindrome
+            and <code>False</code> otherwise. As a reminder, a palindrome is a
+            string that reads the same forwards and backwards. Your function
+            should behave as follows on the following inputs:
+          </p>
+          <div class="codeblock">
+            <pre>
+                  <code class='python'>
+>>> is_palindrome('kayak')
+True
+>>> is_palindrome('brahm')
+False
+>>> is_palindrome('maps spam')
+True
+>>> is_palindrome('Maps spam')
+False # uppercase 'M' and lowercase 'm' are not the same character
+                  </code>
+              </pre>
+          </div>
+        </div>
+        <p>
+          As an extension, write a function
+          <code>is_palindrome_without_spaces(s)</code> that returns
+          <code>True</code> if <code>s</code> is a palindrome when all the
+          spaces have been removed from the string. Some sample inputs are:
+        </p>
+        <div class="codeblock">
+          <pre>
+            <code class='python'>
+>>> is_palindrome_without_spaces('a nut for a jar of tuna')
+True
+>>> is_palindrome_without_spaces('oozy rat in a sanitary zoo')
+True
+            </code>
+          </pre>
+        </div>
+      </div>
+    </div>
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atom-one-dark.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atelier-forest-light.min.css"
+      disabled
+    />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>

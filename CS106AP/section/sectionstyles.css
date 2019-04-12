@@ -22,6 +22,17 @@ code {
   font-style: normal;
 }
 
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  text-align: justify;
+}
+
+.codeblock {
+  width: 60%;
+  margin: auto;
+}
+
 /* Problem layouts and text formatting */
 .problem {
   padding-top: 15px;
