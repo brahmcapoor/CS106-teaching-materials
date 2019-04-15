@@ -1,0 +1,247 @@
+<html>
+  <head>
+    <title> Section 2 </title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../sectionstyles.css" />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="pageHeader">
+            <a href="http://cs106ap.stanford.edu" class="no-print">
+              <p class="subtleHeading text-center">
+                Back to CS 106A Homepage
+              </p>
+            </a>
+            <h1> Section 2 Solutions </h1>
+            <p class="subtleHeading">
+              Written by Brahm Capoor
+            </p>
+            <p class="subtleHeading">
+              <i class="far fa-calendar-alt"></i> April 11th, 2019
+            </p>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="problem no-print">
+        <h2>Image Algorithms Review</h2>
+        <div class="subproblem">
+          <h3>Rotate Left</h3>
+          <pre class="python">
+              <code>
+def rotate_image_left(image):
+    out = SimpleImage.blank(image.height, image.width)
+
+    for y in range(image.height):
+        for x in range(image.width):
+            source_pixel = image.get_pixel(x, y)
+            dest_pixel = image.get_pixel(y, image.width - 1 - x)
+            dest_pixel.red = source_pixel.red
+            dest_pixel.green = source_pixel.green
+            dest_pixel.blue = source_pixel.blue
+
+    return out
+              </code>
+          </pre>
+        </div>
+        <div class="subproblem">
+          <h3>Flip Vertical</h3>
+          <pre class="python">
+              <code>
+def flip_vertical(image):
+    out = SimpleImage.blank(image.height, image.width)
+
+    for y in range(image.height):
+        for x in range(image.width):
+            source_pixel = image.get_pixel(x, y)
+            dest_pixel = image.get_pixel(x, image.height - 1 - y)
+            dest_pixel.red = source_pixel.red
+            dest_pixel.green = source_pixel.green
+            dest_pixel.blue = source_pixel.blue
+
+    return out
+              </code>
+          </pre>
+        </div>
+      </div>
+      <hr class="no-print" />
+      <div class="problem">
+        <h2> Variable Tracing </h2>
+        <p>
+          The <code>hakuna_matata</code> function returns the remainder when
+          <code>pumbaa</code> is divided by <code>timon</code>.
+        </p>
+        <p>
+          <code>sarabi</code> has a value of 9, and <code>scar</code> has a
+          value of 17.
+        </p>
+        <p>
+          There are several steps Brahm could take to improve his program's
+          style. Here's a nonexhaustive list:
+        </p>
+        <ul>
+          <li>More descriptive variable and function names</li>
+          <li>
+            Comments describing the purpose of the function, as well as why the
+            variables in the <code>pride_rock</code> function are initialized to
+            the variables they were initialized to, since those values aren't
+            obvious.
+          </li>
+          <li>
+            The first if statement in the <code>hakuna_matata</code> function is
+            unnecessary. If <code>timon</code> is <i>greater</i> than or equal
+            <code>pumbaa</code>, the <code>while</code> loop will never execute,
+            and so <code>pumbaa</code> will be returned naturally. In addition,
+            as the function currently stands, there is no need for the
+            <code>else</code> statement. If <code>timon</code> is greater than
+            <code>pumbaa</code>, the block of code inside the initial
+            <code>if</code> statement will return and the function will end.
+            Thus, the only way we get to the while loop is if
+            <code>timon &lt;= pumbaa</code>, and so the <code>else</code> is
+            unnecessary.
+          </li>
+        </ul>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2>String Slicing</h2>
+        <ol>
+          <li><code>s[1:6]</code></li>
+          <li><code>s[:2]</code> or <code>s[0:2]</code></li>
+          <li><code>s[6:9]</code></li>
+          <li><code>s[6:]</code> or <code>s[6:10]</code></li>
+          <li><code>s[6]</code> or <code>s[6:7]</code></li>
+          <li
+            ><code>s[:]</code> or <code>s[0:10]</code> (or just
+            <code>s</code>)</li
+          >
+        </ol>
+      </div>
+      <div class="no-print">
+        <hr />
+      </div>
+      <div class="problem">
+        <h2> String Function Warmup</h2>
+        <div class="codeblock">
+          <pre class="python">
+                <code>
+def defront(s):
+    if len(s) >= 2:
+        return s[2:]
+    return s
+
+def x_end(s):
+    found = s.find('x')
+    if found != -1:
+        return s[found:]
+    return ''
+
+def pre_colon(s):
+    colon = s.find(':')
+    if colon != -1:
+        return s[:colon]
+    return s
+
+def at_word(s):
+    at1 = s.find('@')
+    if at1 != -1:
+        at2 = s.find('@', at1 + 1)
+    if at2 != -1:
+        return s[at1 + 1:at2]
+    return ''
+
+
+                </code>
+            </pre>
+        </div>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2>Advanced String Problems</h2>
+        <br />
+        <div class="subproblem">
+          <h4>Adding Comma to Numeric Strings</h4>
+          <div class="codeblock">
+            <pre class="python">
+                          <code>
+def add_commas_to_numeric_string(digits):
+    result = ""
+    num_digits = 0
+    for char_index in range(len(digits)):
+        result = digits[len(digits) - char_index - 1] + result
+        num_digits += 1
+        if num_digits % 3 == 0 and char_index > 0 and \
+            num_digits < len(digits):
+            """
+            We need to check that
+            a) we've added a multiple of 3 number of digits
+            b) we've added at least one digit
+            c) there are more digits to add
+            """
+            result="," + result
+    return result
+                          </code>
+                      </pre>
+          </div>
+        </div>
+        <div class="subproblem">
+          <h3>Remove All Occurrences</h3>
+          <div class="codeblock">
+            <pre class="python">
+                          <code>
+def remove_all_occurrences(s, to_remove):
+    result = ""
+
+    for ch in s:
+        if ch != to_remove:
+            result += ch
+
+    return result
+                          </code>
+                      </pre>
+          </div>
+        </div>
+        <div class="subproblem">
+          <h3>Palindrome Checker</h3>
+          <div class="codeblock">
+            <pre>
+                  <code class='python'>
+def is_palindrome(s):
+    for i in range(len(s)):
+        if s[i] != s[len(s) - 1 - i]:
+            return False
+    return True
+
+                  </code>
+              </pre>
+          </div>
+        </div>
+      </div>
+    </div>
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atom-one-dark.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atelier-forest-light.min.css"
+      disabled
+    />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>

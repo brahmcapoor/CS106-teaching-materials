@@ -89,12 +89,12 @@
           <pre class="python">
             <code>
 def hakuna_matata(pumbaa, timon):
-    if timon >= pumbaa:
-        return timon
+    if timon > pumbaa:
+        return pumbaa
     else:
         while pumbaa > timon:
             pumbaa = pumbaa - timon
-        return pumba
+        return pumbaa
 
 def pride_rock():
     nala = 80
@@ -294,7 +294,7 @@ def pride_rock():
             <pre>
               <code class='python'>
 >>> remove_all_occurrences('This is a test', 't')
-'this is a es'
+'This is a es'
 >>> remove_all_occurrences('Summer is here!', 'e')
 'Summr is hr!'
 >>> remove_all_occurrence('----O----', '-')
