@@ -30,13 +30,9 @@
             <p class="subtleHeading">
               <i class="far fa-calendar-alt"></i> April 11th, 2019
             </p>
-            <hr />
           </div>
         </div>
       </div>
-      <p>
-        Section overview
-      </p>
       <hr />
       <div class="problem no-print">
         <h2>Image Algorithms Review</h2>
@@ -82,12 +78,57 @@
       </div>
       <hr class="no-print" />
       <div class="problem">
-        <h2>String Slicing</h2>
+        <h2> Variable Tracing </h2>
         <p>
-          Suppose we have the following string:
+          Just before writing this problem, Brahm watched the trailer for the
+          new Lion King film and having been consumed by nostalgia, decided to
+          shape his program in its honor. Unfortunately, this has resulted in a
+          program that is less than stylistically desirable:
         </p>
+        <div class="codeblock">
+          <pre class="python">
+            <code>
+def hakuna_matata(pumbaa, timon):
+    if timon >= pumbaa:
+        return timon
+    else:
+        while pumbaa > timon:
+            pumbaa = pumbaa - timon
+        return pumba
+
+def pride_rock():
+    nala = 80
+    mufasa = 9
+    rafiki = 42
+    zazu = 17
+
+    sarabi = hakuna_matata(nala, mufasa)
+    scar = hakuna_matata(zazu, rafiki)
+            </code>
+          </pre>
+        </div>
+        <p>
+          As Brahm's long-suffering section leader, your task is to first find
+          out which common mathematical operation his
+          <code>hakuna_matata</code> function is supposed to implement. To do
+          so, trace through the <code>pride_rock</code> function's execution to
+          determine the values of the <code>sarabi</code> and
+          <code>scar</code> variable after the calls to
+          <code>hakuna_matata</code>.
+        </p>
+        <p>
+          Following this, what feedback would you provide to Brahm about the
+          style of his program? What would you improve?
+        </p>
+        <p class="hint">
+          Note: the most dour email to Brahm about his style will earn his
+          eternal respect.
+        </p>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2>String Slicing</h2>
         <div class="codeblock text-center">
-          <!--TODO Codeblock class-->
           <code>s = 'PythonTime'</code>
         </div>
         <p>
@@ -180,6 +221,12 @@
             </p>
           </li>
         </ol>
+        <p class="no-print">
+          Test your solutions
+          <a href="https://parlante.org/make/str1-section/" target="_blank">
+            here </a
+          >.
+        </p>
       </div>
       <hr />
       <div class="problem">
@@ -273,8 +320,6 @@
           <div class="codeblock">
             <pre>
                   <code class='python'>
->>> is_palindrome('kayak')
-True
 >>> is_palindrome('brahm')
 False
 >>> is_palindrome('maps spam')
@@ -289,18 +334,8 @@ False # uppercase 'M' and lowercase 'm' are not the same character
           As an extension, write a function
           <code>is_palindrome_without_spaces(s)</code> that returns
           <code>True</code> if <code>s</code> is a palindrome when all the
-          spaces have been removed from the string. Some sample inputs are:
+          spaces have been removed from the string.
         </p>
-        <div class="codeblock">
-          <pre>
-            <code class='python'>
->>> is_palindrome_without_spaces('a nut for a jar of tuna')
-True
->>> is_palindrome_without_spaces('oozy rat in a sanitary zoo')
-True
-            </code>
-          </pre>
-        </div>
       </div>
     </div>
     <link
