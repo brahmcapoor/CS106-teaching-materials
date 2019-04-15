@@ -1,0 +1,163 @@
+<html>
+  <head>
+    <title> Section 2 Lesson Plan</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../sectionstyles.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="pageHeader">
+            <h1> Section 2 Lesson Plan</h1>
+            <p class="subtleHeading">
+              Written by Brahm Capoor
+            </p>
+            <p class="subtleHeading">
+              <i class="far fa-calendar-alt"></i> April 15th, 2019
+            </p>
+          </div>
+        </div>
+      </div>
+      <hr />
+
+      <p>
+        106AP this last week has been a rollercoaster of tricky concepts like
+        nested for loops, functions and strings. This section is a great way for
+        students to get a breather and make sure they understand these important
+        topics.
+      </p>
+
+      <hr />
+      <h2>Lecture and Concepts Recap</h2>
+      <p>
+        Check out the slides for full details, but here's a quick summary of
+        everything that went down. In addition, make sure to take a look at the
+        exercises students went through in class.
+      </p>
+      <p class="only-print">
+        <i>
+          On the digital version of the lesson plan, each of the lecture names
+          is a link to the lecture slides.
+        </i>
+      </p>
+      <ul>
+        <li>
+          <p class="only-print">
+            <b> Lectures #7 and 8 - functions and strings </b>
+          </p>
+          <p class="no-print">
+            <a href="#"> Lectures #7 and 8 - functions and strings </a>
+          </p>
+          <p>
+            Neither of these lectures has happened at the time of writing, but
+            will cover functions (specifically, exploring parameters and return
+            values in more depth) as well as strings.
+            <span class="only-print">
+              The digital version of this handout will be updated with
+              descriptions of each lecture.</span
+            >
+          </p>
+
+          <p>
+            There are a couple of crucial ideas that are emphasized in lecture
+            when it comes to functions: that variables with the same name in
+            different functions aren't related and that the number and order of
+            parameters passed in to a function must match that of the function
+            declaration. Make sure your sectionees feel good about this.
+          </p>
+          <p>
+            On the subject of strings, one crucial point is the idea that
+            strings are immutable. Specifically, like all variables in Python,
+            strings are mutable <i>references</i> to immutable String
+            <i>literals</i> elsewhere in memory. While we can change what our
+            variables <i>refer to</i> (i.e. the address they store), we can't
+            change the objects stored at those addresses. Pragmatically
+            speaking, the implication is that whenever you want to manipulate a
+            string, you need to somehow construct a new string rather than
+            changing the one you already have.
+          </p>
+          <p>
+            Some of your more enterprising students might question the
+            immutability of strings, wondering why on earth Python's designers
+            would foist us with such a limitation. While you don't have to go
+            into a lot of detail and are welcome to defer the question to office
+            hours or Piazza, here are a couple of quick answers you could give
+            (some are harder to explain than others):
+          </p>
+          <ul>
+            <li>
+              Since strings are fixed in size, it's easier to allocate the
+              memory for them when they're constructed.
+            </li>
+            <li>
+              Since strings are immutable, Python can save memory by reusing
+              string objects (for example, if two strings are both initialized
+              to
+              <code>'banter'</code>, they may well point at the same object in
+              memory. You can verify this by using the
+              <code>is</code> operator.) This is similar to String Pooling in
+              Java, if you're used to that.
+            </li>
+            <li>
+              Philosophically, Python considers strings 'elemental', just like
+              floats or ints. Thus, to change a string is to change its very
+              <i>essence</i> and so we might as well make a new string instead.
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <hr />
+      <h2>Problems</h2>
+      <p>
+        This week's section handout has a wide variety of problems, all of which
+        lend themselves well to a whiteboard-style section. The problems are
+        detailed in greater detail following this, but as a general suggestion,
+        I recommend working through the trace problem first, followed by a few
+        string slicing or warmup problems as an introduction to Strings, and
+        finally discussing a more advanced string problem.
+      </p>
+      <ul>
+        <li>
+          The first problem (only on the digital version of the handout) is an
+          image algorithm review problem, for students who are still feeling
+          shaky about images. You shouldn't do this in section, but point your
+          students towards it if you think they'll find it helpful.
+        </li>
+        <li>
+          The next problem is a trace problem! By far every student's least
+          favorite kind of question in 106A, the pedagogical goals of problems
+          like this are twofold. Firstly, they force a student to confront and
+          reassess their own understanding of control flow and variable usage by
+          tracing through a program's execution. Secondly, they allow a student
+          to be more thoughtful about style, and to see how devastating a
+          program with bad style can be through strategic hyperbole. Use this
+          problem as a starting point for both conversations.
+        </li>
+        <li>
+          The next two problems are both basic string problems, intended to help
+          build a conceptual and practical foundation by showcasing common
+          patterns such as the use of the <code>find</code> method and slicing
+          syntax. I'd imagine this could be nicely integrated into a conceptual
+          review of strings.
+        </li>
+        <li>
+          The last problem is a collection of slightly more advanced string
+          problems, intended for students to develop an algorithmic feel for
+          strings. I'll leave it to you to figure out which is best for your
+          section - adding commas to numeric strings is the most nitpicky,
+          palindrome checker is the cheekiest and removing all occurrences is a
+          nice compromise. One important idea to reflect on here is the idea of
+          a for loop through a string's characters, and how that incredible
+          common pattern is a result of the immutability of strings.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
