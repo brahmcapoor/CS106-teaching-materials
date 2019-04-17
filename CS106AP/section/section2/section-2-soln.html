@@ -158,8 +158,8 @@ def at_word(s):
     at1 = s.find('@')
     if at1 != -1:
         at2 = s.find('@', at1 + 1)
-    if at2 != -1:
-        return s[at1 + 1:at2]
+        if at2 != -1:
+            return s[at1 + 1:at2]
     return ''
 
 
