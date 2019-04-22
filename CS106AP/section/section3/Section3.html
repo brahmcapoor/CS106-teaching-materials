@@ -1,0 +1,208 @@
+<html>
+  <head>
+    <title> Section 3 </title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../sectionstyles.css" />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="pageHeader">
+            <a href="http://cs106ap.stanford.edu" class="no-print">
+              <p class="subtleHeading text-center">
+                Back to CS 106A Homepage
+              </p>
+            </a>
+            <h1> Section 3 </h1>
+            <p class="subtleHeading">
+              Written by Nick Parlante, Brahm Capoor and Andrew Tierno
+            </p>
+            <p class="subtleHeading">
+              <i class="far fa-calendar-alt"></i> April 21th, 2019
+            </p>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2>String Parsing</h2>
+        <div class="subproblem">
+          <h4>Introduction to String Parsing</h4>
+          <p>
+            Implement the following functions:
+          </p>
+          <ul>
+            <li>
+              <code>exclaim(s)</code>: Given a string <code>s</code>, look for
+              the first exclamation mark. If there is a substring of 1 or more
+              alphabetic characters immediately to the left of the exclamation
+              mark, return this substring including the exclamation mark.
+              Otherwise, return the empty string. For example,
+              <code>exclaim('xx Hello! yy')</code> returns
+              <code>'Hello!'</code>.
+            </li>
+            <li>
+              <code>vowels(s)</code>: Given a string <code>s</code>, look for
+              the first colon. If there is a substring of 1 or more vowels
+              immediately to the right of the colon, return this substring
+              without the colon. Otherwise, return the empty string. For
+              example, <code>exclaim('xy:aieee!')</code> returns
+              <code>'aieee!'</code>.
+            </li>
+          </ul>
+        </div>
+        <div class="subproblem">
+          <h4>Extracting Email Hostnames</h4>
+          <p>
+            Now, we're going to turn our attention to a parsing task we'd be
+            more likely to see in the real world: parsing email addresses. For
+            the purposes of this problem, we'll be using a simplified format of
+            an email address as follows:
+          </p>
+          <div class="text-center">
+            <code>username@hostname</code>
+          </div>
+          <p>
+            where <code>hostname</code> is a string with at least 4 characters.
+            It consists of alphabetic characters and at least one period. In
+            addition, the username can be any length, including 0 characters.
+            Some examples are:
+          </p>
+          <pre class="plaintext">
+              <code>
+brahm@stanford.edu    # valid email address
+nick@cs.stanford.edu  # valid email address
+jillian@website       # invalid email address, since there isn't at least one period.
+sheridan@email123.com # invalid email address, since there are non-alphabetical characters that aren't periods
+@gmail.com            # valid email address, a username can be 0 characters long.
+sam@a.eb              # invalid email address, since it is less than 4 characters long.
+              </code>
+          </pre>
+          <p>
+            Suppose you have a file called <code>emails.txt</code> that looks
+            like this:
+          </p>
+          <pre class="text">
+              <code>
+ Please forward this email to bill@stanford.edu for me. Thanks!
+ Can someone tell me who owns the me@yahoo.com email address?
+ The email brahm@gmail.com keeps sending me spam mail.
+ Please forward this email to bill@stanford.edu for me. Thanks!
+ Omg @justinbieber is my favorite!
+ Do you think a@b.c is spam?
+ This one isn't spam: a@d.tv
+ Hello, world!
+ Why am I getting emails from notspam@spam.com?
+              </code>
+          </pre>
+          <p>
+            which has at most one email address per line of the file. Your job
+            is to write the following function:
+          </p>
+          <div class="text-center">
+            <code>def extract_all_hostnames(filename)</code>
+          </div>
+          <p>
+            which takes in a string representing a file's name and returns a
+            <b>sorted</b> list of all the <b>unique</b> hostnames in the file.
+            For example, calling the function with the parameter
+            <code>emails.txt</code>
+            would have the following result:
+          </p>
+          <pre class="python">
+              <code>
+>>> extract_all_hostnames('emails.txt')
+['d.tv', 'gmail.com', 'spam.com', 'stanford.edu', 'yahoo.com']
+              </code>
+          </pre>
+          <p>
+            In writing this function, think about how best to decompose it into
+            functions that are responsible for subparts of the problem. For
+            example, consider implementing a function which extracts a hostname
+            from a single line and how you might use it.
+          </p>
+        </div>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2>The <code>main</code> function</h2>
+        <p>
+          Your job is to write a program that emulates the 3 calculator
+          functions, as shown below:
+        </p>
+        <pre class="bash">
+            <code>
+$ python3 calculator.py -square 42
+1764 # prints the square of the number passed in
+
+$ python3 calculator.py -exp 2 10
+1024 # prints the first number raised to the power of the second number
+
+$ python3 calculator.py -add 1 2 3 4 5
+15   # prints the sum of all the numbers typed in
+            </code>
+        </pre>
+        <p>
+          You may assume that you are provided with a <code>main</code> function
+          that takes as a parameter the list of arguments typed in the console,
+          as below:
+        </p>
+        <pre class="python">
+            <code>
+import sys
+
+def main(args):
+    # your code here
+    pass
+
+if __name__ == "__main__":
+    main(sys.argv)
+            </code>
+        </pre>
+        <p>
+          Thus, your job is to decompose and implement the
+          <code>main</code> function so that your program produces the sample
+          output above.
+        </p>
+        <h4>Notes</h4>
+        <ul>
+          <li>
+            You may assume that the correct number of parameters are passed in
+            to the program: specifically, <code>-square</code> will be followed
+            by two numbers, <code>-exp</code> will be followed by two numbers
+            and <code>-add</code> will be followed by at least one number.
+          </li>
+          <li>
+            You will need to deal with the fact that the command line parameters
+            are passed to your program as strings, and you will need to convert
+            them to ints.
+          </li>
+        </ul>
+      </div>
+    </div>
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atom-one-dark.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atelier-forest-light.min.css"
+      disabled
+    />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>

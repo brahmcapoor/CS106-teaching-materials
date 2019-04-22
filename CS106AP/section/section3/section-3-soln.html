@@ -1,0 +1,172 @@
+<html>
+  <head>
+    <title> Section 3 Solutions </title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../sectionstyles.css" />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="pageHeader">
+            <a href="http://cs106ap.stanford.edu" class="no-print">
+              <p class="subtleHeading text-center">
+                Back to CS 106A Homepage
+              </p>
+            </a>
+            <h1> Section 3 Solutions</h1>
+            <p class="subtleHeading">
+              Written by Nick Parlante, Brahm Capoor and Andrew Tierno
+            </p>
+            <p class="subtleHeading">
+              <i class="far fa-calendar-alt"></i> April 21th, 2019
+            </p>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2>String Parsing</h2>
+        <div class="subproblem">
+          <h4>Introduction to String Parsing</h4>
+          <pre class="python">
+              <code>
+def exclaim(s):
+    mark = s.find('!')
+    if mark == -1:
+        return ''
+    # scan left from the exclamation mark
+    i = mark - 1
+    while i >= 0 and s[i].isalpha():
+        i -= 1
+    word = s[i + 1: mark + 1]
+    if len(word) >= 2:
+        return word
+    return ''
+
+def vowels(s):
+    colon = s.find(':')
+    if colon == -1:
+        return ''
+    # scan right from the colon
+    i = colon + 1
+    while i < len(s) and s[i].lower() in 'aeiou':
+        i += 1
+    word = s[colon + 1:i]
+    return word
+              </code>
+          </pre>
+        </div>
+        <div class="subproblem">
+          <h4>Extracting Email Hostnames</h4>
+          <pre class="python">
+              <code>
+def extract_hostname(line):
+    at_index = line.find('@')
+    if at_index == -1:
+        return ''
+    # scan forward till the end of the word or line
+    i = at_index + 1
+    while i < len(line) and line[i] != " ":
+        i += 1
+    hostname = line[at_index + 1: i]
+
+    if len(hostname) < 4 or not '.' in hostname:
+        return ''
+    for ch in hostname:
+        if not ch.isalpha() and not ch == '.':
+            return '' # invalid character
+
+    return hostname
+
+def extract_all_hostnames(filename):
+    hostnames = []
+    with open(filename, 'r') as f:
+        for line in f:
+            hostname = extract_hostname(line)
+            if hostname != '' and not hostname in hostnames:
+                hostnames.append(hostname)
+    hostnames = sorted(hostnames)
+    return hostnames
+              </code>
+          </pre>
+        </div>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2>The <code>main</code> function</h2>
+        <pre class="python">
+            <code>
+"""
+calculator.py
+-------------
+Implements the calculator program, as specified in the
+section 3 handout.
+"""
+
+import sys # so we have access to argv
+
+def exp(base, power):
+    total = 1
+    for i in range(power):
+        total *= base
+    return total
+
+def square(base):
+    return exp(base, w)
+
+def add(args):
+    total = 0
+    for i in range(len(args) - 2):
+        total += int(args[i + 2])
+    return total
+
+def main(args):
+    operation = args[1]     # args[0] is calculator.py
+
+    if operation == "-exp":
+        base = int(args[2]) # convert the argument to an int
+        power = int(args[3])
+        result = exp(base, power)
+        print(result)
+
+    if operation == "-square":
+        base = int(args[2])
+        result = square(base)
+        print(result)
+
+    if operation == "-add":
+        result = add(args)
+        print(results)
+
+if __name__ == "__main__":
+    main(sys.argv)
+            </code>
+        </pre>
+      </div>
+    </div>
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atom-one-dark.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atelier-forest-light.min.css"
+      disabled
+    />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>
