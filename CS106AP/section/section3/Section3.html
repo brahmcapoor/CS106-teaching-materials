@@ -29,7 +29,7 @@
               Written by Nick Parlante, Brahm Capoor and Andrew Tierno
             </p>
             <p class="subtleHeading">
-              <i class="far fa-calendar-alt"></i> April 21th, 2019
+              <i class="far fa-calendar-alt"></i> April 21st, 2019
             </p>
           </div>
         </div>
@@ -57,8 +57,8 @@
               the first colon. If there is a substring of 1 or more vowels
               immediately to the right of the colon, return this substring
               without the colon. Otherwise, return the empty string. For
-              example, <code>exclaim('xy:aieee!')</code> returns
-              <code>'aieee!'</code>.
+              example, <code>vowels('xy:aieee?')</code> returns
+              <code>'aieee'</code>.
             </li>
           </ul>
         </div>
@@ -79,31 +79,33 @@
             addition, the username can be any length, including 0 characters.
             Some examples are:
           </p>
-          <pre class="plaintext">
+          <div class="codeblock">
+            <pre class="plaintext">
               <code>
-brahm@stanford.edu    # valid email address
-nick@cs.stanford.edu  # valid email address
-jillian@website       # invalid email address, since there isn't at least one period.
-sheridan@email123.com # invalid email address, since there are non-alphabetical characters that aren't periods
-@gmail.com            # valid email address, a username can be 0 characters long.
-sam@a.eb              # invalid email address, since it is less than 4 characters long.
+brahm@stanford.edu   # valid email address
+nick@cs.stanford.edu # valid email address
+jillian@website      # invalid email address, needs at least one period.
+sheridan@email1.com  # invalid, since 1 isn't a letter or period
+@gmail.com           # valid email address
+sam@a.eb             # invalid,  less than 4 characters long.
               </code>
           </pre>
+          </div>
           <p>
             Suppose you have a file called <code>emails.txt</code> that looks
             like this:
           </p>
           <pre class="text">
               <code>
- Please forward this email to bill@stanford.edu for me. Thanks!
- Can someone tell me who owns the me@yahoo.com email address?
+ Please forward this email to ingrid@stanford.edu for me. Thanks!
+ Can someone tell me who owns the parth@yahoo.com email address?
  The email brahm@gmail.com keeps sending me spam mail.
- Please forward this email to bill@stanford.edu for me. Thanks!
- Omg @justinbieber is my favorite!
+ Please forward this email to justin@stanford.edu for me. Thanks!
+ Omg @ye is my favorite!
  Do you think a@b.c is spam?
  This one isn't spam: a@d.tv
  Hello, world!
- Why am I getting emails from notspam@spam.com?
+ Why am I getting emails from trey@spam.com?
               </code>
           </pre>
           <p>
@@ -120,12 +122,14 @@ sam@a.eb              # invalid email address, since it is less than 4 character
             <code>emails.txt</code>
             would have the following result:
           </p>
-          <pre class="python">
+          <div class="codeblock">
+            <pre class="python">
               <code>
 >>> extract_all_hostnames('emails.txt')
 ['d.tv', 'gmail.com', 'spam.com', 'stanford.edu', 'yahoo.com']
               </code>
           </pre>
+          </div>
           <p>
             In writing this function, think about how best to decompose it into
             functions that are responsible for subparts of the problem. For
@@ -139,9 +143,10 @@ sam@a.eb              # invalid email address, since it is less than 4 character
         <h2>The <code>main</code> function</h2>
         <p>
           Your job is to write a program that emulates the 3 calculator
-          functions, as shown below:
+          functions shown below:
         </p>
-        <pre class="bash">
+        <div class="codeblock">
+          <pre class="bash">
             <code>
 $ python3 calculator.py -square 42
 1764 # prints the square of the number passed in
@@ -153,12 +158,14 @@ $ python3 calculator.py -add 1 2 3 4 5
 15   # prints the sum of all the numbers typed in
             </code>
         </pre>
+        </div>
         <p>
           You may assume that you are provided with a <code>main</code> function
           that takes as a parameter the list of arguments typed in the console,
           as below:
         </p>
-        <pre class="python">
+        <div class="codeblock">
+          <pre class="python">
             <code>
 import sys
 
@@ -170,6 +177,7 @@ if __name__ == "__main__":
     main(sys.argv)
             </code>
         </pre>
+        </div>
         <p>
           Thus, your job is to decompose and implement the
           <code>main</code> function so that your program produces the sample

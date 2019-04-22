@@ -33,6 +33,13 @@ pre {
   margin: auto;
 }
 
+.quote {
+  margin-left: 20px;
+  padding-left: 5px;
+  border-left: #888 2px solid;
+  font-style: italic;
+}
+
 /* Problem layouts and text formatting */
 .problem {
   padding-top: 15px;
