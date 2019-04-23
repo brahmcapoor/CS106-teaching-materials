@@ -181,97 +181,117 @@ def product(num1, num2):
         <li>
           <p class="only-print">
             <b>
-              Lectures #10 and 11- More style, the <code>main</code> function,
-              and lists
+              Lecture #10 - More style & variables
             </b>
           </p>
           <p class="no-print">
             <a href="#">
-              Lectures #10 and 11- More style, the <code>main</code> function,
-              and lists
+              Lectures #10 - More style & variables
             </a>
-          </p>
-          <p>
-            These lectures haven't happened yet, but below is a quick overview
-            of the sorts of material we'll be covering:
           </p>
           <ul>
             <li>
               <p>
                 <i>Style 2.0</i>: This involves coming up with a strategy to
                 decompose your programs, as well as appropriately commenting and
-                doctesting said functions
+                doctesting said functions. In addition, we spent a bunch of time
+                talking about appropriate variable names.
               </p>
-            </li>
-
-            <li>
-              <i>The <code>main</code> function and command line arguments</i>:
-              These are in spirit similar to the <code>main</code> method in
-              Java, although the syntax looks quite different. Here's a quick
-              summary:
-
-              <pre class="python">
-                <code>
-"""
-argument_exploration.py
-"""
-import sys # for sys.argv
-
-def main(args):
-    print(args)
-
-if __name__ == "__main__":
-    # any code here gets executed whenever the program is
-    # run from the command line
-    main(sys.argv) # sys.argv is a list of the command line arguments as strings
-                </code>
-              </pre>
-
-              And here's what running that program would look like:
-
-              <pre class="bash">
-                <code>
-$ python3 argument_exploration.py
-["argument_exploration.py"]
-
-$ python3 argument_exploration.py heartOfGold 42 textfile.txt
-["argument_exploration.py", "heartOfGold", "42", "textfile.txt"]
-                </code>
-              </pre>
-            </li>
-
-            <li>
               <p>
-                <i>Lists</i>: Similar to <code>ArrayList</code>s in Java, lists
-                in Python are variable-length ordered collections, with the
-                nuance that they can store objects of any type (i.e. they're not
-                homogenous). This week, we'll mostly be focussing on the
-                following use cases:
+                <i>The Variable Memory Model</i>: We also spent some time
+                talking about variables, and how they're stored in memory. As an
+                executive summary, <i>everything</i> in Python is stored as a
+                reference (a pointer to an object somewhere else), and whenever
+                we set variables equal to another, we're making a shallow copy,
+                which means that we're just adding a reference to an object as
+                opposed to making a new object.
               </p>
-              <div class="codeblock">
-                <pre class="python">
-                      <code>
->>> lst = []                    # make a new list
->>> lst.append("arthur")        # add a new value
->>> lst.append("hitchhiker")
->>> lst.append("deepthought")
->>> lst[2]
-"deepthought"                   # lists are 0-indexed
->>> len(list)
-3                               # number of elements in the list
->>> for i in range(len(list)):
-...     print(lst[i])
-arthur
-hitchhiker
-deepthought
-                      </code>
-                  </pre>
-              </div>
             </li>
+
           </ul>
         </li>
+        <li>
+          <p class="only-print">
+          <b>
+            Lecture #11 - The main function and lists
+          </b>
+        </p>
+        <p class="no-print">
+          <a href="#">
+            Lectures #11 - The main function and lists
+          </a>
+        </p>
+          <ul>
+          <li>
+            <i>The <code>main</code> function and command line arguments</i>:
+            These are in spirit similar to the <code>main</code> method in
+            Java, although the syntax looks quite different. Here's a quick
+            summary:
+
+            <pre class="python">
+                          <code>
+          """
+          argument_exploration.py
+          """
+          import sys # for sys.argv
+
+          def main(args):
+              print(args)
+
+          if __name__ == "__main__":
+              # any code here gets executed whenever the program is
+              # run from the command line
+              main(sys.argv) # sys.argv is a list of the command line arguments as strings
+                          </code>
+                        </pre>
+
+            And here's what running that program would look like:
+
+            <pre class="bash">
+                          <code>
+          $ python3 argument_exploration.py
+          ["argument_exploration.py"]
+
+          $ python3 argument_exploration.py heartOfGold 42 textfile.txt
+          ["argument_exploration.py", "heartOfGold", "42", "textfile.txt"]
+                          </code>
+                        </pre>
+          </li>
+
+          <li>
+            <p>
+              <i>Lists</i>: Similar to <code>ArrayList</code>s in Java, lists
+              in Python are variable-length ordered collections, with the
+              nuance that they can store objects of any type (i.e. they're not
+              homogenous). This week, we'll mostly be focussing on the
+              following use cases:
+            </p>
+            <div class="codeblock">
+              <pre class="python">
+                                <code>
+          >>> lst = []                    # make a new list
+          >>> lst.append("arthur")        # add a new value
+          >>> lst.append("hitchhiker")
+          >>> lst.append("deepthought")
+          >>> lst[2]
+          "deepthought"                   # lists are 0-indexed
+          >>> len(list)
+          3                               # number of elements in the list
+          >>> for i in range(len(list)):
+          ...     print(lst[i])
+          arthur
+          hitchhiker
+          deepthought
+                                </code>
+                            </pre>
+            </div>
+          </li>
+        </li>
+        </ul>
       </ul>
       <hr />
+
+
       <h2>Problems</h2>
       As a rough heuristic, I'd spend more time on String Parsing than I would
       on the main function. If it comes to it, giving a conceptual overview of
