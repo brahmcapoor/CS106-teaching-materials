@@ -82,8 +82,11 @@ def extract_hostname(line):
     # scan forward till the end of the word or line
     i = at_index + 1
     while i < len(line) and line[i] != ' ':
-      if line[i].isalpha() or line[i] =='.':
-        i += 1
+        if line[i].isalpha() or line[i] =='.':
+            i += 1
+        else:
+            break # end the loop immediately - we'll talk about this more next week!
+
     hostname = line[at_index + 1: i]
 
     if len(hostname) < 4 or not '.' in hostname:
