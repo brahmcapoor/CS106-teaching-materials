@@ -1,0 +1,313 @@
+<html>
+  <head>
+    <title> Section 4 Lesson Plan</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../sectionstyles.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="pageHeader">
+            <h1> Section 4 Lesson Plan</h1>
+            <p class="subtleHeading">
+              Written by Brahm Capoor
+            </p>
+            <p class="subtleHeading">
+              <i class="far fa-calendar-alt"></i> April 29nd, 2019
+            </p>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <h2>Lecture and Concepts Recap</h2>
+      <p>
+        Check out the slides for full details, but here's a quick summary of
+        everything that went down. In addition, make sure to take a look at the
+        exercises students went through in class.
+      </p>
+      <ul>
+        <li>
+          <p class="only-print">
+            <b> Lecture 12: Abstraction & the <code>main</code> function </b>
+          </p>
+          <p class="no-print">
+            <a
+              href="https://web.stanford.edu/class/cs106ap/handouts/lecture-12.html"
+              target="_blank"
+            >
+              Lecture 12: Abstraction & the <code>main</code> function
+            </a>
+          </p>
+          <p>
+            A lot of this lecture was dedicated to the art contest, but here's a
+            summary of everything we talked about:
+          </p>
+          <ul>
+            <li>
+              <p>
+                <b>Constants</b> We spent some time talking about constants in
+                Python programs, and what they're useful for. As a quick primer,
+                constants in python are declared in the global scope using
+                <code>UPPER_SNAKE_CASE</code>. The language doesn't enforce
+                their constancy (if you wanted to, you could still mutate them)
+                but as a stylistic convention, we never would.
+              </p>
+              <p>
+                This will almost certainly not come up in section, but we also
+                <i>briefly</i> mentioned global variables in general and we try
+                to avoid them. It turns out that modifying global variables is a
+                little strange in Python, because it's hard to distinguish
+                between reassigning the global variable and assigning a local
+                variable with the same name. To disambiguate these cases, python
+                has a <code>global</code> keyword, which is used as follows:
+              </p>
+              <pre class="python">
+                <code>
+n = 42 # this is a global variable, scoped to every function
+
+def makes_local_variable():
+    n = 100 # makes a local variable, also called n, and sets it to 100.
+            # the global n is still equal to 42
+
+def modifies_global_variable():
+    global n # establishes that we're referring to the global variable
+    n = 100  # the global n is now equal to 100
+                </code>
+              </pre>
+            </li>
+            <li>
+              <p>
+                <b>Decomposition and abstraction</b>: We spent some time
+                discussing the philosophy of abstraction in decomposition. We
+                introduced the 'black box' model of a function: that we can
+                think of it as an opaque machine into which might go parameters
+                and out of which might come a return value. In this model, we
+                don't need to know or care about the how the function works (its
+                <i>implementation details</i>). Another frame we used to drive
+                this home was the <i>contract</i> of a function: the promises we
+                make to ourselves about its parameters and return values when we
+                defined it.
+              </p>
+              <p>
+                With this in mind, we came up with a general strategy for
+                decomposition. First, we build a mental model of what a
+                particular function is supposed to do (I'd add that this is the
+                point that students would ideally be making a first pass at
+                writing their function comments and doctests to specify the
+                function contract). Next, we actually implement it by writing
+                come code. Then, we test it, either using doctests or a test
+                harness that gets called from <code>main</code>. Finally, as we
+                write the rest of our program, we forget the inner machinations
+                of this function and treat it is a black box that just does what
+                we want it to. In this way, we can shield ourselves from the
+                complexity of other function implementations when we're working
+                on a particular one.
+              </p>
+            </li>
+            <li>
+              <p>
+                <b>More Command Line Arguments</b>: We spent some more time
+                talking about command line arguments. The last time they were
+                mentioned, it was more as an of example of lists, but this time
+                round we talked about how <code>sys.argv</code> actually
+                interacts with the stuff you type in the terminal. Check out
+                last week's lesson plan for an explanation of how this works!
+              </p>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <p class="only-print">
+            <b>
+              Lectures 13 and 14
+            </b>
+          </p>
+          <p class="no-print">
+            <a href="#">
+              Lectures 13 and 14
+            </a>
+          </p>
+          <p>
+            Neither of these lectures has happened yet, but the rough outline of
+            what we'll be covering is:
+          </p>
+          <ul>
+            <li>
+              <p>
+                <b>Other forms of <code>range()</code></b>
+                specifically, the 2-parameter version (which takes an inclusive
+                lower bound and an exclusive upper bound) and the 3-parameter
+                version (which takes an inclusive lower bound, an exclusive
+                upper bound, and a step size).
+              </p>
+            </li>
+            <li>
+              <p><b>Nested Loops</b></p>
+            </li>
+            <li>
+              <p><code>break</code> (and maybe <code>continue</code>)</p>
+            </li>
+            <li>
+              <p>
+                More list methods, like <code>extend</code> (which takes in a a
+                list as a parameter and concatenates it to the current list) and
+                <code>pop</code>, which removes and returns the value at the end
+                of the list.
+              </p>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <hr class="no-print" />
+
+      <div class="new-page"></div>
+      <h2>Problems</h2>
+      <p>
+        This week's section has two problems: the first is intended as a warmup
+        for students to gain familiarity with a common parsing pattern they'll
+        be using in assignments, followed by a more complex problem that extends
+        the narrative of last week's section to write a more robust email
+        scanning tool.
+      </p>
+      <p>
+        The second problem also lends itself pretty well to a 'lab style'
+        section, in which students work on the problem in PyCharm on their
+        laptops and you walk around and monitor their progress. I'll be posting
+        a PyCharm project for the section by Wednesday for students to download,
+        if you'd like to pursue that avenue. That said, it is a large problem
+        and it's worth coming together as a section at various watershed moments
+        in the problem. My suggestions for what those moments are below.
+      </p>
+      <ol>
+        <li>
+          <p>
+            <b>Range & loop problems</b>: These problems have the twin goals of
+            increasing familiarity with the additional forms of the
+            <code>range</code>
+            function as well as nested loops. The first is pretty trivial, but
+            is a good way of discussing edge cases as well as the
+            inclusive/exclusive bounds of the function. The next two are
+            slightly more complex, since they require the use of nested lists,
+            which students haven't seen yet. Spending some time going over the
+            fact that lists can store other lists (specifically, references to
+            other lists) might be necessary. I don't think it's hugely necessary
+            to do both parts 2 and 3 of this problem: one should be sufficient.
+            That said, play it by ear.
+          </p>
+        </li>
+        <li>
+          <p>
+            <b>A much better email parser</b>: This problem is intended to
+            provide students with more practice in sophisticated string parsing
+            and file reading, as well as to provide them with their first
+            exposure to using list methods and parsing command line arguments
+            and decomposing a relatively large program. The problem is
+            structured thusly:
+          </p>
+          <ol>
+            <li>
+              <p>
+                First, students implement a more sophisticated email parsing
+                program with far fewer limitations than the one written in
+                section last week. We provide a suggested decomposition for this
+                problem, and it is intentionally similar to the structure of the
+                grep assignment in order to allow students to play wih more
+                advanced concepts in a context they should hopefully be familiar
+                with.
+              </p>
+            </li>
+            <li>
+              <p>
+                Following this, students then have to implement support for two
+                optional command line arguments that provide a user of the
+                program with more control over its behaviour. We specify how
+                these flags would work, but provide no further details as to how
+                to proceed. This problem is intended to be an exercise in
+                decomposition, as well as a means to better understand the role
+                of the
+                <code>main</code> function and <code>sys.argv</code>.
+              </p>
+            </li>
+          </ol>
+          <p>
+            As I mentioned earlier, I think this problem lends itself pretty
+            well to a lab-style section, if you feel that would benefit your
+            students. That said, because it's fairly large, I think it's worth
+            having some conversations as a group. Here's an outline of the
+            things that I think everyone should take away from this problem, as
+            well as other things to consider when leading a lab-style session
+            for this problem:
+          </p>
+          <ul>
+            <li>
+              <p>
+                Ensuring that students understand the decomposition provided and
+                what each function is supposed to do is essential. You could
+                also choose to separate your section into multiple groups and
+                have each group work on different functions to emphasize the
+                abstraction between them. Either way, it's worth clarifying the
+                contract of each function.
+              </p>
+            </li>
+            <li>
+              <p>
+                Having a brief discussion of the difference between appending
+                to, and extending a list, is a good idea. As a brief reminder,
+                appending adds a single element to the end of the list, while
+                extending concatenates a list with another one. In addition,
+                while
+                <code>list.pop</code> almost certainly will not feature in the
+                solution to this problem, it is also worth quickly discussing.
+              </p>
+            </li>
+            <li>
+              <p>
+                We give the students a <code>main</code> function for the first
+                part of the problem, although it will need to be modified in
+                part 2. That said, reviewing exactly how the function we've
+                written works is a great idea as it puts them in good stead for
+                the next problem. Specifically, emphasizing that this method is
+                called automatically and what <code>argv</code> looks like will
+                be really helpful.
+              </p>
+            </li>
+            <li>
+              <p>
+                When you get to step 2, it's also a good idea to as a class come
+                up with a decompositional strategy for supporting the command
+                line arguments. How does the <code>main</code> function need to
+                modified? Which other functions need to be modified? Once those
+                questions have been answered, you could even split your students
+                back up into groups and have each group work on a different
+                flag. If you can come up with another flag for students to work
+                on as well, go for it! If you think it's a really cool idea,
+                post on the section slack channel so that other SLs can take
+                inspiration from it.
+              </p>
+            </li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atom-one-dark.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atelier-forest-light.min.css"
+      disabled
+    />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>

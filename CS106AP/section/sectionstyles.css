@@ -70,6 +70,12 @@ pre {
   }
 }
 
+@media print {
+  .new-page {
+    page-break-before: always;
+  }
+}
+
 @media screen {
   .only-print,
   .only-print * {

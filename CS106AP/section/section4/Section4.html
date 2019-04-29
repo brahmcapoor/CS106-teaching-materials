@@ -1,0 +1,335 @@
+<html>
+  <head>
+    <title> Section 4 </title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../sectionstyles.css" />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="pageHeader">
+            <a href="http://cs106ap.stanford.edu" class="no-print">
+              <p class="subtleHeading text-center">
+                Back to CS 106A Homepage
+              </p>
+            </a>
+            <h1> Section 4 </h1>
+            <p class="subtleHeading">
+              Written by Nick Parlante, Brahm Capoor and Andrew Tierno
+            </p>
+            <p class="subtleHeading">
+              <i class="far fa-calendar-alt"></i> April 28th, 2019
+            </p>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2>Range & Loop Problems</h2>
+        <br />
+        <p>
+          First, we'll go through a series of problems intended to increase your
+          familiarity with the additional parameters of the
+          <code>range</code> function and nested loops. Implement the following
+          functions:
+        </p>
+        <ol>
+          <li>
+            <p>
+              <code>negative(n)</code>: Given a non-negative integer
+              <code>n</code>, return a list of all the ints from
+              <code>n</code> down to <code>-n</code>, i.e.
+              <code>[n, n-1, ..., 1, 0, -1, -2, ..., -n]</code>.
+            </p>
+            <p class="hint">
+              Note: consider the case where <code>n == 0</code>. Does your
+              function need to do any special work to account for this
+              situation?
+            </p>
+          </li>
+          <li>
+            <p>
+              <code>threes(n)</code>: Given a non-negative integer
+              <code>n</code>, create and return a list of <code>n</code> lists,
+              each of which has length 3. Each inner list should contain 3
+              consecutive integers. The first inner list should start with a 1,
+              and every subsequent inner list's first element should increase by
+              1. For example, <code>threes(4)</code> would return
+              <code>[[1,2,3], [2,3,4], [3,4,5], [4,5,6]]</code>.
+            </p>
+          </li>
+          <li>
+            <code>countdown(n)</code>: Given a non-negative integer
+            <code>n</code> that is less than or equal to 10, create and return a
+            list of <code>n</code> lists, where each inner list counts down from
+            10 to successively smaller numbers. For example,
+            <code>countdown(3)</code> would return
+            <code>[[10], [10, 9], [10, 9, 8]]</code>.
+          </li>
+        </ol>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2>A much better email parser </h2>
+        <p>
+          Last week in section, you built a program to retrieve email hostnames
+          from a file. Unfortunately, that program was limited in several ways.
+          For example, it could only parse a single email from each line of the
+          file, only retrieved the hostname of each email, and finally wasn't
+          robust to peculiar cases such as punctuation occurring immediately
+          after the hostname.
+        </p>
+        <p>
+          This week, you'll leverage your new skills with nested loops and
+          string parsing to build a more sophisticated program to grab emails
+          from a file. You'll start by writing a program that simply grabs every
+          email address from the file by implementing functions which we specify
+          and whose definitions we provide for you. Then, you'll make your
+          program a little more flexible by having it to support a variety of
+          command line arguments which alter its behaviour.
+        </p>
+
+        <div class="subproblem">
+          <h4> Step 1: Parsing Emails </h4>
+          <br />
+
+          <h5>Detecting Valid Characters</h5>
+          <p>
+            First, we're going to refine our definition of what constitutes an
+            email address. An email address must be formatted in the following
+            way:
+          </p>
+          <div class="text-center"> <code>username@hostname</code></div>
+          <p>
+            Every character in both the username and the hostname must be a
+            letter, a digit, a period, a dash, or an underscore (the
+            <code>'_'</code> character). The username must be at least one
+            character long, and the hostname must be at least 4 characters long,
+            one of which is a period. With this in mind, implement the following
+            useful helper function:
+          </p>
+          <div class="text-center"> <code>def is_email_char(ch)</code></div>
+          <p>
+            that takes in a character, and returns whether that character is a
+            valid part of an email address. This will not be a long function,
+            but will be instrumental in the readability of the more complex
+            functions you write later.
+          </p>
+
+          <h5>Getting email addresses from a line</h5>
+          <p>Your job here is to implement the following function:</p>
+          <div class="text-center"> <code>def get_all_emails(line)</code></div>
+          <p>
+            Which takes as input a string representing a line of text from a
+            file, and returns a list of all the valid email addresses in that
+            line.
+          </p>
+          <p>
+            Here's some sample output for the
+            <code>get_all_emails</code> function:
+          </p>
+          <pre class="python">
+            <code>
+>>> get_all_emails('xx aa@bb.com 1.2@3.45')
+['aa@bb.com', '1.2@3.45']
+>>> get_all_emails('_@_ aa-bb@TV.org**meh@meh.com')
+['aa-bb@TV.org', 'meh@meh.com']
+>>> get_all_emails('abc @ @ 123')
+[]
+>>> get_all_emails('')
+[]
+            </code>
+          </pre>
+          <div class="hint">
+            <p> Some words of wisdom:</p>
+            <ul>
+              <li>
+                You might find it helpful to first find an
+                <code>@</code> character in the email, and then scan backwards
+                and forwards to find the other characters in the email address.
+                As a reminder, the <code>str.find()</code> function accepts an
+                optional second parameter which specifies which index to begin
+                searching in the string from.
+              </li>
+              <li>
+                Leveraging the <code>is_email_char()</code> function you wrote
+                in the previous section will be very helpful here.
+              </li>
+              <li>
+                Remember, the username in an email address must be at least one
+                character long and the hostname must be at least 4 characters
+                long, with one period.
+              </li>
+            </ul>
+          </div>
+
+          <h5>Getting all the email addresses from a file</h5>
+          <p>Finally, implement the following function:</p>
+          <div class="text-center">
+            <code>def get_emails_from_file(filename)</code>
+          </div>
+          <p>
+            that takes as input a filename for your function to read through and
+            returns a sorted list of all the email addresses in the file. For
+            example, if the file <code>emails.txt</code> looks like this:
+          </p>
+          <pre class="text">
+              <code>
+Hello john@example.com this is alice@microsoft.com
+And a.7@d_e.org and a@a.com
+brahm@stanford.edu is not nick's email
+              </code>
+            </pre>
+          <p>
+            then the function would behave as below:
+          </p>
+          <pre class="python">
+              <code>
+>>> get_emails_from_file('emails.txt')
+['a.7@d_e.org', 'a@a.com', 'alice@microsoft.com', 'brahm@stanford.edu', 'john@example.com']
+              </code>
+          </pre>
+
+          <h5>Putting it all together</h5>
+          <p>
+            We've written a main function for you that puts all of these
+            together, so you don't need to worry about modifying it for this
+            section.
+          </p>
+          <pre class="python">
+              <code>
+def main():
+    args = sys.argv[1:]
+    if len(args) == 1:
+        emails = parse_all_emails(args[0])
+        for email in emails:
+            print(email)
+    # some other bookkeeping here
+              </code>
+          </pre>
+          <p>
+            You can use your program as demonstrated below:
+          </p>
+          <pre class="shell">
+            <code>
+$ python3 emails.py emails.txt
+a.7@d_e.org
+a@a.com
+alice@microsoft.com
+brahm@stanford.edu
+john@example.com
+
+$ python3 emails.py big-emails.txt
+--@
+--@and.com
+--@bill
+--@come
+--@oh
+--@oh.com
+--@the.com
+....lots and lots of emails....
+you@thinking.com
+your@acceptance.com
+your@walk
+            </code>
+          </pre>
+        </div>
+        <div class="subproblem">
+          <h4> Step 2: Command Line Arguments </h4>
+          <p>
+            Now that you have a basic version of your program working, you'll
+            now turn your attention to making it a more flexible and powerful by
+            implementing various optional command line options for the user:
+          </p>
+          <ul>
+            <li>
+              <code>-max</code>: The <code>-max</code> command line option
+              allows you to specify the maximum number of emails you'd like to
+              grab from each line. For example, if one of the lines in the file
+              is
+              <code
+                >brahm@stanford.edu and nick@stanford.edu and
+                chris@stanford.edu</code
+              >, but your program is called as below, only
+              <code>brahm@stanford.edu</code> and
+              <code>nick@stanford.edu</code> should be printed to the terminal.
+              <pre class="shell">
+                <code>
+$ python3 emails.py emails.txt
+... emails from other lines in the file ...
+brahm@stanford.edu
+nick@stanford.edu
+chris@stanford.edu
+... emails from other lines in the file ...
+
+$ python3 emails.py -max 2 emails.txt
+... emails from other lines in the file ...
+brahm@stanford.edu
+nick@stanford.edu
+... emails from other lines in the file ...
+
+                </code>
+              </pre>
+            </li>
+            <li>
+              <code>-host</code>: The <code>-host</code> command line option
+              allows you to specify that you would only like to grab emails with
+              a paricular hostname. For example, calling the program as below
+              will only print <code>stanford.edu</code> emails in the shell.
+              <pre class="shell">
+                <code>
+$ python3 emails.py emails.txt
+carol@avengers.com
+brahm@stanford.edu
+julia@gmail.com
+
+$ python3 emails.py -host stanford.edu emails.txt
+brahm@stanford.edu
+                </code>
+              </pre>
+            </li>
+          </ul>
+          <p>
+            You can assume that a user will use either the
+            <code>-max</code> option, or the <code>-host</code> option, but not
+            both.
+          </p>
+          <p>
+            Elegantly supporting both these options is primarily a challenge in
+            decomposition and style - there is no one 'correct' way to do it.
+            You are free to make whatever modifications you want to the
+            program's functions, their parameters and return values. As a
+            reference, the sample solution modifies the <code>main</code>,
+            <code>get_emails_from_file</code>, and
+            <code>get_all_emails</code> functions, although you are welcome to
+            pursue an alternative strategy.
+          </p>
+        </div>
+      </div>
+    </div>
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atom-one-dark.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atelier-forest-light.min.css"
+      disabled
+    />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>
