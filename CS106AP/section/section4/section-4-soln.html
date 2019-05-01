@@ -86,6 +86,9 @@ def parse_emails(s, max_per_line, permitted_host):
     search = 0
     while (max_per_line == -1 or len(emails) < max_per_line) and search < len(s):
         at = s.find('@', search)
+        if at == -1:
+            continue
+
         start = at - 1
         while start >= 0 and is_email_char(s[start]):
             start -= 1
