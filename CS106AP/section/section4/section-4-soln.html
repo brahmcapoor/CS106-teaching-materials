@@ -87,7 +87,7 @@ def parse_emails(s, max_per_line, permitted_host):
     while (max_per_line == -1 or len(emails) < max_per_line) and search < len(s):
         at = s.find('@', search)
         if at == -1:
-            continue
+            break
 
         start = at - 1
         while start >= 0 and is_email_char(s[start]):
@@ -113,7 +113,7 @@ def parse_all_emails(filename, max_per_line, permitted_host):
     return parsed
 
 def main():
-    args = sys.args[1:]
+    args = sys.argv[1:]
     if len(args) == 1:
         print(parse_all_emails(args[0], -1, ''))
     else:
