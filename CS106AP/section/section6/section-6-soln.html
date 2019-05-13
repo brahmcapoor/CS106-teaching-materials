@@ -1,0 +1,167 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title> Section 6 Solutions </title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../sectionstyles.css" />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="pageHeader">
+            <a href="http://cs106ap.stanford.edu" class="no-print">
+              <p class="subtleHeading text-center">
+                Back to CS 106A Homepage
+              </p>
+            </a>
+            <h1> Section 6 Solutions </h1>
+            <p class="subtleHeading">
+              Written by Nick Parlante and Brahm Capoor
+            </p>
+            <p class="subtleHeading">
+              <i class="far fa-calendar-alt"></i> May 13th, 2019
+            </p>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2>Nested Dictionaries</h2>
+        <pre class="python">
+                <code>
+def int_counts(ints):
+    """Returns int-count dict as above."""
+    counts = {}
+    for num in ints:
+        if not num in counts:
+            counts[num] = 0
+        counts[num] += 1
+    return counts
+
+
+def first_list(strs):
+    """Return a firsts dict as above."""
+    firsts = {}
+    for s in strs:
+        if len(s) >= 1:
+            ch = s[0]
+            if ch not in firsts:
+                firsts[ch] = []
+            firsts[ch].append(s)
+    return firsts
+
+
+def suffix_list(strs):
+    """Return a suffixes dict as above."""
+    suffixes = {}
+    for s in strs:
+        if len(s) >= 2:
+            # use suffix as key
+            suffix = s[len(s)-2:]
+            if suffix not in suffixes:
+                suffixes[suffix] = []
+            suffixes[suffix].append(s)
+    return suffixes
+                </code>
+            </pre>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2>Big Tweet Data!</h2>
+        <pre class="python">
+            <code>
+def add_tweet(user_tags, tweet):
+    user = parse_user(tweet)
+    if user == '':
+        return user_tags
+
+    # if user is not in there, put them in with empty counts
+    if user not in user_tags:
+        user_tags[user] = {}
+
+    # counts is the nested tag -> count dict
+    # go through all the tags and modify it
+    counts = user_tags[user]
+    parsed_tags = parse_tags(tweet)
+    for tag in parsed_tags:
+        if tag not in counts:
+            counts[tag] = 0
+        counts[tag] += 1
+
+    return user_tags
+
+def parse_tweets(filename):
+    user_tags = {}
+    # here we specify encoding 'utf-8' which is how this text file is encoded
+    # python technically does this by default, but it's better to be explicit
+    with open(filename, encoding='utf-8') as f:
+        for line in f:
+            add_tweet(user_tags, line)
+    return user_tags
+
+def user_total(user_tags, user):
+    """
+    Optional. Given a user_tags dict and a user, figure out the total count
+    of all their tags and return that number.
+    If the user is not in the user_tags, return 0.
+    """
+    if user not in user_tags:
+        return 0
+    counts = user_tags[user]
+    total = 0
+    for tag in counts.keys():
+        total += counts[tag]
+    return total
+
+            </code>
+        </pre>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2> Extension </h2>
+        <pre class="python">
+          <code>
+def flat_counts(user_tags):
+    """
+    Given a user_tags dicts, sum up the tag counts across all users,
+    return a "flat" counts dict with a key for each tag,
+    and its value is the sum of that tag's count across users.
+    """
+    counts = {}
+    for user in user_tags.keys():
+        tags = user_tags[user]
+        for tag in tags:
+            if tag not in counts:
+                counts[tag] = 0
+            counts[tag] += tags[tag]
+    return counts
+          </code>
+        </pre>
+      </div>
+    </div>
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atom-one-dark.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atelier-forest-light.min.css"
+      disabled
+    />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>

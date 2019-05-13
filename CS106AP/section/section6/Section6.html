@@ -1,0 +1,338 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title> Section 6 </title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../sectionstyles.css" />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="pageHeader">
+            <a href="http://cs106ap.stanford.edu" class="no-print">
+              <p class="subtleHeading text-center">
+                Back to CS 106A Homepage
+              </p>
+            </a>
+            <h1> Section 6 </h1>
+            <p class="subtleHeading">
+              Written by Nick Parlante and Brahm Capoor
+            </p>
+            <p class="subtleHeading">
+              <i class="far fa-calendar-alt"></i> May 13th, 2019
+            </p>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2>Nested Dictionaries</h2>
+        <p>
+          To get some practice with dictionaries and nesting collections,
+          implement the following functions:
+        </p>
+        <ol>
+          <li>
+            <p>
+              <code>def int_counts(ints)</code> Given a list of integers, create
+              and return an int-count dict: that is, each unique integer in
+              <code>ints</code>
+              is a key in the dictionary and the corresponding value is the
+              number of times that integer appeared in the list.
+            </p>
+            <p class="no-print">
+              Test out your solution
+              <a
+                href="https://parlante.org/make/dict-section/1.int-counts"
+                target="_blank"
+              >
+                here </a
+              >.
+            </p>
+          </li>
+          <li>
+            <p>
+              <code>def first_list(strs)</code> Given a list of strings, create
+              and return a dictionary whose keys are the unique first characters
+              of the strings and whose values are lists of words beginning with
+              those characters, in the same order that they appear in
+              <code>strs</code>.
+            </p>
+            <p class="no-print">
+              Test out your solution
+              <a
+                href="https://parlante.org/make/dict-section/2.firsts-list"
+                target="_blank"
+              >
+                here </a
+              >.
+            </p>
+          </li>
+          <li>
+            <p>
+              <code>def suffix_list(strs)</code> Given a list of strings, create
+              and return a dictionary whose keys are the suffixes of those
+              strings and whose values are lists of words ending with those
+              suffixes, in the same order that they appear in <code>strs</code>.
+              A suffix is defined as the last 2 characters of a string, and a
+              string that is less than 2 characters long has no suffix.
+            </p>
+            <p class="no-print">
+              Test out your solution
+              <a
+                href="https://parlante.org/make/dict-section/3.suffix-list"
+                target="_blank"
+              >
+                here </a
+              >.
+            </p>
+          </li>
+        </ol>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2>Big Tweet Data!</h2>
+        <p>
+          In this program, you'll write a program that reads through a large
+          collection of tweets and store the data to keep track of how hashtags
+          occur in tweets. This is a great example of how Python can be used in
+          data analysis tasks.
+          <span class="no-print"
+            >Begin by downloading the PyCharm project
+            <a href="tweets.zip" target="_blank"> here </a>.</span
+          >
+        </p>
+        <h4> Our Dataset </h4>
+        <p>
+          For the purposes of this problem, each tweet is represented as a
+          single line of text in a file. Each line consists of the poster's
+          username (prefixed by a '@' symbol), followed by a colon and then the
+          text of the tweet. Each character in this file can be a character from
+          any language, or an emoji, although you don't need to do anything
+          special to deal with thse characters. One such file in the PyCharm
+          project we provide is <code>small-tweets.txt</code>, which is
+          reproduced here:
+        </p>
+        <pre class="text">
+          <code>
+@BarackObama: Missed President Obama's final #SOTU last night? Check out his full remarks. https://t.co/7KHp3EHK8D
+@BarackObama: Fired up from the #SOTU? RSVP to hear @VP talk about the work ahead with @OFA supporters:
+https://t.co/EIe2g6hT0I https://t.co/jIGBqLTDHB
+@BarackObama: RT @WhiteHouse: The 3rd annual #BigBlockOfCheeseDay is today! Here's how you can participate:
+https://t.co/DXxU8c7zOe https://t.co/diT4MJWQ…
+@BarackObama: Fired up and ready to go? Join the movement: https://t.co/stTSEUMkxN #SOTU
+@kanyewest: Childish Gambino - This is America https://t.co/sknjKSgj8c
+@kanyewest: 😂😂😂🔥🔥🔥 https://t.co/KmvxIwKkU6
+@dog_rates: This is Kylie. She loves naps and is approximately two bananas long. 13/10 would snug softly
+https://t.co/WX9ad5efbN
+@GonzalezSarahA: RT @JacobSmithVT: Just spent ten minutes clicking around this cool map #education #vt #realestate
+https://t.co/iqxXtruqrt
+          </code>
+        </pre>
+        <p>
+          We provide 3 such files for you in the PyCharm Project:
+          <code>small-tweets.txt</code>, <code>big-tweets.txt</code> and
+          <code>huge-tweets.txt</code>.
+        </p>
+        <h4> Building a <code>user_tags</code> Dictionary </h4>
+        <p>
+          Central to this program is a <code>user_tags</code> dictionary, in
+          which each key is a Twitter user's name like
+          <code>'@BarackObama'</code>. The value for each key in this dictionary
+          is a second, nested dictionary which counts how frequently that
+          particular user has used particular hashtags. For example, a very
+          simple <code>user_tags</code> dictionary might be:
+        </p>
+        <div class="text-center">
+          <code>{'@BarackObama': {'#SCOTUS': 4, '#Obamacare': 3}}</code>
+        </div>
+        <br />
+        <p>
+          We'll explore this dictionary in some more detail as we go through
+          this problem, but as a matter of nomenclature, we'll call the inner
+          dictionary the 'counts' dictionary (since it uses the dict-count
+          algorithm we've seen a bunch in class). Our high-level strategy is to
+          <b>change</b> the above dict for each tweet we read, so it accumulates
+          all the counts as we go through the tweets.
+        </p>
+        <h5> 1. Warmup questions </h5>
+        <p>
+          Given the dictionary above, what updates we would make to it in each
+          of the following cases?
+        </p>
+        <ul>
+          <li>
+            We encounter a new tweet that reads
+            <code>'@BarackObama: #Obamacare signups now!'</code>.
+          </li>
+          <li>
+            We encounter a new tweet that reads
+            <code>'@kanyewest: 😂😂😂🔥🔥🔥 https://t.co/KmvxIwKkU6'</code>.
+          </li>
+        </ul>
+        <h5> 2. Implementing <code>add_tweet</code> </h5>
+        <p>
+          The add_tweet() function is the core of this whole program, and is
+          responsible for performing the update to a
+          <code>user_tags</code> dictionary described above. The tests shown
+          below represent a sequence, expressed as a series of Doctests. For
+          each call, you can see the dictionary that is passed in, and the
+          dictionary that is returned on the next line. The first test passes in
+          the empty dictionary (<code>{}</code>) and gets back a dictionary with
+          1 user and 2 tags. The 2nd test then takes that returned dictionary as
+          its input, and so on. Each call adds more data to the
+          <code>user_tags</code> dictionary.
+        </p>
+        <p>
+          You're all string parsing experts by now, so we won't make you do that
+          work anymore. We've provided you with two functions entitled
+          <code>parse_tags</code> and <code>parse_user</code>, both of which
+          take as a parameter the tweet in question and return a list of tags in
+          the tweet and the username that posted the tweet, respectively.
+        </p>
+        <pre class="python">
+          <code>
+def add_tweet(user_tags, tweet):
+    """
+    Given a user_tags dict and a tweet, parse out the user and tags,
+    and add those counts to the user_tags dict which is returned.
+    If no user exists in the tweet, return the user_tags dict unchanged.
+    Note: call the parse_tags(tweet) and parse_user(tweet) functions to pull
+    the parts out of the tweet.
+    >>> add_tweet({}, '@alice: #apple #banana')
+    {'@alice': {'#apple': 1, '#banana': 1}}
+    >>> add_tweet({'@alice': {'#apple': 1, '#banana': 1}}, '@alice: #banana')
+    {'@alice': {'#apple': 1, '#banana': 2}}
+    >>> add_tweet({'@alice': {'#apple': 1, '#banana': 2}}, '@bob: #apple')
+    {'@alice': {'#apple': 1, '#banana': 2}, '@bob': {'#apple': 1}}
+    """
+          </code>
+        </pre>
+        <h5> 3. Implementing <code>parse_tweets</code> </h5>
+        <p>
+          Use <code>add_tweet</code> in a loop to build up and return a
+          <code>user_tags</code> dict. This should look mostly like other
+          file-reading functions you've written, and your job is to make sure
+          you understand how to follow the pattern of creating and updating a
+          dictionary suggested by the <code>add_tweet</code> function. Restated,
+          the responsibility of <code>add_tweet</code> is to update a
+          dictionary, and <code>parse_tweets</code> must create and maintain
+          that dictionary as it is updated.
+        </p>
+        <h4> Running your program </h4>
+        <p>
+          We provide a <code>main</code> function that calls the
+          <code>parse_tweets</code> function you implemented in a variety of
+          ways. To use it, run the program from the terminal. Run with just 1
+          argument (a data filename), it reads in all the data from that file
+          and prints out a summary of each user and all their tweets and counts:
+        </p>
+        <pre class="shell">
+          <code>
+$ python3 tweets.py small-tweets.txt
+@BarackObama
+ #BigBlockOfCheeseDay -> 1
+ #SOTU -> 3
+@GonzalezSarahA
+ #education -> 1
+ #vt -> 1
+ #realestate -> 1
+          </code>
+        </pre>
+        <p>
+          When run with the <code>'-users'</code> argument,
+          <code>main</code> prints out all the usernames:
+        </p>
+        <pre class="shell">
+          <code>
+$ python3 tweets.py -users small-tweets.txt
+users
+@BarackObama
+@kanyewest
+@dog_rates
+@GonzalezSarahA
+          </code>
+        </pre>
+        <p>
+          When run with the <code>'-user'</code> argument followed by a
+          username, the program prints out the data for just that user.
+        </p>
+        <pre class="shell">
+          <code>
+$ python3 tweets.py -user @BarackObama small-tweets.txt
+user: @BarackObama
+ #BigBlockOfCheeseDay -> 1
+ #SOTU -> 3
+          </code>
+        </pre>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2> Extensions </h2>
+        <p>
+          You probably won't get to this extension in section, but if you have
+          time, implement this additional function which you can then leverage
+          to answer some interesting questions about Hashtag use.
+        </p>
+        <h4>Implementing <code>flat_counts</code></h4>
+        <p>
+          It's natural to be curious about how often tags are used across users.
+          This function takes in a <code>user_tags</code> dictionary and
+          computes a new "flat" count dictionary:
+        </p>
+        <pre class="python">
+          <code>
+def flat_counts(user_tags):
+    """
+    Given a user_tags dicts, sum up the tag counts across all users,
+    return a "flat" counts dict with a key for each tag,
+    and its value is the sum of that tag's count across users.
+    >>> flat_counts({'@alice': {'#apple': 1, '#banana': 2}, '@bob': {'#apple': 1}})
+    {'#apple': 2, '#banana': 2}
+    """
+          </code>
+        </pre>
+        <p>
+          <code>main</code> will call that function with the
+          <code>-flat</code> argument, like so:
+        </p>
+        <pre class="shell">
+          <code>
+$ python3 tweets.py -flat small-tweets.txt
+flat
+ #BigBlockOfCheeseDay -> 1
+ #MAGA -> 2
+ #SOTU -> 3
+ .
+ .
+ .
+          </code>
+        </pre>
+      </div>
+    </div>
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atom-one-dark.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atelier-forest-light.min.css"
+      disabled
+    />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>

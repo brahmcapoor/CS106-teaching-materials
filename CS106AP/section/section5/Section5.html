@@ -1,0 +1,319 @@
+<html>
+  <head>
+    <title> Section 5 </title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../sectionstyles.css" />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="pageHeader">
+            <a href="http://cs106ap.stanford.edu" class="no-print">
+              <p class="subtleHeading text-center">
+                Back to CS 106A Homepage
+              </p>
+            </a>
+            <h1> Section 5 </h1>
+            <p class="subtleHeading">
+              Written by Brahm Capoor and Andrew Tierno
+            </p>
+            <p class="subtleHeading">
+              <i class="far fa-calendar-alt"></i> May 6th, 2019
+            </p>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2> Pyramid </h2>
+        <p>
+          Write the following function:
+        </p>
+        <div class="text-center">
+          <code>
+            def make_pyramid(image)
+          </code>
+        </div>
+        <br />
+        <p>
+          that takes in a source image and returns a new image which copies over
+          pixels from the source image in a centered triangular pattern. That
+          is, only the middle pixel should be taken from the first row, the
+          middle three pixels from the second row, etc. Any pixels that aren't
+          copied from the source image should be white in our triangular image.
+          You may assume that the image is at least twice as wide as it is tall
+          and that for images with even widths that the 'middle pixel' of a row
+          is defined as the pixel whose column is the width of the image divided
+          by two and rounded down. Your function should produce images that look
+          like the image below, if passed an all-black image. The border is
+          provided for your own convenience and need not be present in your
+          returned image.
+        </p>
+        <img
+          src="section5_img/pyramid.png"
+          alt="An image grid"
+          class="img-fluid mx-auto d-block"
+          style="border: 1px solid gray; padding: 0;"
+        />
+      </div>
+      <hr />
+      <div class="problem">
+        <h2> Tracing </h2>
+        <p> Consider the following program: </p>
+        <pre class="python">
+          <code>
+def dundees(pam, michael, dwight):
+    jim = 5
+    for i in range(1, pam, 2):
+        jim += i
+        if michael:
+            battlestar_galactica(pam, jim)
+            jim = scotts_tots(jim, pam, dwight)
+        else:
+            if not dwight:
+                jim = scotts_tots(pam, jim, not michael) #  'not' just flips a boolean from True to False or vice-versa
+                battlestar_galactica(jim, 42)
+    return jim // pam
+
+def battlestar_galactica(toby, kevin):
+    creed = toby
+    toby = kevin
+    kevin = creed
+
+def scotts_tots(oscar, angela, jim):
+    kelly = 2 * oscar
+    if jim:
+        kelly -= angela
+    return kelly
+
+def main():
+    args = sys.argv[1:]
+    michael = False
+    holly = False
+    if '-scott' in args:
+        michael = True
+    if '-flax' in args:
+        holly = True
+    mifflin = int(args[0])
+    print(dundees(mifflin, holly, michael))
+
+if __name__ == '__main__':
+    main()
+          </code>
+        </pre>
+        <p>
+          For each of the following calls, trace through the program's execution
+          to determine what the program prints:
+        </p>
+        <pre class="bash">
+          <code>
+$ python3 the-office.py 2 -flax
+
+$ python3 the-office.py 5 -scott
+
+$ python3 the-office.py 4
+          </code>
+        </pre>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2> String Problems </h2>
+        <h4> Parsing Problems </h4>
+        <p>
+          Implement the following functions:
+        </p>
+        <ol>
+          <li>
+            <p>
+              <code>def find_numbers(s):</code> Given a string <code>s</code>,
+              return a list of strings representing all the numbers in
+              <code>s</code>. A number is defined as any sequence of consecutive
+              digits, with at most one period representing a decimal point. For
+              example, <code>find_numbers('42 abc100.75def50')</code> would
+              return the list <code>['42', '100.75', '50']</code>.
+            </p>
+          </li>
+          <li>
+            <p>
+              <code>def find_letter_runs(s):</code> Given a string
+              <code>s</code>, return a list of strings representing all the
+              'character runs' in <code>s</code>. A 'character run' is defined
+              as a sequence of 2 or more consecutive appearances of the same
+              letter (disregarding case) in a string. For example,
+              <code>find_letter_runs('a bcdeef gghhhijjjklmnnnnnooooo') </code>
+              would return the list
+              <code>['ee', 'gg', 'hhh', 'jjj', 'nnnnn', 'ooooo']</code>.
+            </p>
+          </li>
+        </ol>
+
+        <h4> Pig Latin </h4>
+        <p>
+          Write the following function:
+        </p>
+        <div class="text-center">
+          <code> def pig_latin(word) </code>
+        </div>
+        <br />
+        <p>
+          that converts a single lowercase word to a simplified version of Pig
+          Latin, a (profoundly silly) variant of English The rules for
+          translating a word to Pig Latin are as follows:
+        </p>
+        <ul>
+          <li>
+            If the word starts with a vowel (a,e,i,o, or u), simply append 'yay'
+            to the end of the word. For example,
+            <code>pig_latin('elephant')</code> returns
+            <code>'elephantyay'</code> and
+            <code>pig_latin('aardvark')</code> returns
+            <code>'aardvarkyay'</code>.
+          </li>
+          <li>
+            If the word starts with a consonant, move all constants up to the
+            first vowel to the end, and append 'ay'. For example,
+            <code>pig_latin('switch')</code> returns <code>'itchsway'</code> and
+            <code>pig_latin('string')</code> returns <code>'ingstray'</code>.
+          </li>
+        </ul>
+        <p>
+          You may assume that the word has at least one character and is
+          comprised of only lowercase letters.
+        </p>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2> List Problems </h2>
+        <h4> Collapse </h4>
+        <p>
+          Write a function named collapse that accepts a list of integers as a
+          parameter and returns a new list containing the result of replacing
+          each pair of integers with the sum of that pair. For example, if a
+          list called <code>nums</code> stores the values
+          <code>[7, 2, 8, 9, 4, 13, 7, 1, 9, 10]</code>, then the call of
+          <code>collapse(nums)</code> should return a new list containing
+          <code>[9, 17, 17, 8, 19]</code>. The first pair from the original list
+          is collapsed into 9 (7 + 2), the second pair is collapsed into 17 (8 +
+          9), and so on. If the list stores an odd number of elements, the final
+          element is not collapsed. For example, if the list had been
+          <code>[1, 2, 3, 4, 5]</code>, then the call would return
+          <code>[3, 7, 5]</code>. Your function should not change the list that
+          is passed as a parameter.
+        </p>
+        <h4> Rotate </h4>
+        <p>
+          Write the following function:
+        </p>
+        <div class="text-center">
+          <code>def rotate_list_right(numbers, n)</code>
+        </div>
+        <br />
+        <p>
+          that takes in a list of integers called <code>numbers</code> and an
+          integer called <code>n</code> and returns a 'rotate' version of the
+          list that rotates <code>numbers</code> to the right
+          <code>n</code> times. Each element in <code>numbers</code> is shifted
+          forward <code>n</code> places, and the last <code>n</code> elements
+          are moved to the start of the list. For example, calling
+          <code>rotate_list_right([1, 2, 3, 4, 5], 2)</code> would return the
+          list <code>[4, 5, 1, 2, 3]</code>. Your function should not change the
+          list that is passed as a parameter.
+        </p>
+      </div>
+      <hr />
+      <div class="problem new-page">
+        <h2>Word counts</h2>
+        <p>
+          Your job is to write a full python program, including a
+          <code>main</code> function, for a file called
+          <code>special-count.py</code>. This program should implement the
+          following behavior:
+        </p>
+        <ol>
+          <li>
+            <p>
+              If <code>special-count.py</code> is called with just a filename
+              (e.g. <code>python3 special-count.py myfile.txt</code>) then it
+              should read in the file named myfile.txt (you may assume that this
+              file is formatted as single words separated by newlines) and
+              produce counts of words that share the same consonants in order.
+              For example, if we had the following text in
+              <code>myfile.txt</code>:
+            </p>
+            <pre class="text">
+                <code>
+great
+grate
+greet
+teeny
+tiny
+bump
+                </code>
+              </pre>
+            <p>
+              Your program should produce the following output. Note that the
+              output is in sorted order.
+            </p>
+            <pre class="bash">
+                <code>
+$ python3 special-count.py myfile.txt
+bmp -> 1
+grt -> 3
+tny -> 2
+                </code>
+              </pre>
+          </li>
+          <li>
+            If <code>special-count.py</code> is called with the additional flag
+            -vowels (e.g.
+            <code>python3 special-count.py -vowels myfile.txt</code>) then it
+            should produce the same output, only grouping words by their vowels
+            rather than their consonants. So, using the same file as before
+            produces the following output:
+          </li>
+          <pre class="bash">
+              <code>
+$ python3 special-count.py -vowels myfile.txt
+ae -> 1
+ea -> 1
+ee -> 2
+i -> 1
+u -> 1
+              </code>
+            </pre>
+        </ol>
+      </div>
+      <hr />
+      <p>
+        <i
+          >For even more practice, check out the sample midterm and midterm
+          preparation handout, linked on the course website </i
+        >.
+      </p>
+    </div>
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atom-one-dark.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atelier-forest-light.min.css"
+      disabled
+    />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>

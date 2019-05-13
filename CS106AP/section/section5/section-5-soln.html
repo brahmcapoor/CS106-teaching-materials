@@ -1,0 +1,272 @@
+<html>
+  <head>
+    <title> Section 5 Solutions </title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../sectionstyles.css" />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="pageHeader">
+            <a href="http://cs106ap.stanford.edu" class="no-print">
+              <p class="subtleHeading text-center">
+                Back to CS 106A Homepage
+              </p>
+            </a>
+            <h1> Section 5 Solutions </h1>
+            <p class="subtleHeading">
+              Written by Brahm Capoor and Andrew Tierno
+            </p>
+            <p class="subtleHeading">
+              <i class="far fa-calendar-alt"></i> May 6th, 2019
+            </p>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2> Pyramid </h2>
+        <pre class="python">
+            <code>
+def make_pyramid(image):
+    pyramid_image = SimpleImage.blank(image.width, image.height)  # the new image
+    for y in range(image.height):              # go through each row of the image
+        range_min = image.width // 2 - y       # the x coordinate of the beginning of the row
+        range_max = image.width // 2 + y + 1   # the x coordinate of the end of the row
+        for x in range(range_min, range_max):
+            pixel = image.get_pixel(x, y)      # the pixel we're copying from
+            pixel_pyramid = pyramid_image.get_pixel(x, y) # the pixel we're copying to
+            pixel_pyramid.red = pixel.red
+            pixel_pyramid.green = pixel.green
+            pixel_pyramid.blue = pixel.blue
+    return pyramid_image
+            </code>
+        </pre>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2> Tracing </h2>
+        <pre class="bash">
+          <code>
+$ python3 the-office.py 2 -flax
+6
+$ python3 the-office.py 5 -scott
+1
+$ python3 the-office.py 4
+0
+          </code>
+        </pre>
+      </div>
+      <hr />
+      <div class="problem new-page">
+        <h2> String Problems </h2>
+        <h4> Parsing Problems </h4>
+        <pre class="python">
+          <code>
+def find_numbers(s):
+    search = 0
+    numbers = []
+    while True:
+        begin = search
+
+        # we look for a digit or a period to indicate the start of a number
+        while begin < len(s) and not (s[begin].isdigit() or s[begin] == '.'):
+            begin += 1
+
+        # begin is now at the end of the string or the index of the first
+        # digit or period in the number. First,  let's make sure we're not
+        # at the end of the string by ending the loop if we are.
+        if begin >= len(s):
+            break
+
+        # start off end one character after begin, since the number will
+        # be at least one character long.
+        end = begin + 1
+        # find the first non-number-or-period character after begin
+        while end < len(s) and (s[end].isdigit() or s[end] == '.'):
+            end += 1
+
+        # slice out the number from the string
+        number = s[begin:end]
+
+        # count the number of periods in the number
+        num_periods = 0
+        for i in range(len(number)):
+            if number[i] == '.':
+                num_periods += 1
+
+        # make sure there's a maximum of one period
+        # in the number
+        if num_periods <= 1:
+            numbers.append(number)
+
+        search = end + 1
+    return numbers
+
+
+def find_letter_runs(s):
+    search = 0
+    words = []
+    while True:
+        begin = search
+        while begin < len(s) and not s[begin].isalpha():
+            begin += 1
+
+        if begin >= len(s):
+            break
+
+        end = begin + 1
+        while end < len(s) and s[end] == s[begin]:
+            end += 1
+
+        word = s[begin:end]
+        if len(word) > 1:
+          words.append(word)
+        # notice we don't increment search here, since the
+        # next letter run could begin immediately
+
+    return words
+          </code>
+        </pre>
+        <h4 class="new-page"> Pig Latin </h4>
+        <pre class="python">
+            <code>
+def is_vowel(char):
+    """
+    A useful helper function that returns True
+    if char is a vowel and False otherwise
+    """
+    return char in ['a', 'e', 'i', 'o', 'u']
+
+def pig_latin(word):
+    if len(word) == 0:
+        # we don't want to look at the first character
+        # of an empty string, so we just return a blank
+        # string immediately.
+        return ''
+
+    if is_vowel(word[0]):
+        return word + 'yay'
+
+    first_vowel_index = 1
+    for i in range(1, len(word)):
+        if not is_vowel(word[i]):
+            first_vowel_index += 1
+        else:
+            break
+
+    return word[first_vowel_index:] + word[:first_vowel_index] + "ay"
+
+            </code>
+        </pre>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2> List Problems </h2>
+        <h4> Collapse </h4>
+        <pre class="python">
+          <code>
+def collapse(nums):
+  result = []
+  for i in range(len(result)//2):
+    # since we're going pairs at a time, we only need
+    # to go as many as times as half the number of elements
+    result.append(nums[i * 2] + nums[i * 2 + 1])
+
+  # You don't need to understand the % operator for the midterm,
+  # but it was covered in Monday's lecture. Essentially, we check
+  # that the remainder when the length is divided by 2 is 1.
+  # If so, it's odd and we need to add the last element of the original
+  # result to the string
+  if len(result) % 2 == 1:
+    result.append(nums[-1])
+  return result
+          </code>
+        </pre>
+        <h4> Rotate </h4>
+        <pre class="python">
+          <code>
+def right_list_right(numbers, num):
+    output_list = []
+
+    for i in range(len(numbers) - num, len(numbers)):
+        output_list.append(numbers[i])
+
+    for i in range(0, len(numbers) - num):
+        output_list.append(numbers[i])
+
+    return output_list
+          </code>
+        </pre>
+        </p>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2>Word counts</h2>
+        <pre class="python">
+          <code>
+def remove_vowels(s):
+    out = ''
+    for c in s:
+        if c not in 'aieou':
+            out += c
+    return out
+
+def remove_consonants(s):
+    out = ''
+    for c in s:
+        if c in 'aieou':
+            out += c
+    return out
+
+def count_lines(filename, keep_vowels):
+    counts = {}
+    with open(filename, 'r') as f:
+        for word in f:
+            word = word.strip()
+            if keep_vowels:
+                word = remove_vowels(word)
+            else:
+                word = remove_consonants(word)
+            if word not in counts:
+                counts[word] = 0
+            counts[word] += 1
+    for key in sorted(counts.keys()):
+        print(key, '->', counts[key])
+
+def main():
+    args = sys.argv[1:]
+
+    if len(args) == 2 and args[0] == '-vowels':
+        count_lines(args[1], True)
+    else:
+        count_lines(args[0], False)
+          </code>
+        </pre>
+    </div>
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atom-one-dark.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atelier-forest-light.min.css"
+      disabled
+    />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>
