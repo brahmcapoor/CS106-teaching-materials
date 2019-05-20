@@ -1,0 +1,648 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title> Section 7 </title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../sectionstyles.css" />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="pageHeader">
+            <a href="http://cs106ap.stanford.edu" class="no-print">
+              <p class="subtleHeading text-center">
+                Back to CS 106A Homepage
+              </p>
+            </a>
+            <h1> Section 7 </h1>
+            <p class="subtleHeading">
+              Written by Nick Parlante, Brahm Capoor and Andrew Tierno
+            </p>
+            <p class="subtleHeading">
+              <i class="far fa-calendar-alt"></i> May 19th, 2019
+            </p>
+          </div>
+        </div>
+      </div>
+      <p>
+        <i>
+          In this week's section handout, we're covering a variety of different
+          topics: tracing, graphics, sorting, and dictionaries amongst others.
+          It'll also have you engage in some basic analysis of the output of
+          your assignment 6's Mimic program to convince yourself it effectively
+          models the text which it is fed as an input. Our goal is for you to
+          gain a sense of how the programming skills you've been developing and
+          are continuing to develop can be leveraged to solve some really
+          interesting and realistic problems.
+        </i>
+      </p>
+      <hr />
+      <div class="problem">
+        <h2> Grid Drawing </h2>
+        <p>
+          Python is commonly used in industry and academia as a tool for
+          managing and visualizing large amounts of data. Almost any
+          visualization requires the use of some sort of grid on which you can
+          orient your data. While Python has several toolboxes for producing
+          such grids automatically, in this problem we'll work through manually
+          making such a grid using the <code>tkinter</code> library. We'll
+          primarily employ the following functions, which we reproduce here with
+          the assumption that a <code>canvas</code> has already been created for
+          us:
+        </p>
+        <pre class="python">
+            <code>
+# Draw a line between  (x1, y1) and (x2, y2), touching both
+# optional: fill='red' to set color ('black' is default)
+# optional: width=2 to draw a thicker line (1 is default)
+canvas.create_line(x1, y1, x2, y2)
+canvas.create_line(x1, y1, x2, y2, fill='red')
+canvas.create_line(x1, y1, x2, y2, width=2)
+
+# Draws text on the canvas.
+# anchor=tkinter.SW means the given x,y is SouthWest corner of the tet
+# of the beginning of the string. Other common choices are W (West) and NW (NorthWest)
+# optional: fill='red' to set color ('black' is default)
+canvas.create_text(x, y, text=a_str_value, anchor=tkinter.SW)
+canvas.create_text(x, y, text=a_str_value, anchor=tkinter.SW, fill='red')
+            </code>
+        </pre>
+
+        <p class="no-print">
+          You can download the starter project for this problem
+          <a href="draw-grid.zip">here</a>, which comes with a
+          <code>main</code> function that's already outfitted to facilitate two
+          behaviours:
+        </p>
+
+        <ul>
+          <li>
+            If your program is called with one integer command line argument
+            (i.e. <code>python3 draw-grid.py 10</code>), it will produce a 500
+            pixel x 300 pixel grid, separated into that many rows and columns.
+          </li>
+          <li>
+            If your program is called with two integer command line arguments,
+            (i.e. <code>python3 draw-grid.py 1200 800 25</code>), it will use
+            the first two arguments as the dimension of the grid and the third
+            as the number of rows and columns.
+          </li>
+        </ul>
+
+        <p>
+          Your job is to complete the following function, which the
+          <code>main</code> function will then call:
+        </p>
+
+        <div class="codeblock">
+          <pre class="python">
+                <code>
+def draw_grid(width, height, n):
+    """
+    Divides a canvas into n rows and columns
+    """
+    # make canvas of specified dimensions
+    canvas = make_canvas(width, height)
+
+    # TODO: your code here
+
+    # required line to put window on screen
+    tkinter.mainloop()
+                </code>
+            </pre>
+        </div>
+
+        <p>
+          The function begins by making a canvas (delineated by a blue border)
+          for you to separate into a grid using the
+          <code>make_canvas</code> function (which we provide), and ends by
+          calling <code>tkinter.mainloop()</code> to put the window on the
+          screen. It is your responsibility to actually draw the grid.
+        </p>
+
+        <h4>Milestone 1: Drawing column separators</h4>
+
+        <p>
+          We'll begin by first dividing the canvas into <code>n</code> vertical
+          columns, which is accomplished by drawing <code>n - 1</code> vertical
+          red lines between said columns, like so:
+        </p>
+
+        <img
+          src="section7_img/section-7-1.png"
+          alt="A grid"
+          class="img-fluid mx-auto d-block"
+        />
+
+        <p>
+          To determine the x-coordinate of each line, compute its position as a
+          fraction of the entire width of the canvas, then multiply that
+          fraction by the canvas width. This fraction will by definition be a
+          number between 0 and 1, and thus will need to be represented by the
+          <code>float</code> data type. In your own code, this likely means that
+          you'll simply use the <code>/</code> operator rather than the integer
+          division <code>//</code> operator which you might be more likely used
+          to. Each vertical line should extend the full height of the canvas.
+        </p>
+
+        <h4>Milestone 2: Drawing row separators</h4>
+
+        <p>
+          Now, you'll do the same thing to draw separator lines for the rows of
+          the grid to produce a window like this:
+        </p>
+
+        <img
+          src="section7_img/section-7-2.png"
+          alt="A grid"
+          class="img-fluid mx-auto d-block"
+        />
+
+        <p>
+          Each horizontal line should extend the full width of the canvas.
+        </p>
+
+        <h4>Milestone 3: Drawing labels</h4>
+
+        <p>
+          Finally, you'll label each of the row separation lines with its
+          y-coordinate. Each label should be above and to the right of the
+          leftmost end of the line, like so:
+        </p>
+
+        <img
+          src="section7_img/section-7-3.png"
+          alt="A grid"
+          class="img-fluid mx-auto d-block"
+        />
+
+        <p>
+          In <code>tkinter</code> nomenclature, we say that the anchor point for
+          the label is <code>anchor=tkinter.SW</code>, which means that the
+          coordinates we specify for the label are those for its SouthWest
+          corner.
+        </p>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2>Random Circles</h2>
+        <p class="hint no-print">
+          Download the starter code for this problem
+          <a href="RandomCircles.zip">here</a>.
+        </p>
+        <img
+          src="section7_img/circles.png"
+          alt="A grid"
+          class="img-fluid mx-auto d-block"
+        />
+        <p>
+          Write a program that draws a random number of circles of random sizes
+          at random positions on the canvas. Be careful to make sure that none
+          of the drawn circles are cut off by the edge of your canvas. You are
+          provided with the constants <code>WIDTH</code> and
+          <code>HEIGHT</code> (the canvas width and height, respectively),
+          <code>RADIUS_MAX</code> and <code>RADIUS_MIN</code> (the
+          maximum/minimum radius that each random circle may have), and
+          <code>N_CIRCLES_MAX</code> (the maximum number of circles that may be
+          generated in one run of our program. Note that each run should
+          generate between 1 and <code>N_CIRCLES_MAX</code> circles inclusive on
+          both ends). Specifically, your job is to implement the following
+          function:
+        </p>
+        <div class="text-center">
+          <code>
+            def make_all_circles(canvas)
+          </code>
+        </div>
+        <br />
+        <p>
+          into which is passed a canvas and whose job is to do the random
+          drawing of the circles. You might find the following functions
+          helpful, some of which are found in the
+          <code>random</code> module:
+        </p>
+        <pre class="python">
+            <code>
+# draws an oval on a canvas, the top left corner of whose bounding box
+# is at (x0, y0) and the bottom right corner of whose bounding box is
+# at (x1, y1)
+canvas.create_oval(x0, y0, x1, y1)
+
+# returns a random integer between lower and upper, inclusive of both
+# bounds
+random.randint(lower, upper)
+
+# returns a random number between 0 and 1
+random.random()
+            </code>
+        </pre>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2> Sorting with <code>lambda</code>s </h2>
+        <p>
+          Solve each of the following challenges in one line of Python, using
+          the <code>lambda</code> technique:
+        </p>
+        <ol>
+          <li>
+            Given a list of strings <code>strs</code>, sort the list
+            case-insensitively (i.e. ignoring whether the word is upper or lower
+            case)
+          </li>
+          <li>
+            Given a list of strings <code>strs</code>, sort the list according
+            to the last character of each string, case-insensitively.
+          </li>
+          <li>
+            Given a list of integers <code>nums</code>, sort the list according
+            to the absolute difference between each number and 3.14. Python has
+            an <code>abs</code> function, which takes as input a number and
+            returns its absolute value, and which you might find helpful in this
+            problem.
+          </li>
+          <li>
+            Given a list of tuples that represents houses for rent, the number
+            of bedrooms and their prices, like so:
+            <div class="text-center">
+              <code>
+                [ ('main st.', 4, 4000), ('elm st.', 1, 1200), ('pine st.', 2,
+                1600)]
+              </code>
+            </div>
+            <p>
+              Sort the list in the following ways:
+            </p>
+            <ol type="a">
+              <li>In ascending order by number of rooms</li>
+              <li>In ascending order of price</li>
+              <li>In ascending order of price-per-room</li>
+            </ol>
+          </li>
+        </ol>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2>Tweets Revisited</h2>
+        <p>
+          Recall the Big Tweets Data problem from last week, in which we worked
+          with a <code>user_tags</code> dictionary whose keys were twitter
+          usernames and whose values were additional nested dictionaries keeping
+          track of the frequencies of Hashtag usage, like so:
+        </p>
+        <pre class="python">
+            <code>
+user_tags = {'@alice': {'#apple': 1, '#banana': 2}, '@bob': {'#apple': 1}}
+            </code>
+        </pre>
+        <p>
+          One of the suggested extensions for this problem was to implement a
+          function called <code>flat_counts</code>, which takes in a
+          <code>user_tags</code> and returns a dictionary that counts the number
+          of times each Hashtag is used, across all users. For example, calling
+          <code>flat_counts</code> and passing the
+          <code>user_tags</code> dictionary in as a parameter would lead to the
+          following behaviour:
+        </p>
+        <pre class="python">
+            <code>
+>>> flat_counts(user_tags)
+{'#apple': 2, '#banana': 2}
+            </code>
+        </pre>
+        <p>
+          Now, armed with your new toolkit for sorting, your job is to implement
+          the following function:
+        </p>
+        <div class="text-center">
+          <code>def most_used(flat_counts)</code>
+        </div>
+        <br />
+        <p>
+          which takes in a 'flat' dictionary as described above, and returns the
+          most frequently used hashtag in the dataset. With a solid
+          understanding of how <code>lambda</code>s can be used in sorting, you
+          should be able to solve this in just a few lines of code. As a hint,
+          dictionaries have a built-in <code>items()</code> function that
+          returns a list of <code>(key, value)</code> tuples.
+        </p>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2>Pynary Bomb</h2>
+        <p class="hint no-print">
+          Download the starter file for this problem
+          <a href="PynaryBomb.zip">here</a>.
+        </p>
+        <p>
+          A rogue Cal student has somehow gained access to a computer on
+          Stanford premises and as a misguided attempt to demonstrate their
+          technical superiority, has left an ill-intentioned program -- a
+          'Pynary bomb' -- for us to deal with. Left unchecked, there's no
+          telling what this program might do: perhaps it'll delete the 106AP
+          website and all your hard work on the assignments, or perhaps it'll
+          constantly post low-quality content to SMFET, diluting Stanford's
+          cultural credibility.
+        </p>
+        <p>
+          Fortunately for us, that student underestimated both your tenacity and
+          skill with Python, and it's up to you to save the day. Your mission,
+          should you choose to accept it, is to trace through the student's
+          program (reproduced below) and to figure out the set of command line
+          arguments that 'defuse' the bomb.
+        </p>
+        <p>
+          We've collected some intel about the program, which we're sharing with
+          you here:
+        </p>
+        <ul>
+          <li>
+            The author of this program is malintentioned, without question, but
+            is not duplicitious. The functions they've written are at least
+            good-faith efforts in implementing the behaviour their names
+            describe, although they might not always succeeed.
+          </li>
+          <li>
+            The bomb will not resist any attempts by you to make its workings
+            more transparent, for example by printing the values of various
+            variables throughout the program's execution.
+          </li>
+        </ul>
+        <pre class="python">
+          <code>
+def swap(li, idx0, idx1):
+    temp = li[idx0]
+    li[idx0] = li[idx1]
+    li[idx1] = temp
+    return idx1 - 1
+
+def extends(d, k1, k2):
+    copy = d[k1]
+    copy.extend(d[k2])
+
+def slicer(lst, val):
+    lst = lst[val:]
+
+def even_odd_counter(d):
+    d_even_odd = {}
+    for k in d.keys():
+        for v in d[k]:
+            x = v % 2
+            if x not in d_even_odd:
+                d_even_odd[x] = 0
+            d_even_odd[x] += 1
+    return d_even_odd
+
+def foo(inp1, inp2, inp3):
+    y = {'a': [1], 'b': [2,3], 'c': [4,5,6], 'd':[7,8,9,10], 'e':[11,12,13,14,15]}
+    x = sorted(list(y.keys()), reverse=True) # sorts y.keys() in descending order
+    idx0 = 0
+    while idx0 <= inp1:
+        inp1 = swap(x, 0, inp1)
+    if y[x[2]] != [2,3] and x[4] != 'a':
+        print("BOOM!!")
+        return
+    slicer(x, 2)
+    extends(y, x[0], x[inp2])
+    if len(y[x[0]]) != 5:
+        print("BOOM!!")
+        return
+    d_count = even_odd_counter(y)
+    if d_count[1] != inp3:
+        print("BOOM!!")
+        return
+    print("Phew! That was a close one.")
+    print("You've defeated the Pynary Bomb, congratulations!")
+
+def main():
+    args = sys.argv[1:]
+    print("Good luck...")
+    foo(int(args[0]), int(args[1]), int(args[2]))
+
+if __name__ == "__main__":
+    main()
+          </code>
+        </pre>
+      </div>
+      <hr />
+      <div class="problem new-page">
+        <h2>Analyzing Mimic Output</h2>
+        <p class="hint">
+          Thanks to Sheridan Rea for suggesting this problem!
+        </p>
+        <h4>Introduction</h4>
+        <p>
+          One of the programs you'll have written as part of assignment 6 is
+          called Mimic, in which you examine a piece of text and associate
+          individual words with those that might follow them. In doing so, you
+          gain the ability to generate new text by continuously choosing new
+          words from the ones you previously selected.
+        </p>
+        <p>
+          This program involves constructing what is called a
+          <i>Markov Model</i>, in which you generate new data (in this case,
+          words), based solely on information about the last piece of data you
+          generated. Markov Models are widely employed to solve all sorts of
+          problems in Artificial Intelligence research. In fact, many of the
+          most widely-used techniques in Natural Language Processing use
+          representations of words produced from a process not unlike that which
+          you're tasked with implementing in Assignment 6. One of the most
+          interesting properties of such models is that they help us to
+          construct a statistical model of Natural Language, and to consequently
+          make predictions about it. In this problem, you'll explore the
+          statistical properties of the model constructed in the Mimic program,
+          using only the skills you've already developed as a Python programmer.
+        </p>
+        <h4>Getting started</h4>
+        <p>
+          Begin by downloading the starter code for this project
+          <span class="no-print"><a href="TextStats.zip">here </a></span
+          ><span class="only-print"> from the course website </span>and
+          importing it into PyCharm. The project comes with a few important
+          files:
+        </p>
+        <ul>
+          <li>
+            <code>stats.py</code>, in which you'll be writing code to analyze
+            the output of the Mimic program.
+          </li>
+          <li>
+            <code>alice-book.txt</code>, the full text of
+            <i>Alice in Wonderland</i>.
+          </li>
+          <li>
+            <code>alice-sample.txt</code>, produced by running my own Mimic
+            solution as follows:
+            <!-- <div class="codeblock"> -->
+            <pre class="shell">
+                    <code>
+$ python3 mimic.py alice-book.txt 1000
+                    </code>
+                </pre>
+            <!-- </div> -->
+          </li>
+          <li>
+            <code>tale-of-two-cities.txt</code>, the full text of
+            <i>A Tale of Two Cities</i>.
+          </li>
+          <li>
+            <code>tale-of-two-cities-sample.txt</code>, produced by running my
+            own Mimic solution as follows:
+            <!-- <div class="codeblock"> -->
+            <pre class="shell">
+                    <code>
+$ python3 mimic.py tale-of-two-cities.txt 1000
+                    </code>
+              </pre>
+            <!-- </div> -->
+          </li>
+        </ul>
+        <p>
+          Each of the <code>-sample.txt</code> files are approximately 1000
+          words and as the assignment handout suggests, should sound like
+          they're in the voice of the original text. You'll verify this in this
+          problem!
+        </p>
+        <h4>Collecting statistics</h4>
+        <p>
+          Your goal in this problem is to write a program that analyses and
+          prints the frequency of words in a piece of text. You'll then use the
+          program to compare the distributions of word occurrences between a
+          piece of text and the output of the Mimic program, run on that piece
+          of text. We've provided some basic scaffolding for you in
+          <code>stats.py</code>, which you can run like so:
+        </p>
+        <pre class="shell">
+            <code>
+$ python3 stats.py alice-book.txt
+            </code>
+        </pre>
+        <p>
+          Your job is to implement the following function:
+        </p>
+        <div class="text-center">
+          <code>def print_most_frequent(filename)</code>
+        </div>
+        <br />
+        <p>
+          which takes as a parameter the name of a file and ultimately prints
+          the words in the file in ascending order of how frequently they are
+          used, as well as their frequency counts. We'll leave your exact
+          decompositional strategy up to you, but your program should look
+          fairly similar in structure to the Mimic assignment itself.
+        </p>
+        <h4>Analyzing the Output</h4>
+        <p>
+          Once you've got the <code>print_most_frequent</code> function (and by
+          extension the <code>stats.py</code> program) up and running, it's time
+          to use it to examine the frequency distributions of the words in
+          various files. For example, run
+          <code>python3 stats.py alice-book.txt</code> and
+          <code>python3 stats.py alice-sample.txt</code> and compare the
+          outputs. Do the two files use the same words the most frequently? If
+          not, what might be causing that difference? Is the same true for
+          <i>A Tale of Two Cities</i>?
+        </p>
+        <h4>Words of Wisdom</h4>
+        <p>
+          While we'll leave the actual strategy of decomposition and other
+          implementation details largely up to you, here are a few directions
+          you could take, some of which I employed in my own solution:
+        </p>
+        <ul>
+          <li>
+            When reading through a file, you can use the
+            <code>f.read()</code> function to read the entire text of the file
+            as a string and the <code>s.split()</code> function to split that
+            string into a list of space-separated tokens.
+          </li>
+          <li>
+            Words might appear in a variety of different cases throughout the
+            text (for example, at the beginning of a sentence, they will begin
+            with a capital letter). Somehow standardizing the case of the words
+            will allow you to produce better distributions of word usage.
+          </li>
+          <li>
+            Some words might also end with punctuation marks like full stops,
+            exclamation marks, question marks, and semicolons. To deal with this
+            this, you might want to detect and remove any punctuation at the end
+            of a word.
+          </li>
+          <li>
+            Given a dictionary of word counts, you can get a sortable list of
+            key-value tuples like so:
+            <pre class="python">
+                <code>
+word_count_pairs = list(counts.items())
+                </code>
+            </pre>
+            Each of these tuples represents a key and its corresponding value.
+            To get the key, you can index into the tuple at position 0 and to
+            get the value, you can index into the tuple at position 1.
+          </li>
+          <li>
+            The texts in question have many different words, most of do not
+            occur very frequently. When printing out the words and their counts
+            in the text, consider only doing so for words that only occur above
+            some fixed amount of times to reduce the number of words printed.
+          </li>
+        </ul>
+        <h4> Moving On </h4>
+        <p>
+          While you were hopefully able to gain some insights into the language
+          model that the Mimic program constructs, there's plenty you can do to
+          continue to explore this, if you so choose:
+        </p>
+        <ul>
+          <li>
+            <i>Trying on different texts</i> Try using Mimic to produce samples
+            of essays or blog posts you've written, or on other pieces of famous
+            literature, or if you're feeling really wild, pieces of Python code.
+            What sorts of text does it work well on? On the ones that it doesn't
+            work well on, inspect the distributions using
+            <code>stats.py</code> to see how they're different. To save the
+            output of Mimic to a text file, run it like so:
+            <pre class="shell">
+                <code>
+$ python3 mimic.py &lt;textfile&gt; &lt;limit&gt; &gt; &lt;filename&gt;.txt
+                </code>
+            </pre>
+            and replace any expressions in angle brackets with strings or
+            numbers of your own choosing. The results will be stored in
+            <code>&lt;filename&gt;.txt</code>.
+          </li>
+          <li>
+            The approach that Mimic takes to modelling a piece of text is a
+            reasonable one, but suffers from a few limitations, as you might be
+            able to tell from the nonsensical text it produces. Can you think of
+            any? What could you do to fix it?
+          </li>
+        </ul>
+      </div>
+    </div>
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atom-one-dark.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atelier-forest-light.min.css"
+      disabled
+    />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>

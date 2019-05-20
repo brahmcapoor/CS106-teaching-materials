@@ -1,0 +1,264 @@
+<html>
+  <head>
+    <title> Section 6 Lesson Plan</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../sectionstyles.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="pageHeader">
+            <h1> Section 6 Lesson Plan</h1>
+            <p class="subtleHeading">
+              Written by Brahm Capoor
+            </p>
+            <p class="subtleHeading">
+              <i class="far fa-calendar-alt"></i> April 29nd, 2019
+            </p>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <h2>Lecture and Concepts Recap</h2>
+      <p>
+        Check out the slides for full details, but here's a quick summary of
+        everything that went down. In addition, make sure to take a look at the
+        exercises students went through in class.
+      </p>
+      <ul>
+        <li>
+          <p class="only-print">
+            <b> Lecture 16: The dictionary counting algorithm </b>
+          </p>
+          <p class="no-print">
+            <a
+              href="https://web.stanford.edu/class/cs106ap/handouts/lecture-16.html"
+              target="_blank"
+            >
+              Lecture 16: The dictionary counting algorithm
+            </a>
+          </p>
+          <p>
+            We started talking about the dictionary data type in class. The
+            dictionary in Python most closely resembles a HashMap in other
+            languages, and is declared and used thusly:
+          </p>
+          <!-- <div class="codeblock"> -->
+          <pre class="python">
+                  <code>
+>>> d = {}            # make an empty dictionary
+>>> d['brahm'] = 42   # associate the key 'brahm' with the value 42
+>>> d['nick'] = 105
+>>> d['brahm']        # get the value associated with a particular key
+42
+>>> d['brahm'] = 7    # overwrites the value
+>>> d[brahm]
+7
+
+                  </code>
+              </pre>
+          <!-- </div> -->
+          <p>
+            In this lecture, we demonstrated the use of a dictionary as a
+            frequency table, printing out the counted things in sorted order.
+            Here's the general structure:
+          </p>
+          <!-- <div class="codeblock"> -->
+          <pre class="python">
+                  <code>
+def count_the_things(things_to_count):
+    counts = {}
+    for thing in things_to_count:
+        if thing not in counts:  #checking whether we've seen it before
+            counts[thing] = 0
+        thing[counts] += 1
+
+    for key in sorted(counts.keys()):
+        print(key, counts[key])
+                  </code>
+              </pre>
+          <!-- </div> -->
+          <p>
+            This material was tested on the midterm, so students should have
+            internalized it and I doubt you'll have to spend too much time
+            reviewing it.
+          </p>
+          <p>
+            As a note for you in case it comes up, iterating over the non-sorted
+            keys of a <code>dict</code> in Python is guaranteed to return the
+            keys in insertion order. We haven't told students about this, but in
+            case they ask about why we sort the keys, the answer is no longer
+            that a dict uses a 'random order' but rather 'not a useful order'
+            when giving you keys.
+          </p>
+        </li>
+        <li>
+          <p class="only-print">
+            <b> Lecture 18: List functions and patterns </b>
+          </p>
+          <p class="no-print">
+            <a
+              href="https://web.stanford.edu/class/cs106ap/handouts/lecture-16.html"
+              target="_blank"
+            >
+              Lecture 18: List functions and patterns
+            </a>
+          </p>
+          <p>
+            This won't be particularly emphasized in section this week, but we
+            explored other common list patterns, like:
+          </p>
+          <ul>
+            <li>
+              <b>List slicing</b>, which works just like string slicing.
+            </li>
+            <li>
+              The <code>list.pop()</code> method, which pops and returns an
+              element from the end of a list. It optionally takes an integer
+              parameter which specifies where the element is popped from.
+            </li>
+            <li>
+              The <code>reversed()</code> function, which takes a collection and
+              returns an ierable to that reversed collection, so you can use it
+              in a for each loop.
+            </li>
+            <li
+              >The <code>min()</code> and <code>max()</code> functions, which
+              take collections such as lists and return exactly what their names
+              suggest they do.
+            </li>
+            <li>
+              Maintaining a <b>state</b> variable as we iterate through a list,
+              for example when we're implementing our own
+              <code>min</code> function.
+            </li>
+          </ul>
+        </li>
+        <br />
+        <li>
+          <p>
+            <b> Lecture 19</b>
+          </p>
+          <p>
+            This lecture hasn't happened yet, but we'll be reviewing nested
+            dictionaries. Suppose, for example, we have a dictionary that maps
+            people to dictionaries counting how many times they've seen a
+            particular movie. Such a dictionary might look like this:
+          </p>
+          <div class="text-center">
+            <code>
+              {'brahm': {'Citizen Kane': 1, 'Avengers: Endgame': 80}, 'nick':
+              {'Toy Story': 2, 'The Lion King': 1}}
+            </code>
+          </div>
+          <br />
+          <p>
+            A particular pattern that we're focussing on is a function to update
+            these counts appropriately by taking in the dictionary and a new
+            piece of evidence and returns an appropriately mutated dictionary.
+            Such a function might be implemented as follows:
+          </p>
+          <!-- <div class="codeblock"> -->
+          <pre class="python">
+                  <code>
+def update_counts(all_counts, evidence):
+    name = get_name(evidence)  # assume this works
+    movie = get_name(evidence) # assume this works
+
+    # if this is a new name, put it in the dictionary
+    if name not in all_counts:
+        all_counts[name] = {}
+
+    user_counts = all_counts[name]
+    # if the user hasn't seen that movie before, put it in their counts
+    if movie not in user_counts:
+        user_counts[movie] = 0
+    user_counts[movie] += 1
+
+    return user_counts
+                  </code>
+              </pre>
+          <!-- </div> -->
+          <p>
+            A lot of section this week will be focussed on understanding this
+            pattern.
+          </p>
+        </li>
+      </ul>
+
+      <hr />
+      <h2>Problems</h2>
+      <p>
+        This week's section is a lab style section!
+        <span class="no-print"
+          >You can download the PyCharm project
+          <a href="tweets.zip">here</a>.</span
+        >
+      </p>
+      <p>
+        The main goal of section this week is to work through a program that
+        leverages nested dictionaries to keep track of information about the
+        frequency of HashTag usage across different twitter users. The PyCharm
+        project comes with a few different data files containing tweets for
+        students to play with.
+      </p>
+      <p>
+        We've included a few warmup problems as well, but I'd strongly suggest
+        leaving those for students to do after section to get through the main
+        problem, unless they're particularly shaky on dictionaries. Even in that
+        situation, I think you can use this problem as a way to teach
+        dictionaries so it's probably worth polling your students very early on
+        in section to make a decision.
+      </p>
+      <p>
+        I want to leave the exact structure of this section mostly to you, but I
+        do have a few suggestions:
+      </p>
+      <ul>
+        <li>
+          <b>
+            Emphasize that this is a big problem that can be solved with
+            comparatively little code.
+          </b>
+          It's far more about the pattern of solving than it is about writing
+          tons of code.
+        </li>
+        <li>
+          Section is going to have to proceed at a relatively rapid clip. Make
+          sure to plan beforehand how you'll integrate lecture review and work
+          so that students get the most out of the experience.
+        </li>
+        <li>
+          If you have a projector in your room, and a (relatively) smallish
+          section, you might want to livecode your section instead.
+        </li>
+        <li>
+          Another thing to consider is integrating some sort of debugging
+          practice. Perhaps lead your students down a common misconception (i.e.
+          setting a count for a previously-unseen key to be 1 and then
+          incrementing it) and discuss strategies to solve such a problem.
+        </li>
+      </ul>
+    </div>
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atom-one-dark.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atelier-forest-light.min.css"
+      disabled
+    />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>

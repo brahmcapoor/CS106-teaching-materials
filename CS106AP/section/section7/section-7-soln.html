@@ -1,0 +1,289 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title> Section 7 Solutions </title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../sectionstyles.css" />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="pageHeader">
+            <a href="http://cs106ap.stanford.edu" class="no-print">
+              <p class="subtleHeading text-center">
+                Back to CS 106A Homepage
+              </p>
+            </a>
+            <h1> Section 7 Solutions </h1>
+            <p class="subtleHeading">
+              Written by Nick Parlante, Brahm Capoor and Andrew Tierno
+            </p>
+            <p class="subtleHeading">
+              <i class="far fa-calendar-alt"></i> May 19th, 2019
+            </p>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2> Grid Drawing </h2>
+        <pre class="python">
+            <code>
+#!/usr/bin/env python3
+
+import sys
+import tkinter
+
+
+def make_canvas(width, height):
+    top = tkinter.Tk()
+    top.minsize(width=width + 10, height=height + 10)
+
+    canvas = tkinter.Canvas(top, width=width, height=height)
+    canvas.pack()
+    canvas.xview_scroll(6, 'units')  # hack so (0, 0) works correctly
+    canvas.yview_scroll(6, 'units')
+
+    # draw blue boundaries - sides
+    canvas.create_line(0, 0, 0, height - 1, fill='blue')
+    canvas.create_line(width - 1, 0, width - 1, height - 1, fill='blue')
+    # top to bottom
+    canvas.create_line(0, 0, width - 1, 0, fill='blue')
+    canvas.create_line(0, height - 1, width - 1, height - 1, fill='blue')
+    return canvas
+
+
+def draw_grid(width, height, n):
+    canvas = make_canvas(width, height)
+
+    # Vertical lines at 1/n, 2/n, .. n-1/n
+    for i in range(1, n):
+        x = int(width * i/n)
+        canvas.create_line(x, 0, x, height - 1, fill='red')
+
+    # b. horizontal lines + text
+    for i in range(1, n):
+       y = int(height * i/n)
+       canvas.create_line(0, y, width - 1, y, fill='red')
+       canvas.create_text(3, y, text=str(y), anchor=tkinter.SW)
+
+    # required last line puts the canvas-window up on screen
+    tkinter.mainloop()
+
+
+# Default canvas size
+WIDTH = 500
+HEIGHT = 300
+
+def main():
+    args = sys.argv[1:]
+
+    # args:
+    # n               # draws 500x300 with this n
+    if len(args) == 1:
+        draw_grid(WIDTH, HEIGHT, int(args[0]))
+
+    # args:
+    # width height n  # draws custom size grid with n
+    if len(args) == 3:
+        draw_grid(int(args[0]), int(args[1]), int(args[2]))
+
+
+if __name__ == '__main__':
+    main()
+            </code>
+        </pre>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2>Random Circles</h2>
+        <pre class="python">
+            <code>
+import sys
+import tkinter
+import random
+
+WIDTH = 800
+HEIGHT = 600
+RADIUS_MIN = 30
+RADIUS_MAX = 100
+N_CIRCLES_MAX = 10
+
+def make_canvas():
+    """
+    (provided)
+    Creates and returns a drawing canvas
+    of the given int size with a blue border,
+    ready for drawing.
+    """
+    top = tkinter.Tk()
+    top.minsize(width=WIDTH + 10, height=HEIGHT + 10)
+
+    canvas = tkinter.Canvas(top, width=WIDTH, height=HEIGHT)
+    canvas.pack()
+    canvas.xview_scroll(6, 'units')  # hack so (0, 0) works correctly
+    canvas.yview_scroll(6, 'units')
+
+    return canvas
+
+
+def make_one_circle(canvas):
+    radius = random.randint(RADIUS_MIN, RADIUS_MAX)
+    x0 = random.randint(0, WIDTH  - 2 * radius)
+    y0 = random.randint(0, HEIGHT - 2 * radius)
+    x1 = x0 + 2 * radius
+    y1 = y0 + 2 * radius
+    canvas.create_oval(x0, y0, x1, y1)
+
+def make_all_circles():
+    canvas = make_canvas()
+    n_circles = random.randrange(0, N_CIRCLES_MAX) + 1
+    for i in range(n_circles):
+        make_one_circle(canvas)
+
+def main():
+    make_all_circles()
+    tkinter.mainloop()
+
+if __name__ == "__main__":
+    main()
+
+            </code>
+        </pre>
+      </div>
+      <hr />
+      <div class="problem new-page">
+        <h2> Sorting with <code>lambda</code>s </h2>
+        <pre class="python">
+            <code>
+>>> strs = ['apple', 'BANANA', 'candy', 'aardvark']
+# 1A.
+>>> sorted(strs, key=lambda word : word.lower())
+['aardvark', 'apple', 'BANANA', 'candy']
+# 1B.
+>>> sorted(strs, key=lambda word : word.lower()[len(word)-1])
+['BANANA', 'apple', 'aardvark', 'candy']
+
+#2
+>>> nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+>>> sorted(nums, key=lambda num:abs(num-3.14))
+[3, 4, 2, 5, 1, 6, 7, 8, 9, 10]
+>>> min(nums, key=lambda num:abs(num-3.14))
+3
+>>> max(nums, key=lambda num:abs(num-3.14))
+10
+
+# 3A.
+>>> sorted(rentals, key=lambda room_tuple:room_tuple[1])
+[('elm st.', 1, 1200), ('pine st.', 2, 1600), ('main st.', 4, 4000)]
+# 3B.
+>>> sorted(rentals, key=lambda room_tuple:room_tuple[2])
+[('elm st.', 1, 1200), ('pine st.', 2, 1600), ('main st.', 4, 4000)]
+# 3C.
+>>> sorted(rentals, key=lambda room_tuple:room_tuple[2]/room_tuple[1])
+[('pine st.', 2, 1600), ('main st.', 4, 4000), ('elm st.', 1, 1200)]
+>>> min(rentals, key=lambda room_tuple:room_tuple[2]/room_tuple[1])
+('pine st.', 2, 1600)
+            </code>
+        </pre>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2>Tweets Revisited</h2>
+        <pre class="python">
+            <code>
+def most_used(counts):
+    """
+    Given a non-empty "flat" counts dict of tags, return the tag
+    that has the largest count.
+    """
+    return max(counts.keys(), key=lambda hashtag : counts[hashtag])
+            </code>
+        </pre>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2>Pynary Bomb</h2>
+        <p>
+          The correct command to defuse the bomb is:
+        </p>
+        <pre class="shell">
+            <code>
+$ python3 pynarybomb.py 3 4 9
+            </code>
+        </pre>
+        <p>
+          If you didn't work through this yourself, try tracing through the
+          problem now and verifying that this sequence of numbers would in fact
+          defuse the bomb!
+        </p>
+      </div>
+      <hr />
+      <div class="problem new-page">
+        <h2>Analyzing Mimic Output</h2>
+        <pre class="python">
+            <code>
+import sys
+
+
+def get_word_frequencies(filename):
+    counts = {}
+
+    with open(filename, 'r') as f:
+        text = f.read()
+        words = text.split()
+
+        for word in words:
+            word = word.lower()
+            if word not in counts:
+                counts[word] = 0
+            counts[word] += 1
+
+    return counts
+
+
+def print_most_frequent(filename):
+    counts = get_word_frequencies(filename)
+    for pair in sorted(counts.items(), key=lambda x: x[1]):
+        print(pair[0], pair[1])
+
+
+def main():
+    args = sys.argv[1:]
+    filename = args[0]
+    print_most_frequent(filename)
+
+
+if __name__ == '__main__':
+    main()
+
+            </code>
+        </pre>
+      </div>
+    </div>
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atom-one-dark.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atelier-forest-light.min.css"
+      disabled
+    />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>

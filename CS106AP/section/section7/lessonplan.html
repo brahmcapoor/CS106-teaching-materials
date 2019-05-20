@@ -1,0 +1,445 @@
+<html>
+  <head>
+    <title> Section 7 Lesson Plan</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../sectionstyles.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="pageHeader">
+            <h1> Section 7 Lesson Plan</h1>
+            <p class="subtleHeading">
+              Written by Brahm Capoor
+            </p>
+            <p class="subtleHeading">
+              <i class="far fa-calendar-alt"></i> May 20th, 2019
+            </p>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <h2>Lecture and Concepts Recap</h2>
+      <p>
+        Check out the slides for full details, but here's a quick summary of
+        everything that went down. In addition, make sure to take a look at the
+        exercises students went through in class.
+      </p>
+      <ul>
+        <li>
+          <p class="only-print">
+            <b> Lecture 20: Modules and more File Reading</b>
+          </p>
+          <p class="no-print">
+            <a
+              href="http://web.stanford.edu/class/cs106ap/handouts/lecture-20.html"
+              target="_blank"
+            >
+              Lecture 20: Modules and more File Reading
+            </a>
+          </p>
+          <p>
+            First, we covered the first portion of modules in Python. We
+            positioned modules as pieces of code written by the designers of
+            Python that are prepackaged up for our convenience and use. We
+            covered two specific modules:
+          </p>
+          <ul>
+            <li>
+              <code>math</code>, specifically the <code>sqrt</code> and
+              <code>log10</code> functions, as well as the
+              <code>math.pi</code> constant.
+            </li>
+            <li>
+              <code>random</code>, specifically the <code>randrange</code> and
+              <code>choice</code> functions.
+            </li>
+          </ul>
+          <p>
+            Here's a quick example of how to use both of these:
+          </p>
+          <pre class="python">
+              <code>
+>>> import random
+>>> import math
+>>> math.sqrt(4)
+2.0
+>>> math.log10(1000)
+3.0
+>>> math.pi
+3.141592653589793
+>>> random.randrange(0, 2)
+1
+>>> random.randrange(0, 2)
+0
+>>> random.randrange(0, 2)
+1
+>>> random.randrange(0, 2)
+1
+>>> random.choice(['a', 'b', 'c'])
+'b'
+>>> random.choice(['a', 'b', 'c'])
+'c'
+>>> random.choice(['a', 'b', 'c'])
+'c'
+              </code>
+          </pre>
+          <p>
+            Following that, we talked about a few new ways to read files,
+            summarized below:
+          </p>
+          <pre class="python">
+              <code>
+>>> with open(filename, 'r') as f:
+>>>     for line in f:
+>>>         # process each line
+
+>>> with open(filename, 'r') as f:
+>>>     text = f.read() # read the entire file as a single string with newlines
+
+>>> with open(filename, 'r') as f:
+>>>     lines = f.readlines() # read each line of the file into a list
+              </code>
+          </pre>
+          <p>
+            Finally, we spent some time talking about algorithmic style and how
+            it can actually speed up the functionality of our programs. Check
+            out the lecture slides for an example of this.
+          </p>
+        </li>
+        <li>
+          <p class="only-print">
+            <b> Lecture 21: Tuples and <code>lambda</code>s </b>
+          </p>
+          <p class="no-print">
+            <a
+              href="http://web.stanford.edu/class/cs106ap/handouts/lecture-21.html"
+              target="_blank"
+            >
+              Lecture 21: Tuples and <code>lambda</code>s
+            </a>
+          </p>
+          <p>
+            We began by talking about Tuples, a new data type that you might not
+            have seen before. A tuple is a fixed-length sequence of objects that
+            is itself immutable (importantly, its members need not be immutable:
+            the tuple simply contains immutable references to its members). A
+            tuple is defined using surrounding parentheses, like so:
+          </p>
+          <div class="text-center">
+            <code>tup = (1, 2, 3)</code>
+          </div>
+          <br />
+          <p>
+            (For completeness, the parentheses aren't actually <i>necessary</i>,
+            and omitting them would have the same effect. That said, we're
+            considering that bad style, since it should be clear that a tuple is
+            being employed. )
+          </p>
+          <p>
+            We talked about a bunch of cool Tuple features, which are outlined
+            below:
+          </p>
+          <ul>
+            <li>
+              When sorting lists of tuples, they are sorted first by their first
+              elements, and then by subsequent elements to break ties, like so:
+              <pre class="python">
+                  <code>
+>>> pairs = [('stanford.edu', '/meh'), ('google.com','/search'),
+('stanford.edu', '/admit'), ('google.com', '/aardvark')]
+>>> pairs
+[('stanford.edu', '/meh'), ('google.com', '/search'), ('stanford.edu', '/admit'), ('google.com', '/aardvark')]
+>>> sorted(pairs)
+[('google.com', '/aardvark'), ('google.com', '/search'), ('stanford.edu', '/admit'), ('stanford.edu', '/meh')]
+                  </code>
+              </pre>
+            </li>
+            <li>
+              We can also leverage the mechanisms of tuple <i>unpacking</i>, by
+              which Python can automatically decompress a tuple into a
+              collection of elements which can be stored in variables
+              individually, like so:
+              <pre class="python">
+                  <code>
+>>> x, y = (42, 100)
+>>> x
+42
+>>> y
+100
+                  </code>
+              </pre>
+            </li>
+            <li>
+              Finally, when we're working with a dictionary, we can call its
+              <code>.items()</code> method to get what essentially is a list of
+              key-value tuples that allows us to iterate over the dictionary in
+              a truly elegant manner:
+            </li>
+            <pre class="python">
+                <code>
+>>> dict = {'a': 1, 'b': 2, 'c': 42}
+>>> dict.items()
+dict_items([('a', 1), ('b', 2), ('c', 42)])
+>>> for key, value in dict.items():
+        print(key, value)
+a 1
+b 2
+c 42
+                </code>
+            </pre>
+            <p>
+              As a quick addendum, <code>.items()</code> returns the elements of
+              the dictionary in insertion order.
+            </p>
+            <p>
+              Next, we moved on to talking about <code>lambda</code> functions.
+              These are a little complex and if you haven't encountered them
+              before (either in Python or another language), make sure to review
+              this section carefully. Much of this was abstracted away from
+              students, but I think it's important for you to have some
+              familiarity with it.
+            </p>
+            <p>
+              In Python, functions are what is known as
+              <i>first class citizens</i>, which means that just like other
+              values, they can be stored in variables, passed as parameters and
+              even returned from functions. Thus, that means you can do
+              something like this, in which we sort a dictionary's
+              <code>items</code>
+              by their values:
+            </p>
+            <pre class="python">
+                <code>
+>>> def get_value_from_tuple(key_value_pair):
+>>>    return key_value_pair[1]
+
+>>> d = # some random dict
+>>> sorted_items = sorted(d.items(), key=get_value_from_tuple)
+                </code>
+            </pre>
+            <p>
+              The interesting line here is the call to <code>sorted</code>,
+              which takes the additional <code>key</code> parameter
+              (incidentally, this parameter is called an optional
+              <i>keyword argument</i>, meaning that it doesn't need to be
+              specified, but if it is specified, it must be prefaced by
+              <code>key=</code>). This parameter specifies a function (in this
+              case <code>get_value_from_tuple</code>) that is called on
+              <i>each member of <code>d.items()</code></i
+              >. The values that are thus sorted are those returned by the key,
+              rather than the values in the collection themselves. Note that
+              we're passing in <code>get_value_from_tuple</code> as a parameter,
+              rather than <code>get_value_from_tuple()</code>. The former passes
+              in the function itself, whereas the latter <i>calls</i> the
+              function and passes in the return value to <code>sorted</code>.
+            </p>
+            <p>
+              With that in mind, the working definition we provided to students
+              of <code>lambda</code> functions is that they are a way of
+              specifying the parameters and return values of a function without
+              having to explicitly name it (in fact, the technical nomenclature
+              for a <code>lambda</code> is an <code>anonymous function</code>).
+              The code sample above could be rewritten as follows:
+            </p>
+            <pre class="python">
+                <code>
+>>> # we're not defining get_value_from_tuple() here
+>>> d = # some random dict
+>>> sorted_items = sorted(d.items(), key=lambda item: item[1])
+                </code>
+            </pre>
+            <p>
+              The important portion of this code is
+              <code>lambda item: item[0]</code>, which defines a lambda function
+              that takes in a parameter called <code>item</code> and returns the
+              1st element of <code>item</code>. Similar to the previous code
+              example, each time a comparison is made in the sorting algorithm,
+              it calls the <code>lambda</code> function (passing in a single
+              key-value pair), and compares whatever the
+              <code>lambda</code> returns.
+            </p>
+            <p>
+              In general, the body of a lambda function looks as follows:
+            </p>
+            <div class="text-center">
+              <code>lambda parameter : return value</code>
+            </div>
+            <p>
+              Thus far, we've only been discussing lambdas that take in one
+              parameter. Notice also that we don't need to explicitly
+              <code>return</code> anything - the expression following the colon
+              is implicitly returned.
+            </p>
+            <p>
+              A student might ask you whether there are any functional reasons a
+              lambda function is better suited to a task than a normal function
+              defined using <code>def</code>. There are few reasons one might be
+              a better functional decision than the other but many stylistic
+              considerations apply:
+            </p>
+            <ul>
+              <li>
+                A function defined using <code>def</code> lends itself better to
+                side effects like printing. Conversely, it's easier to guarantee
+                that a lambda function doesn't have inadvertent side effects
+                (although it's certainly not impossible).
+              </li>
+              <li>
+                A lambda function reduces the amount of cruft in your code, by
+                reducing the number of simple functions you need to write.
+              </li>
+            </ul>
+            <p>
+              That said, for the sake of completeness, the following two
+              functions are defined differently but are exactly equivalent, even
+              if we'd never use the second way:
+            </p>
+            <pre class="python">
+                <code>
+>>> def option_1(x):
+>>>    return x * 2
+
+>>> option_2 = lambda x : x * 2
+
+>>> option_1(42)
+84
+>>> option_2(42)
+84
+                </code>
+            </pre>
+          </ul>
+        </li>
+        <li>
+          <p>
+            <b> Lecture 22: More sorting and Graphics </b>
+          </p>
+          <p>
+            This lecture hasn't happened yet, but we'll be discussing the use of
+            <code>lambda</code> functions for custom sorting, and then moving
+            onto graphics using <code>tkinter</code>. Check out
+            <a
+              href="https://web.stanford.edu/class/archive/cs/cs106ap/cs106ap.1194/handouts/lecture-20.html"
+              target="_blank"
+              class="no-print"
+            >
+              last quarter's slides
+            </a>
+            <span class="only-print">
+              last quarter's slides (linked on the digital version of this
+              handout)
+            </span>
+            , as well as this week's section handout, for details on
+            <code>tkinter</code>. It's not particularly complex to use
+            (especially since we take care of setting up the canvas for them)
+            but it's worth being familiar with anyway, since one of the
+            recommended problems in this week's section handout is a graphics
+            problem.
+          </p>
+        </li>
+      </ul>
+
+      <hr />
+      <h2>Problems</h2>
+      <p>
+        I'll start by saying that this week's section handout is
+        <i>
+          absolutely mammoth, and there is no expectation for you to get through
+          more than one or two of the problems </i
+        >. Most of this bulk comes from additional practice problems or
+        exercises that students themselves have requested, and so I'm entirely
+        comfortable with suggesting that students work through most of it
+        themselves. I've been encouraging students I've been interacting with to
+        practice each week, rather than marathoning all the content before the
+        final and this handout facilitates that endeavour. The problems I
+        strongly recommend working in section through are
+        <b>Grid Drawing</b> and <b>Sorting with <code>lambda</code>s</b>: these
+        are the problems most immediately relevant to assignment 7 as well as
+        the foundational for all the other problems in the handout. That said,
+        here's a summary of each of the problems. Many of them have starter code
+        you can download, and if you have a projector in your room, might be
+        cool to live code (especially the graphics problems).
+      </p>
+      <ol>
+        <li>
+          <p>
+            <b>Grid Drawing</b>: This is a great problem to introduce students
+            to <code>tkinter</code> (prounounced 'tk-inter', by the way). The
+            goal is to have them reason about how the python they've learned can
+            lend itself to a graphical context that will hopefully appear
+            obviously useful. Note that we provide the
+            <code>make_canvas</code> function to students (which we will usually
+            do), so they only need to worry about adding the appropriate
+            graphical objects to the screen. We've set up a few milestones for
+            students to follow as well.
+          </p>
+        </li>
+        <li>
+          <p>
+            <b>Random Circles</b>: This is an additional practice problem for
+            students to tackle graphics programs. This also gives students some
+            practice with using the <code>random</code> module. Importantly,
+            students will probably not see how to draw circles in
+            <code>tkinter</code> in lecture, so be sure to go over the syntax.
+            Essentially, you need to spcify the top left and bottom right
+            coordinates of the bounding box.
+          </p>
+        </li>
+        <li>
+          <p>
+            <b>Sorting with <code>lambda</code>s</b>: A bunch of quick puzzles
+            to work through to make students familiar with
+            <code>lambda</code> functions and using <code>sorted</code>. Be sure
+            to work through these yourself first.
+          </p>
+        </li>
+        <li>
+          <p>
+            <b>Tweets Revisited</b>: An extension on the tweets projects from
+            last section. Students should have worked through the entire tweets
+            project (including the extension) before doing this problem.
+          </p>
+        </li>
+        <li>
+          <p>
+            <b>Pynary bomb</b>: I included this problem almost entirely because
+            it's an incredible pun, but it's also a vicious trace problem that's
+            entirely worth a student working through in their own time.
+          </p>
+        </li>
+        <li>
+          <p>
+            <b>Analyzing Mimic Output</b>: Several students have expressed
+            interest in more meaningful data-analysis type projects, and this is
+            a program that students write to convince themselves that pieces of
+            text produced by the Mimic program have similar language
+            distributions to the original corpus. THis is mostly for working
+            through outside of section, but if you have time, this is a cool
+            thing to discuss. Big thanks to Sheridan for suggesting a problem
+            like this!
+          </p>
+        </li>
+      </ol>
+    </div>
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atom-one-dark.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atelier-forest-light.min.css"
+      disabled
+    />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>
