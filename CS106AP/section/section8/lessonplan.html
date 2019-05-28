@@ -1,0 +1,219 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title> Section 8 Lesson Plan</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../sectionstyles.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="pageHeader">
+            <h1> Section 8 Lesson Plan</h1>
+            <p class="subtleHeading">
+              Written by Brahm Capoor
+            </p>
+            <p class="subtleHeading">
+              <i class="far fa-calendar-alt"></i> May 28th, 2019
+            </p>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <h2>Lecture and Concepts Recap</h2>
+      <p>
+        This isn't ordered by lecture, but here's a general summary of
+        everything that went down, or will go down by the end of Wednesday's
+        class and which might come up in section:
+      </p>
+      <h4>Floats</h4>
+      <p>
+        We went over the <code>float</code> data type, which is a lot like the
+        <code>double</code> datatype in Java and C++ in that it represents
+        arbitrary decimals. You shouldn't get too many questions about this, but
+        remember that floats are definitionally a little imprecise once you get
+        15 digits in (see lecture slides for examples of this).
+      </p>
+      <h4>Modules</h4>
+      <p>
+        We discussed the notions of modules in Python. A module (which is
+        basically the formal name for any <code>.py</code> file), allows you
+        encapsulate a particular group of variables and functions (and classes,
+        although that's not relevant to 106A) such that they can be imported
+        into another module. You can import prewritten modules -- such as
+        <code>math</code> and <code>urllib</code> -- but can also define your
+        own. For example, suppose you have the following code in
+        <code>mycoolmodule.py</code>:
+      </p>
+      <pre class="python">
+          <code>
+def foo(n, m):
+    # sick code here
+    return n + 2
+
+def bar():
+    # more sick code here
+          </code>
+      </pre>
+      <p>
+        You could leverage the module in another script, like so:
+      </p>
+      <pre class="python">
+        <code>
+import mycoolmodule  # must be same name as the .py file
+
+def main():
+    print(mycoolmodule.foo(42))
+    mycoolmodule.bar()
+
+if __name__ == "__main__":
+    main()
+        </code>
+      </pre>
+      <h4> List Comprehensions </h4>
+      <p>
+        List Comprehensions -- my personal favorite part of Python -- are a
+        piece of syntactical sugar used to succinctly and expressively construct
+        lists of elements. It's inspired by
+        <a href="https://www.mathwords.com/s/set_builder_notation.htm">
+          set builder notation
+        </a>
+        <span class="only-print"> set builder notation </span>, a mathematical
+        shorthand for expressing the elements of sets.
+      </p>
+      <p>
+        A list comprehension essentially produces a list by iterating over the
+        elements of some collection, applying some (optional) operation to each
+        element, possibly filtering the elements and adding them to a list.
+        That's a lot to take in, but is all expressed quite succinctly using
+        this general format:
+      </p>
+      <div class="text-center">
+        <code>
+          [&lt;operation(e)&gt; for e in &lt;original collection&gt; &lt;if
+          predicate(e)&gt;]
+        </code>
+      </div>
+      <br />
+      <p>
+        Where each of the parts in brackets (except the
+        <code>if predicate</code>, which is optional based on whether or not you
+        want to filter the elements) should be substituted for valid python
+        code. For example, if you wanted to find the first 100 squares, you
+        would do so as follows:
+      </p>
+      <pre class="python">
+        <code>
+>>> [i * i for i in range(100)]
+[0, 1, 4, 9, 16, ..., 9801]       # lots of output elided
+        </code>
+      </pre>
+      <p>
+        If you wanted to do the same thing for just the even numbers, you would
+        adjust the comprehension by adding a predicate:
+      </p>
+      <pre class="python">
+        <code>
+>>> [i * i for i in range(100) if i % 2 == 0]
+[0, 4, 16, ..., 9604]             # lots of output elided
+        </code>
+      </pre>
+      <p>
+        You could also go wild and mix up your types:
+      </p>
+      <pre class="python">
+        <code>
+>>> d = {'Xyz': 50, 'abc': 42, 'xabc': 1000}
+>>> [len(k) for k in d.keys() if k.lower()[0] == 'x']
+[3, 4]
+        </code>
+      </pre>
+      <p>
+        Those examples should hopefully provide you with enough of a working
+        understanding of list comprehensions to teach section, but if you'd like
+        to delve deeper into them (which I strongly recommend), I'd check out
+        <a
+          href="https://hackernoon.com/list-comprehension-in-python-8895a785550b"
+          class="no-print"
+        >
+          this fantastic tutorial
+        </a>
+        <span class="only-print">
+          a fantastic tutorial that I've linked here on the online version of
+          this handout </span
+        >.
+      </p>
+      <h4> Jupyter Notebooks </h4>
+      <p>
+        The absolute best thing for you to do here if you're unfamiliar with
+        them is to actually work through the lecture examples as well as the
+        section material, and to let Brahm know if you have any questions.
+        <span class="no-print">
+          <a
+            href="https://medium.com/codingthesmartway-com-blog/getting-started-with-jupyter-notebook-for-python-4e7082bd5d46"
+            >This</a
+          >
+          is also a really good refresher, if you need it.</span
+        >
+        <span class="only-print">
+          I've also linked a great refreseher on the online version of this
+          handout, if you want to remind yourself of some of the nitty-gritty.
+        </span>
+        THat said, I'll quickly provide a summary of the messaging you can use
+        when talking about Jupyter notebooks:
+      </p>
+      <p>
+        Python, as a general purpose programming language, can be used in a
+        surfeit of different contexts. One incredibly popular use is as an
+        analytic tool, which allows even non-technical users to -- with only a
+        small amount of easy-to-understand code -- engage with large amounts of
+        data and to visualize it. A Jupyter notebook is a programming
+        environment that lends itself particularly well to that kind of work.
+      </p>
+      <p>
+        You can think of a Jupyter notebook as a complete Python program, which
+        is divided into sections by portions of text and images. The text can
+        provide a summary of or context for the code you've written, and the
+        images can be visualizations provided by your code. You are able to run
+        each piece of code (called a 'cell') separately, so that you can iterate
+        on individual parts of your code without having to rerun all of it every
+        time (meaning, for example, you can do the time-intensive file reading
+        once) and then quickly change the functions you call on that data.
+      </p>
+      <h2>This week's section</h2>
+      <p>
+        This is your last section 😭
+      </p>
+      <p>
+        The goal of this week's section is to get student's familiar with the
+        kinds of code that they'll need to write for assignment 8, chief among
+        them Jupyter Notebooks and list comprehensions. Because this is also the
+        last section, the Jupyter Notebooks problem is also a pretty cool
+        problem in which students graph the heart rates of various people. Do
+        the Jupyter Notebooks problem first, before moving onto the one-liners
+        problem if you have time. Don't worry about the debugger problem -
+        that's there for students to engage with in their own time if they want.
+      </p>
+    </div>
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atom-one-dark.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atelier-forest-light.min.css"
+      disabled
+    />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>

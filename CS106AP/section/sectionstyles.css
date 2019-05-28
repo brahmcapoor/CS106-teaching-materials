@@ -68,6 +68,10 @@ pre {
     height: auto;
     padding: 20px;
   }
+
+  .problem .largeimg {
+    max-width: 60%;
+  }
 }
 
 @media print {

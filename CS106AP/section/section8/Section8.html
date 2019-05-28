@@ -1,0 +1,361 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title> Section 8 </title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../sectionstyles.css" />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="pageHeader">
+            <a href="http://cs106ap.stanford.edu" class="no-print">
+              <p class="subtleHeading text-center">
+                Back to CS 106A Homepage
+              </p>
+            </a>
+            <h1> Section 8 </h1>
+            <p class="subtleHeading">
+              Written by Nick Parlante, Brahm Capoor and Jason Lin
+            </p>
+            <p class="subtleHeading">
+              <i class="far fa-calendar-alt"></i> May 28th, 2019
+            </p>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2>One Liners</h2>
+        <p>
+          In this problem, we'll go over how tools like list comprehensions,
+          lambdas and builtin functions like <code>sorted</code>,
+          <code>sum</code> <code>max</code> and <code>min</code> can be used to
+          solve hard problems in satisfyingly few lines of code.
+        </p>
+        <h4> Comprehensions </h4>
+        <p>
+          Suppose we have some list of tuples representing statistics for how
+          frequently a website is visited by particular browsers, as follows:
+        </p>
+        <div class="text-center">
+          <code>
+            stats = [('foo.com', 'firefox', 23), ('bar.com', 'chrome', 47),
+            ('foo.com', 'chrome', 3), ('bar.com', 'firefox', 16)]
+          </code>
+        </div>
+        <br />
+        <p>
+          In addition, note that the builtin <code>sum</code> function takes a
+          list of numbers and returns the sum of those numbers, as follows:
+        </p>
+        <pre class="python">
+          <code>
+>>> sum([1, 2, 3])
+6
+          </code>
+        </pre>
+        <p>
+          Armed with this list, <code>sum</code>, and your knowledge of list
+          comprehensions, find one-line expressions for each of these values:
+        </p>
+        <ol>
+          <li>
+            Get a list of the number of visits per browser to
+            <code>foo.com</code>. For example, if applied to the list above,
+            your expression should evaluate to <code>[23, 3]</code>.
+          </li>
+          <li>
+            Find the total number of visits to <code>foo.com</code>. For
+            example, if applied to the list above, your expression should
+            evaluate to 26.
+          </li>
+          <li>
+            Find the number of visits to any website from the browser
+            <code>firefox</code>. For example, if applied to the list above,
+            your expression shoudl evaluate to 39.
+          </li>
+        </ol>
+        <h4>More List Comprehensions</h4>
+        <p>
+          Given a list of numbers <code>lst</code>, write one-line list
+          comprehensions to do the following:
+        </p>
+        <ul>
+          <li>
+            Produce a list of the absolute difference between each of the
+            numbers in <code>lst</code> and 10. Recall that the
+            <code>abs</code> function returns the absolute value of a number.
+          </li>
+          <li>
+            Produce a list of the absolute difference between the numbers in
+            <code>lst</code> that are between 10 and 15 inclusive, and 10.
+            Recall that the <code>abs</code> function returns the absolute value
+            of a number.
+          </li>
+        </ul>
+        <p>
+          Now, suppose we have a list of pairs such as this one:
+        </p>
+        <div class="text-center">
+          <code>
+            pairs = [('zzz', 3), ('bbb', 10), ('ccc', 4), ('aaa', 6)]
+          </code>
+        </div>
+        <br />
+        <p>
+          Write one-line list comprehensions to do the following:
+        </p>
+        <ul>
+          <li>
+            Produce a list of the second elements of each tuple in
+            <code>pairs</code>.
+          </li>
+          <li>
+            Produce a list of the second elements of each tuple in
+            <code>pairs</code>, so long as the tuple's first element does not
+            begin with a 'c'.
+          </li>
+          <li>
+            Produce a list of the first elements of each tuple in
+            <code>pairs</code>, except that the first character of each of these
+            elements is made uppercase. You can assume that each such element in
+            the tuples has at least one character.
+          </li>
+        </ul>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2> Data Analysis Using Jupyter Notebooks </h2>
+        <p>
+          In class this week, we explored the use of Jupyter notebooks as a
+          means of more interactively engaging with the code we write by
+          embedding it in a narrative that also includes textual commentary,
+          images and graphs. In this problem, we'll be employing those same
+          tools to aid us in solving a very real problem.
+        </p>
+        <p>
+          To get started, make sure you have the Jupyter notebook package
+          installed, which allows you to open and run Jupyter notebooks on your
+          own computer as well as <code>matplotlib</code>, which allows you to
+          quickly and easily draw graphs. If you haven't done this already, open
+          your Terminal application (called 'Terminal' on a Mac and 'Command
+          Prompt' or 'PowerShell' on Windows) and run the following command:
+        </p>
+        <pre class="shell">
+            <code>
+$ python3 -m pip install jupyter matplotlib
+            </code>
+        </pre>
+        <p>
+          If you have a Windows computer, substitute <code>python</code> for
+          <code>python3</code>.
+        </p>
+        <p>
+          Next, go ahead and download and unzip the section starter code
+          <a href="Section8.zip" class="no-print">here</a
+          ><span class="print-only"
+            >from the online version of this handout</span
+          >. There are two files in this starter code:
+        </p>
+        <ul>
+          <li>
+            <code>heart_rates.ipynb</code>: The Jupyter notebook you'll be doing
+            all your work on.
+          </li>
+          <li>
+            <code>jumbled_heart_rates.csv</code>: The dataset you'll be
+            analyzing.
+          </li>
+        </ul>
+        <p>
+          Now, you'll need to open this folder in your terminal. On a Mac, type
+          <code>cd </code> into your terminal and (without pressing enter), drag
+          the folder from Finder into the terminal window (you should see the
+          full folder path show up) and then press enter. On a PC, open the
+          directory containing the folder, right-click the folder and click
+          'Open Command Window here'.
+        </p>
+        <p>
+          You should now have a terminal window that is open in the
+          <code>Section8</code> folder. Now, type
+          <code>jupyter notebook</code> and press enter. This command should
+          open up your web browser to the Jupyter Notebook explorer. Open
+          <code>heart_rates.ipynb</code> to start the project!
+        </p>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2>Experimenting with the Debugger</h2>
+        <p>
+          As you made your way through the assignments this quarter, you likely
+          encountered bugs that required you to inspect the state of your
+          program to assess exactly what was going wrong. Perhaps you
+          strategically printed the values of variables at key points in the
+          program's execution, or perhaps you traced through them by hand, or
+          perhaps you just randomly perturbed parts of your code until it worked
+          (as a teaching staff, we can't endorse that last strategy, but we've
+          all been there).
+        </p>
+        <p>
+          It's important to have a deep understanding of how to debug your
+          programs by yourself, but it turns out that PyCharm comes with a
+          feature called the <i>debugger</i>, which allows you to specify points
+          at which you'd like to pause their program's execution and poke around
+          to see the values of the variables. In this problem, we'll be
+          exploring how to use the debugger. Begin by downloading the PyCharm
+          project <a href="DebuggerIntro.zip" class="no-print">here</a>
+          <span class="only-print">from the online version of this handout</span
+          >, importing it into PyCharm and opening
+          <code>debugger_intro.py</code>.
+        </p>
+        <p>
+          This program is a nonsensical one designed entirely to allow us to
+          explore the debugger, so begin by running the program as per normal to
+          see what it does (it should print a number). Following that, verify to
+          yourself that -- at a high level -- you understand what each of the
+          functions does.
+        </p>
+        <p>
+          Now, we're going to set a <i>breakpoint</i> on a line in our code,
+          which indicates to PyCharm that when we run our program, we would like
+          to pause the program <i>before</i> that line executes, and see what
+          our variables look like at that point. To set a breakpoint, click on
+          the editor's gutter, directly to the right of the line number, and
+          note that a red dot shows up in that position. Set a breakpoint on
+          line 32, which calls the <code>foo</code> function:
+        </p>
+        <img
+          src="section8_img/firstbp.png"
+          alt="A breakpoint"
+          class="img-fluid mx-auto d-block"
+        />
+        <p>
+          Now, click the bug button next to the run button in the top right
+          corner to start the debugger:
+        </p>
+        <img
+          src="section8_img/startdebugger.png"
+          alt="Debug button"
+          class="img-fluid mx-auto d-block"
+        />
+        <p>
+          After a brief pause, you should see line 32 highlighted, since the
+          program is paused there, and the <i>debug pane</i> appear in the
+          bottom of your PyCharm window:
+        </p>
+        <img
+          src="section8_img/debugpane.png"
+          alt="Debug pane"
+          class="img-fluid mx-auto d-md-block largeimg"
+          style="width: 80%"
+        />
+        <p>
+          The first portion of interest in this debuging pane is the
+          <i>Stack Trace</i>, which shows all the functions that are currently
+          running. Notice the top of this trace says <code>main</code>, since
+          that is the function that most recently begun execution. That said,
+          the key portion of this pane is the variables subpane, which displays
+          the values of the program's variables. Right now, since we've paused
+          our program before line 32 executes, no variables have been created
+          and so the pane doesn't show us anything. In order to step our program
+          forward, we turn our attention to the toolbar of buttons at the top of
+          the debug pane:
+        </p>
+        <img
+          src="section8_img/buttons.png"
+          alt="Debug pane"
+          class="img-fluid mx-auto d-md-block"
+        />
+        <p>
+          Far and away the most common buttons you'll be using are the leftmost
+          two, which are called the <i>Step Over</i> and
+          <i>Step Into</i> buttons, respectively. The <i>Step Over</i> button
+          executes the current line of code in its entirety and moves on to the
+          next one. If the current line of code contains a call to another
+          function, the <i>Step Into</i> button jumps into the first function to
+          be called on that line and pauses before it begins to execute. Click
+          the <i>Step Into</i> button to step into the
+          <code>foo</code> function.
+        </p>
+        <img
+          src="section8_img/steppedin.png"
+          alt="Debug pane"
+          class="img-fluid mx-auto d-md-block"
+        />
+        <p>
+          Notice that the Stack Trace has updated to show that
+          <code>foo</code> has been begun (and <code>main</code> hasn't yet
+          ended), and that the variables pane has been updated to show the
+          current value of <code>foo</code>'s <code>n</code> parameter, which in
+          this case is equal to 8, since we passed that value in when calling
+          <code>foo</code>. Verify to yourself that this output makes sense, and
+          then move the program forward a few lines by clicking the
+          <i>Step Over</i> button a few times, noting that the program cycles
+          through the <code>for</code> loop, and that entries for
+          <code>i</code> and <code>total</code> are created and updated in the
+          variables pane. As an added bonus, PyCharm displays the values for
+          variables on the line at which they are declared.
+        </p>
+        <p>
+          Keep moving forward in the program (the <i>Step Over</i> button will
+          automatically jump out of functions when they return) until you get to
+          line 33, at which point you should step into the
+          <code>make_mystery_list</code> function. At this point, keep stepping
+          forward, but pay particular attention to the value of <code>lst</code>
+          in the variables pane. Notice that its members list gets updated as
+          the function progresses:
+        </p>
+        <img
+          src="section8_img/lstval.png"
+          alt="Debug pane"
+          class="img-fluid mx-auto d-md-block largeimg"
+          style="width: 60%"
+        />
+        <p>
+          As you keep stepping through the program, you'll notice the same is
+          true for dictionaries:
+        </p>
+        <img
+          src="section8_img/dictval.png"
+          alt="Debug pane"
+          class="img-fluid mx-auto d-md-block largeimg"
+          style="width: 60%"
+        />
+        <p>
+          Now that you have some familiarity with the debugger, open up
+          <code>broken_program.py</code>, a simple program aimed at
+          demonstrating the differences between how integers and lists are
+          passed as parameters. Trace through the program, and then run it,
+          verifiying that it behaves as you expect it to. Now, armed with the
+          debugger, step through the program, making sure that the values of the
+          variables are what you expect them to be at key points in the program.
+        </p>
+      </div>
+    </div>
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atom-one-dark.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atelier-forest-light.min.css"
+      disabled
+    />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>

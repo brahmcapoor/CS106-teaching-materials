@@ -1,0 +1,108 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title> Section 8 Solutions </title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../sectionstyles.css" />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="pageHeader">
+            <a href="http://cs106ap.stanford.edu" class="no-print">
+              <p class="subtleHeading text-center">
+                Back to CS 106A Homepage
+              </p>
+            </a>
+            <h1> Section 8 Solutions </h1>
+            <p class="subtleHeading">
+              Written by Nick Parlante, Brahm Capoor and Jason Lin
+            </p>
+            <p class="subtleHeading">
+              <i class="far fa-calendar-alt"></i> May 28th, 2019
+            </p>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2> One Liners </h2>
+        <h4> Comprehensions </h4>
+        <pre class="python">
+          <code>
+>>> stats = [('foo.com', 'firefox', 23), ('bar.com', 'chrome', 47), ('foo.com', 'chrome', 3), ('bar.com', 'firefox',
+16)]
+>>>
+>>> [tuple[2] for tuple in stats if tuple[0] == 'foo.com']
+[23, 3]
+>>> sum([tuple[2] for tuple in stats if tuple[0] == 'foo.com'])
+26
+>>> sum([tuple[2] for tuple in stats if tuple[1] == 'firefox'])
+39
+          </code>
+        </pre>
+        <h4> More List Comprehensions </h4>
+        <pre class="python">
+          <code>
+>>> nums = range(20)
+>>> [abs(num - 10) for num in nums]
+[10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+>>> [abs(num - 10) for num in nums if num >= 10 and num <= 15]
+[0, 1, 2, 3, 4, 5]
+>>> pairs = [('zzz', 3), ('bbb', 10), ('ccc', 4), ('aaa', 6)]
+>>> [pair[1] for pair in pairs]
+[3, 10, 4, 6]
+>>> [pair[1] for pair in pairs if not pair[0].startswith('c')]
+[3, 10, 6]
+>>> [pair[0][0].upper() + pair[0][1:] for pair in pairs]
+['Zzz', 'Bbb', 'Ccc', 'Aaa']
+          </code>
+        </pre>
+      </div>
+      <div class="problem">
+        <h2> Data Analysis Using Jupyter Notebooks </h2>
+        <p>
+          Download the solution Jupyter notebook (which you can run the same way
+          as the starter code)
+          <a href="Section8Soln.zip" class="no-print">here</a
+          ><span class="only-print"
+            >from the online version of this handout</span
+          >, or view a pdf of said notebook
+          <a href="heart_rates_soln.pdf" class="no-print"> here</a>.
+        </p>
+      </div>
+      <hr />
+      <div class="problem">
+        <h2> Experimenting with the Debugger </h2>
+        <p>
+          There's no correct answer to this one! When it comes to using the
+          debugger, the journey is the destination.
+        </p>
+      </div>
+    </div>
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atom-one-dark.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atelier-forest-light.min.css"
+      disabled
+    />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>
